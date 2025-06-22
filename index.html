@@ -1,0 +1,2946 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SYNCSKILL</title>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/assets/footer-styles.css">
+    <style>
+        /* Universal box-sizing */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Root variables */
+        :root {
+            --spacing: 0.25rem;
+            --color-gray-200: oklch(92.8% 0.006 264.531);
+            --color-white: #fff;
+            --color-black: #000;
+            --color-dark-teal: #012726;
+            --color-teal-hover: #004D4B;
+            --font-sans: "IBM Plex Sans", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+            --font-weight-medium: 500;
+            --font-weight-normal: 400;
+            --font-weight-bold: 700;
+            --text-base: 1rem;
+            --text-base--line-height: 1.5;
+            --radius-md: 0.375rem;
+            --default-transition-duration: 0.15s;
+            --default-transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* Body styles */
+        body {
+            font-family: var(--font-sans);
+            line-height: 1.6;
+            padding-top: 72px;
+        }
+
+        html, body {
+            overflow-x: hidden;
+        }
+
+        /* Header styles */
+        .header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 50;
+            transition-property: all;
+            transition-duration: 0.3s;
+            transition-timing-function: var(--default-transition-timing-function);
+            overflow: visible;
+            background-color: var(--color-white);
+        }
+
+        /* Container */
+        .header-container {
+            width: 90%;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        @media (min-width: 48rem) {
+            .header-container {
+                width: 80%;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header-container {
+                padding-left: 16px;
+                padding-right: 16px;
+                width: 100%;
+            }
+            .nav-left, .nav-right {
+                margin: 0;
+                padding: 0;
+            }
+            .logo, .menu-button {
+                margin: 0;
+                padding: 0;
+            }
+        }
+
+        /* Navigation */
+        .nav {
+            padding-top: calc(var(--spacing) * 6);
+            padding-bottom: calc(var(--spacing) * 6);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        /* Logo and nav links container */
+        .nav-left {
+            display: flex;
+            align-items: center;
+            gap: calc(var(--spacing) * 6);
+        }
+@media (max-width: 768px) {
+    .nav {
+        padding-top: calc(var(--spacing) * 3);
+        padding-bottom: calc(var(--spacing) * 3);
+    }
+}
+        
+        /* Logo image */
+        .logo {
+            margin-right: calc(var(--spacing) * 6);
+            width: 100px;
+            height: 40px;
+            color: transparent;
+        }
+
+        /* Nav links (hidden on mobile, flex on md) */
+        .nav-links {
+            display: none;
+            align-items: center;
+            gap: calc(var(--spacing) * 4);
+        }
+
+        @media (min-width: 48rem) {
+            .nav-links {
+                display: flex;
+            }
+        }
+
+        /* Learn button (desktop only) */
+        .learn-button {
+            display: flex;
+            align-items: center;
+            padding-left: calc(var(--spacing) * 3);
+            padding-right: calc(var(--spacing) * 3);
+            padding-top: calc(var(--spacing) * 2);
+            padding-bottom: calc(var(--spacing) * 2);
+            font-size: var(--text-base);
+            line-height: var(--text-base--line-height);
+            font-weight: var(--font-weight-medium);
+            border: 1px solid var(--color-dark-teal);
+            border-radius: var(--radius-md);
+            color: var(--color-dark-teal);
+            white-space: nowrap;
+            transition-property: color, background-color, transform;
+            transition-duration: var(--default-transition-duration);
+            transition-timing-function: var(--default-transition-timing-function);
+            background-color: transparent;
+            cursor: pointer;
+        }
+
+        @media (min-width: 769px) {
+            .learn-button {
+                border: none;
+            }
+        }
+
+        @media (hover: hover) {
+            .learn-button:hover {
+                color: var(--color-white);
+                background-color: var(--color-dark-teal);
+            }
+            .learn-button:hover svg {
+                transform: rotate(180deg);
+            }
+        }
+
+        .learn-button svg {
+            margin-left: calc(var(--spacing) * 2);
+            transition: transform var(--default-transition-duration) var(--default-transition-timing-function);
+        }
+
+        /* About link hover effect */
+        .nav-link {
+            padding-left: calc(var(--spacing) * 4);
+            padding-right: calc(var(--spacing) * 4);
+            padding-top: calc(var(--spacing) * 2);
+            padding-bottom: calc(var(--spacing) * 2);
+            font-size: var(--text-base);
+            line-height: var(--text-base--line-height);
+            font-weight: var(--font-weight-medium);
+            color: var(--color-dark-teal);
+            transition-property: color, background-color;
+            transition-duration: var(--default-transition-duration);
+            transition-timing-function: var(--default-transition-timing-function);
+            text-decoration: none;
+            border-radius: var(--radius-md);
+        }
+
+        @media (hover: hover) {
+            .nav-link:hover {
+                color: var(--color-white);
+                background-color: var(--color-dark-teal);
+            }
+        }
+
+        /* Mega menu styles */
+        #megaMenu, #archiveMegaMenu {
+            position: fixed;
+            top: 72px;
+            left: 50%;
+            width: min(800px, 90vw);
+            background: #fff;
+            border-radius: 16px;
+            box-shadow: 0 24px 48px rgba(0,0,0,0.12);
+            padding: 32px;
+            opacity: 0;
+            transform: translate(-50%, 8px);
+            transition: all 0.3s cubic-bezier(0.4,0,0.2,1);
+            pointer-events: none;
+            z-index: 100;
+        }
+
+        #megaMenu.active, #archiveMegaMenu.active {
+            opacity: 1;
+            transform: translate(-50%, 0);
+            pointer-events: auto;
+        }
+
+        .mega-menu-content {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 32px;
+        }
+
+        .mega-menu-section {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .mega-menu-header {
+            margin-bottom: 24px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid #e9ecef;
+        }
+
+        .mega-menu-header h3 {
+            font-size: 14px;
+            font-weight: 700;
+            color: #2d3436;
+            letter-spacing: 0.25px;
+            margin: 0;
+            text-transform: uppercase;
+        }
+
+        .mega-menu-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: grid;
+            gap: 12px;
+        }
+
+        .mega-menu-item {
+            display: flex;
+            align-items: center;
+            padding: 12px 16px;
+            border-radius: 8px;
+            background: linear-gradient(95deg, #f8f9fa 0%, #ffffff 100%);
+            border: 1px solid #f1f3f5;
+            text-decoration: none;
+            transition: all 0.25s cubic-bezier(0.4,0,0.2,1);
+        }
+
+        @media (hover: hover) {
+            .mega-menu-item:hover {
+                background: linear-gradient(95deg, #ffffff 0%, #f8f9fa 100%);
+                transform: translateY(-2px);
+            }
+        }
+
+        .mega-menu-item-icon {
+            width: 32px;
+            height: 32px;
+            border-radius: 6px;
+            margin-right: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .mega-menu-item-icon.career {
+            background: #6366f1;
+        }
+
+        .mega-menu-item-icon.certification {
+            background: #10b981;
+        }
+
+        .mega-menu-item-icon svg {
+            width: 16px;
+            height: 16px;
+            color: white;
+        }
+
+        .mega-menu-item-text {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .mega-menu-item-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: #2d3436;
+        }
+
+        .mega-menu-item-description {
+            font-size: 12px;
+            color: #6c757d;
+            margin-top: 4px;
+        }
+
+        /* Right-side buttons container */
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: calc(var(--spacing) * 4);
+        }
+
+        /* Mobile menu button */
+        .menu-button {
+            display: flex;
+            padding: calc(var(--spacing) * 1.5);
+            border: 1px solid var(--color-dark-teal);
+            border-radius: var(--radius-md);
+            color: var(--color-dark-teal);
+            background-color: transparent;
+            cursor: pointer;
+        }
+
+        @media (min-width: 48rem) {
+            .menu-button {
+                display: none;
+            }
+        }
+
+        /* Mobile menu styles */
+        #mobileMenu {
+            position: fixed;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            width: 75vw;
+            max-width: 320px;
+            background: #ffffff;
+            padding: 24px 16px;
+            transform: translateX(100%);
+            transition: transform 0.3s ease;
+            box-shadow: -2px 0 8px rgba(0,0,0,0.1);
+            z-index: 1000;
+            border-top-left-radius: 16px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        #mobileMenu.active {
+            transform: translateX(0);
+        }
+
+        #menuOverlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 999;
+            display: none;
+        }
+
+        #menuOverlay.active {
+            display: block;
+        }
+
+        .mobile-menu-close {
+            padding: 8px;
+            border-radius: 8px;
+            border: none;
+            background: transparent;
+            transition: background 0.2s ease, transform 0.2s ease;
+            align-self: flex-end;
+            margin-bottom: 24px;
+        }
+
+        .mobile-menu-close svg {
+            width: 24px;
+            height: 24px;
+            color: #4b5563;
+        }
+
+        .mobile-menu-content {
+            flex-grow: 1;
+            overflow-y: auto;
+        }
+
+        .mobile-menu-section {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+
+        .mobile-menu-group {
+            border-bottom: 1px solid #e5e7eb;
+            padding-bottom: 8px;
+        }
+
+        .mobile-menu-header {
+            font-size: 16px;
+            font-weight: 700;
+            color: #2d3436;
+            margin: 0;
+            padding: 12px 0;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .mobile-menu-header svg {
+            margin-left: calc(var(--spacing) * 2);
+            transition: transform var(--default-transition-duration) var(--default-transition-timing-function);
+        }
+
+        .mobile-menu-header.active svg {
+            transform: rotate(180deg);
+        }
+
+        .mobile-menu-list {
+            display: none;
+            flex-direction: column;
+            gap: 12px;
+            padding: 8px 0;
+        }
+
+        .mobile-menu-list.active {
+            display: flex;
+        }
+
+        .mobile-menu-item {
+            display: flex;
+            align-items: center;
+            padding: 12px 16px;
+            border-radius: 8px;
+            background: linear-gradient(95deg, #f8f9fa 0%, #ffffff 100%);
+            border: 1px solid #f1f3f5;
+            text-decoration: none;
+            transition: all 0.25s cubic-bezier(0.4,0,0.2,1);
+        }
+
+        @media (hover: hover) {
+            .mobile-menu-item:hover {
+                background: linear-gradient(95deg, #ffffff 0%, #f8f9fa 100%);
+                transform: translateY(-2px);
+            }
+        }
+
+        .mobile-menu-item-icon {
+            width: 24px;
+            height: 24px;
+            border-radius: 6px;
+            margin-right: 12px;
+        }
+
+        .mobile-menu-item-icon.career {
+            background: #6366f1;
+        }
+
+        .mobile-menu-item-icon.certification {
+            background: #10b981;
+        }
+
+        .mobile-menu-item-text {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .mobile-menu-item-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: #2d3436;
+        }
+
+        .mobile-menu-item-description {
+            font-size: 12px;
+            color: #6c757d;
+            margin-top: 4px;
+        }
+
+        .mobile-menu-auth {
+            flex-shrink: 0;
+            padding-top: 20px;
+        }
+
+        .mobile-menu-auth-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .mobile-menu-auth-button {
+            padding: 12px;
+            text-align: center;
+            border-radius: 8px;
+            text-decoration: none;
+            transition: background 0.2s ease;
+            font-weight: 600;
+        }
+
+        .mobile-menu-auth-button.submit {
+            background: var(--color-dark-teal);
+            color: var(--color-white);
+        }
+
+        .mobile-menu-auth-button.join {
+            border: 1px solid #d1d5db;
+            color: #4b5563;
+        }
+
+        @media (hover: hover) {
+            .mobile-menu-auth-button.submit:hover {
+                background: var(--color-teal-hover);
+            }
+            .mobile-menu-auth-button.join:hover {
+                background: #f3f4f6;
+            }
+        }
+
+        /* Auth buttons container */
+        .auth-buttons {
+            display: none;
+            align-items: center;
+            gap: calc(var(--spacing) * 4);
+        }
+
+        @media (min-width: 48rem) {
+            .auth-buttons {
+                display: flex;
+            }
+        }
+
+        /* Auth button */
+        .auth-button {
+            padding-left: calc(var(--spacing) * 5);
+            padding-right: calc(var(--spacing) * 5);
+            padding-top: calc(var(--spacing) * 2);
+            padding-bottom: calc(var(--spacing) * 2);
+            font-size: var(--text-base);
+            line-height: var(--text-base--line-height);
+            font-weight: var(--font-weight-medium);
+            border: 1px solid var(--color-dark-teal);
+            border-radius: var(--radius-md);
+            color: var(--color-dark-teal);
+            transition-property: color, background-color;
+            transition-duration: var(--default-transition-duration);
+            transition-timing-function: var(--default-transition-timing-function);
+            text-decoration: none;
+            background-color: transparent;
+        }
+
+        .auth-button.submit {
+            background-color: var(--color-dark-teal);
+            color: var(--color-white);
+            border: none;
+        }
+
+        @media (hover: hover) {
+            .auth-button:hover {
+                color: var(--color-white);
+                background-color: var(--color-teal-hover);
+            }
+            .auth-button.submit:hover {
+                background-color: var(--color-teal-hover);
+            }
+        }
+
+        /* Divider */
+        .divider {
+            height: 1px;
+            background-color: var(--color-gray-200);
+        }
+
+        @media (max-width: 768px) {
+            .divider {
+                width: 100%;
+                margin: 0;
+                padding: 0;
+            }
+        }
+
+        /* Media queries for responsiveness */
+        @media (max-width: 768px) {
+            .desktop-only {
+                display: none !important;
+            }
+            #mobileMenuButton {
+                display: block !important;
+            }
+        }
+
+        
+        @media (min-width: 769px) {
+            #mobileMenu {
+                display: none !important;
+            }
+        }
+
+        /* Featured section styles */
+        .section-container {
+            width: 90%;
+            margin-left: auto;
+            margin-right: auto;
+            background: #FFFFFF);
+        }
+
+        .section-content {
+            max-width: 1280px;
+            width: 100%;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 48px;
+            box-sizing: border-box;
+            padding: 40px 0;
+        }
+
+        @media (min-width: 48rem) {
+            .section-container {
+                width: 80%;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .section-container {
+                width: 100%;
+                padding-left: 16px;
+                padding-right: 16px;
+            }
+            .section-content {
+                padding: 24px 0;
+            }
+        }
+
+        .section-text {
+            max-width: 540px;
+            width: 100%;
+        }
+
+        .section-text h2 {
+            font-size: 40px;
+            font-weight: 600;
+            line-height: 48px;
+            color: #111827;
+            margin: 0 0 24px 0;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .section-text h2 span.top-line {
+            color: #111827;
+        }
+
+        .section-text h2 span.top-line span.highlight {
+            color: #FF6666;
+        }
+
+        .section-text h2 span.bottom-line {
+            font-size: 40px;
+            font-weight: 600;
+            line-height: 48px;
+            color: #111827;
+        }
+
+        .section-text p {
+            font-size: 18px;
+            font-weight: 400;
+            line-height: 28px;
+            color: #4B5563;
+            margin: 0 0 32px 0;
+        }
+
+        .section-image {
+            max-width: 560px;
+            width: 100%;
+            aspect-ratio: 560 / 360;
+            position: relative;
+            overflow: hidden;
+            border-radius: 12px;
+            background-color: #f0f0f0;
+        }
+
+        .section-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            object-position: center;
+            border-radius: 12px;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        .section-image img.placeholder {
+            background-color: #e5e7eb;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #6b7280;
+            font-size: 16px;
+            font-weight: 600;
+            text-align: center;
+        }
+
+        .syncskill-button {
+            display: inline-flex;
+            align-items: center;
+            background-color: #33C375;
+            color: var(--color-dark-teal);
+            font-family: var(--font-sans);
+            font-size: 18px;
+            font-weight: 600;
+            padding: 14px 28px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(0, 39, 38, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .syncskill-button:hover {
+            background-color: #2CAC66;
+            box-shadow: 0 4px 12px rgba(0, 39, 38, 0.3);
+            transform: translateY(-2px) scale(1.05);
+        }
+
+        .syncskill-button:active {
+            transform: translateY(0) scale(0.98);
+            box-shadow: 0 2px 6px rgba(0, 39, 38, 0.2);
+        }
+
+        .syncskill-button-icon {
+            margin-left: 10px;
+            transition: transform 0.3s ease;
+        }
+
+        .syncskill-button:hover .syncskill-button-icon {
+            transform: translateY(2px);
+        }
+
+        @media (max-width: 768px) {
+            .section-content {
+                flex-direction: column;
+                gap: 24px;
+                align-items: flex-start;
+            }
+
+            .section-text {
+                max-width: 100%;
+                text-align: left;
+                order: 1;
+            }
+
+            .section-text h2 {
+                font-size: 24px;
+                line-height: 32px;
+                margin-bottom: 16px;
+            }
+
+            .section-text h2 span.top-line {
+                font-size: 24px;
+                line-height: 32px;
+            }
+
+            .section-text h2 span.bottom-line {
+                font-size: 24px;
+                line-height: 32px;
+            }
+
+            .section-text p {
+                font-size: 16px;
+                line-height: 24px;
+                margin-bottom: 24px;
+            }
+
+            .section-image {
+                max-width: 100%;
+                width: 100%;
+                aspect-ratio: 560 / 360;
+                order: 2;
+            }
+
+            .syncskill-button {
+                font-size: 14px;
+                padding: 10px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-container">
+            <nav class="nav">
+                <div class="nav-left">
+                    <a href="/">
+                        <img alt="SYNCSKILLl" class="logo" src="alogo.png">
+                    </a>
+                    <div class="nav-links">
+                        <div class="relative">
+                            <button class="learn-button" id="learningPathsBtn">
+                                <span>Learn</span>
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" class="ml-1 transition-transform duration-200">
+                                    <path d="M6 9L12 15L18 9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                                </svg>
+                            </button>
+                            <div id="megaMenu" class="mega-menu">
+                                <div class="mega-menu-content">
+                                    <div class="mega-menu-section">
+                                        <div class="mega-menu-header">
+                                            <h3>Career Accelerators</h3>
+                                        </div>
+                                        <ul class="mega-menu-list">
+                                            <li>
+                                                <a href="#" class="mega-menu-item">
+                                                    <div class="mega-menu-item-icon career">
+                                                        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                                                        </svg>
+                                                    </div>
+                                                    <div class="mega-menu-item-text">
+                                                        <div class="mega-menu-item-title">Data Science Pro</div>
+                                                        <div class="mega-menu-item-description">12 Courses · 98 Hours</div>
+                                                    </div>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="#" class="mega-menu-item">
+                                                    <div class="mega-menu-item-icon career">
+                                                        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                                                        </svg>
+                                                    </div>
+                                                    <div class="mega-menu-item-text">
+                                                        <div class="mega-menu-item-title">AI & ML Foundation</div>
+                                                        <div class="mega-menu-item-description">8 Courses · 64 Hours</div>
+                                                    </div>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="#" class="mega-menu-item">
+                                                    <div class="mega-menu-item-icon career">
+                                                        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                                                        </svg>
+                                                    </div>
+                                                    <div class="mega-menu-item-text">
+                                                        <div class="mega-menu-item-title">Full Stack Development</div>
+                                                        <div class="mega-menu-item-description">10 Courses · 80 Hours</div>
+                                                    </div>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="mega-menu-section">
+                                        <div class="mega-menu-header">
+                                            <h3>Certifications</h3>
+                                        </div>
+                                        <ul class="mega-menu-list">
+                                            <li>
+                                                <a href="#" class="mega-menu-item">
+                                                    <div class="mega-menu-item-icon certification"></div>
+                                                    <div class="mega-menu-item-text">
+                                                        <div class="mega-menu-item-title">Cloud Architect</div>
+                                                        <div class="mega-menu-item-description">AWS · Azure · GCP</div>
+                                                    </div>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="mega-menu-section">
+                                        <div class="mega-menu-header">
+                                            <h3>More Courses</h3>
+                                        </div>
+                                        <ul class="mega-menu-list">
+                                            <li>
+                                                <a href="#" class="mega-menu-item">
+                                                    <div class="mega-menu-item-icon career">
+                                                        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                                                        </svg>
+                                                    </div>
+                                                    <div class="mega-menu-item-text">
+                                                        <div class="mega-menu-item-title">UX Design</div>
+                                                        <div class="mega-menu-item-description">6 Courses · 48 Hours</div>
+                                                    </div>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="#" class="mega-menu-item">
+                                                    <div class="mega-menu-item-icon career">
+                                                        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                                                        </svg>
+                                                    </div>
+                                                    <div class="mega-menu-item-text">
+                                                        <div class="mega-menu-item-title">DevOps Essentials</div>
+                                                        <div class="mega-menu-item-description">8 Courses · 64 Hours</div>
+                                                    </div>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="#" class="mega-menu-item">
+                                                    <div class="mega-menu-item-icon career">
+                                                        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                                                        </svg>
+                                                    </div>
+                                                    <div class="mega-menu-item-text">
+                                                        <div class="mega-menu-item-title">Product Management</div>
+                                                        <div class="mega-menu-item-description">7 Courses · 56 Hours</div>
+                                                    </div>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="relative">
+                            <button class="learn-button" id="archiveBtn">
+                                <span>Archive</span>
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" class="ml-1 transition-transform duration-200">
+                                    <path d="M6 9L12 15L18 9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                                </svg>
+                            </button>
+                            <div id="archiveMegaMenu" class="mega-menu">
+                                <div class="mega-menu-content">
+                                    <div class="mega-menu-section">
+                                        <div class="mega-menu-header">
+                                            <h3>Career Accelerators</h3>
+                                        </div>
+                                        <ul class="mega-menu-list">
+                                            <li>
+                                                <a href="#" class="mega-menu-item">
+                                                    <div class="mega-menu-item-icon career">
+                                                        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                                                        </svg>
+                                                    </div>
+                                                    <div class="mega-menu-item-text">
+                                                        <div class="mega-menu-item-title">Data Science Pro</div>
+                                                        <div class="mega-menu-item-description">12 Courses · 98 Hours</div>
+                                                    </div>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="#" class="mega-menu-item">
+                                                    <div class="mega-menu-item-icon career">
+                                                        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                                                        </svg>
+                                                    </div>
+                                                    <div class="mega-menu-item-text">
+                                                        <div class="mega-menu-item-title">AI & ML Foundation</div>
+                                                        <div class="mega-menu-item-description">8 Courses · 64 Hours</div>
+                                                    </div>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="#" class="mega-menu-item">
+                                                    <div class="mega-menu-item-icon career">
+                                                        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                                                        </svg>
+                                                    </div>
+                                                    <div class="mega-menu-item-text">
+                                                        <div class="mega-menu-item-title">Full Stack Development</div>
+                                                        <div class="mega-menu-item-description">10 Courses · 80 Hours</div>
+                                                    </div>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="mega-menu-section">
+                                        <div class="mega-menu-header">
+                                            <h3>Certifications</h3>
+                                        </div>
+                                        <ul class="mega-menu-list">
+                                            <li>
+                                                <a href="#" class="mega-menu-item">
+                                                    <div class="mega-menu-item-icon certification"></div>
+                                                    <div class="mega-menu-item-text">
+                                                        <div class="mega-menu-item-title">Cloud Architect</div>
+                                                        <div class="mega-menu-item-description">AWS · Azure · GCP</div>
+                                                    </div>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="mega-menu-section">
+                                        <div class="mega-menu-header">
+                                            <h3>More Courses</h3>
+                                        </div>
+                                        <ul class="mega-menu-list">
+                                            <li>
+                                                <a href="#" class="mega-menu-item">
+                                                    <div class="mega-menu-item-icon career">
+                                                        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                                                        </svg>
+                                                    </div>
+                                                    <div class="mega-menu-item-text">
+                                                        <div class="mega-menu-item-title">UX Design</div>
+                                                        <div class="mega-menu-item-description">6 Courses · 48 Hours</div>
+                                                    </div>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="#" class="mega-menu-item">
+                                                    <div class="mega-menu-item-icon career">
+                                                        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                                                        </svg>
+                                                    </div>
+                                                    <div class="mega-menu-item-text">
+                                                        <div class="mega-menu-item-title">DevOps Essentials</div>
+                                                        <div class="mega-menu-item-description">8 Courses · 64 Hours</div>
+                                                    </div>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="#" class="mega-menu-item">
+                                                    <div class="mega-menu-item-icon career">
+                                                        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                                                        </svg>
+                                                    </div>
+                                                    <div class="mega-menu-item-text">
+                                                        <div class="mega-menu-item-title">Product Management</div>
+                                                        <div class="mega-menu-item-description">7 Courses · 56 Hours</div>
+                                                    </div>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <a class="nav-link" href="/about-us">About</a>
+                    </div>
+                </div>
+                <div class="nav-right">
+                    <button class="menu-button" id="mobileMenuButton">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                            <path stroke="currentColor" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+                        </svg>
+                    </button>
+                    <div class="auth-buttons">
+                        <a class="auth-button submit" href="https://serv-learner-prod.growthschool.io/auth/login">Submit Paper</a>
+                        <a class="auth-button" href="https://forms.growthschool.io/custom/apply-as-a-mentor-at-growthschool/8125ff18-d4a1-42d1-a6f6-0f3bcd3c840a">Join as Reviewer</a>
+                    </div>
+                </div>
+            </nav>
+            <div id="mobileMenu">
+                <div class="mobile-menu-close" id="mobileMenuClose">
+                    <svg viewBox="0 0 24 24">
+                        <path stroke="currentColor" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                    </svg>
+                </div>
+                <div class="mobile-menu-content">
+                    <div class="mobile-menu-section">
+                        <div class="mobile-menu-group">
+                            <h3 class="mobile-menu-header" onclick="(function(c){c.classList.toggle('active'); this.classList.toggle('active');})(this.nextElementSibling)">
+                                <span>Learn</span>
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" class="ml-1 transition-transform duration-200">
+                                    <path d="M6 9L12 15L18 9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                                </svg>
+                            </h3>
+                            <div class="mobile-menu-list">
+                                <a href="#" class="mobile-menu-item">
+                                    <div class="mobile-menu-item-icon career"></div>
+                                    <div class="mobile-menu-item-text">
+                                        <div class="mobile-menu-item-title">Data Science Pro</div>
+                                        <div class="mobile-menu-item-description">12 Courses · 98 Hours</div>
+                                    </div>
+                                </a>
+                                <a href="#" class="mobile-menu-item">
+                                    <div class="mobile-menu-item-icon career"></div>
+                                    <div class="mobile-menu-item-text">
+                                        <div class="mobile-menu-item-title">AI & ML Foundation</div>
+                                        <div class="mobile-menu-item-description">8 Courses · 64 Hours</div>
+                                    </div>
+                                </a>
+                                <a href="#" class="mobile-menu-item">
+                                    <div class="mobile-menu-item-icon career"></div>
+                                    <div class="mobile-menu-item-text">
+                                        <div class="mobile-menu-item-title">Full Stack Development</div>
+                                        <div class="mobile-menu-item-description">10 Courses · 80 Hours</div>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="mobile-menu-group">
+                            <h3 class="mobile-menu-header" onclick="(function(c){c.classList.toggle('active'); this.classList.toggle('active');})(this.nextElementSibling)">
+                                <span>Archive</span>
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" class="ml-1 transition-transform duration-200">
+                                    <path d="M6 9L12 15L18 9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                                </svg>
+                            </h3>
+                            <div class="mobile-menu-list">
+                                <a href="#" class="mobile-menu-item">
+                                    <div class="mobile-menu-item-icon certification"></div>
+                                    <div class="mobile-menu-item-text">
+                                        <div class="mobile-menu-item-title">Cloud Architect</div>
+                                        <div class="mobile-menu-item-description">AWS · Azure · GCP</div>
+                                    </div>
+                                </a>
+                                <a href="#" class="mobile-menu-item">
+                                    <div class="mobile-menu-item-icon certification"></div>
+                                    <div class="mobile-menu-item-text">
+                                        <div class="mobile-menu-item-title">Cybersecurity Expert</div>
+                                        <div class="mobile-menu-item-description">3 Badges</div>
+                                    </div>
+                                </a>
+                                <a href="#" class="mobile-menu-item">
+                                    <div class="mobile-menu-item-icon certification"></div>
+                                    <div class="mobile-menu-item-text">
+                                        <div class="mobile-menu-item-title">Data Analytics</div>
+                                        <div class="mobile-menu-item-description">5 Badges</div>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="mobile-menu-group">
+                            <h3 class="mobile-menu-header" onclick="(function(c){c.classList.toggle('active'); this.classList.toggle('active');})(this.nextElementSibling)">
+                                <span>More</span>
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" class="ml-1 transition-transform duration-200">
+                                    <path d="M6 9L12 15L18 9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                                </svg>
+                            </h3>
+                            <div class="mobile-menu-list">
+                                <a href="#" class="mobile-menu-item">
+                                    <div class="mobile-menu-item-icon career"></div>
+                                    <div class="mobile-menu-item-text">
+                                        <div class="mobile-menu-item-title">UX Design</div>
+                                        <div class="mobile-menu-item-description">6 Courses · 48 Hours</div>
+                                    </div>
+                                </a>
+                                <a href="#" class="mobile-menu-item">
+                                    <div class="mobile-menu-item-icon career"></div>
+                                    <div class="mobile-menu-item-text">
+                                        <div class="mobile-menu-item-title">DevOps Essentials</div>
+                                        <div class="mobile-menu-item-description">8 Courses · 64 Hours</div>
+                                    </div>
+                                </a>
+                                <a href="https://harshajw.netlify.app" class="mobile-menu-item">
+                                    <div class="mobile-menu-item-icon career"></div>
+                                    <div class="mobile-menu-item-text">
+                                        <div class="mobile-menu-item-title">Product Management</div>
+                                        <div class="mobile-menu-item-description">7 Courses · 56 Hours</div>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                        <a href="https://harshajw.netlify.app" style="text-decoration: none;">
+                            <div class="mobile-menu-group">
+                                <h3 class="mobile-menu-header">
+                                    <span>About</span>
+                                </h3>
+                            </div>
+                        </a>
+                        <a href="https://harshajw.netlify.app" style="text-decoration: none;">
+                            <div class="mobile-menu-group">
+                                <h3 class="mobile-menu-header">
+                                    <span>Contact us</span>
+                                </h3>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <div class="mobile-menu-auth">
+                    <div class="mobile-menu-auth-buttons">
+                        <a href="https://serv-learner-prod.growthschool.io/auth/login" class="mobile-menu-auth-button submit">Submit Paper</a>
+                        <a href="https://forms.growthschool.io/custom/apply-as-a-mentor-at-growthschool/8125ff18-d4a1-42d1-a6f6-0f3bcd3c840a" class="mobile-menu-auth-button join">Join as Reviewer</a>
+                    </div>
+                </div>
+            </div>
+            <div id="menuOverlay"></div>
+            <div class="divider"></div>
+        </div>
+    </header>
+
+    <section class="section-container" role="region" aria-label="Syncskill Featured Section">
+        <div class="section-content">
+            <div class="section-text">
+                <h2>
+                    <span class="top-line">The <span class="highlight">IHTNAS</span></span>
+                    <span class="bottom-line">International Hub for Technology, Novelty and Applied Sciences</span>
+                </h2>
+                <p>Whether it's Product, Growth, Design, Business, Tech, or Data, Syncskill is the place to learn from top experts and join the elite.</p>
+                <button class="syncskill-button">
+                    Explore Programs
+                    <svg xmlns="http://www.w3.org/2000/svg" width="10" height="13" viewBox="0 0 12 13" fill="none" class="syncskill-button-icon">
+                        <path d="M1 7.11108L6 12L11 7.11108" stroke="#012726" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                        <path d="M1 1L6 5.88889L11 1" stroke="#012726" stroke-opacity="0.5" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                    </svg>
+                </button>
+            </div>
+            <div class="section-image">
+                <img src="https://framerusercontent.com/images/kkOygtHRHYPv76o5PniXD7eNI.png?scale-down-to=1024" 
+                     onerror="this.src='https://via.placeholder.com/560x360?text=Image+Failed+to+Load'; this.classList.add('placeholder');" 
+                     alt="Syncskill Program Mockup">
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer should be included here, styled by /assets/footer-styles.css -->
+
+    <script>
+        // Learn Mega Menu
+        const learningPathsBtn = document.getElementById('learningPathsBtn');
+        const megaMenu = document.getElementById('megaMenu');
+        const learnChevron = learningPathsBtn.querySelector('svg');
+        let isMenuOpen = false;
+
+        function showLearnMegaMenu() {
+            megaMenu.classList.add('active');
+            learnChevron.style.transform = 'rotate(180deg)';
+        }
+
+        function hideLearnMegaMenu() {
+            megaMenu.classList.remove('active');
+            learnChevron.style.transform = 'rotate(0deg)';
+        }
+
+        learningPathsBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            if (isMenuOpen) {
+                hideLearnMegaMenu();
+            } else {
+                showLearnMegaMenu();
+                hideArchiveMegaMenu();
+            }
+            isMenuOpen = !isMenuOpen;
+        });
+
+        // Archive Mega Menu
+        const archiveBtn = document.getElementById('archiveBtn');
+        const archiveMegaMenu = document.getElementById('archiveMegaMenu');
+        const archiveChevron = archiveBtn.querySelector('svg');
+        let isArchiveMenuOpen = false;
+
+        function showArchiveMegaMenu() {
+            archiveMegaMenu.classList.add('active');
+            archiveChevron.style.transform = 'rotate(180deg)';
+        }
+
+        function hideArchiveMegaMenu() {
+            archiveMegaMenu.classList.remove('active');
+            archiveChevron.style.transform = 'rotate(0deg)';
+        }
+
+        archiveBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            if (isArchiveMenuOpen) {
+                hideArchiveMegaMenu();
+            } else {
+                showArchiveMegaMenu();
+                hideLearnMegaMenu();
+            }
+            isArchiveMenuOpen = !isArchiveMenuOpen;
+        });
+
+        document.addEventListener('click', (e) => {
+            if (isMenuOpen && !megaMenu.contains(e.target) && !learningPathsBtn.contains(e.target)) {
+                hideLearnMegaMenu();
+                isMenuOpen = false;
+            }
+            if (isArchiveMenuOpen && !archiveMegaMenu.contains(e.target) && !archiveBtn.contains(e.target)) {
+                hideArchiveMegaMenu();
+                isArchiveMenuOpen = false;
+            }
+        });
+
+        window.addEventListener('scroll', () => {
+            if (isMenuOpen) {
+                hideLearnMegaMenu();
+                isMenuOpen = false;
+            }
+            if (isArchiveMenuOpen) {
+                hideArchiveMegaMenu();
+                isArchiveMenuOpen = false;
+            }
+        });
+
+        // Mobile Menu
+        const mobileMenu = document.getElementById('mobileMenu');
+        const mobileMenuButton = document.getElementById('mobileMenuButton');
+        const mobileMenuClose = document.getElementById('mobileMenuClose');
+        const menuOverlay = document.getElementById('menuOverlay');
+
+        function toggleMobileMenu() {
+            const isOpen = mobileMenu.classList.contains('active');
+            if (isOpen) {
+                mobileMenu.classList.remove('active');
+                menuOverlay.classList.remove('active');
+            } else {
+                mobileMenu.classList.add('active');
+                menuOverlay.classList.add('active');
+            }
+        }
+
+        mobileMenuButton.addEventListener('click', toggleMobileMenu);
+        mobileMenuClose.addEventListener('click', toggleMobileMenu);
+        menuOverlay.addEventListener('click', toggleMobileMenu);
+
+        // Close on ESC
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && window.innerWidth <= 768) {
+                mobileMenu.classList.remove('active');
+                menuOverlay.classList.remove('active');
+            }
+        });
+
+        // Handle window resize
+        window.addEventListener('resize', () => {
+            if (window.innerWidth > 768) {
+                mobileMenu.classList.remove('active');
+                menuOverlay.classList.remove('active');
+                if (isMenuOpen) {
+                    hideLearnMegaMenu();
+                    isMenuOpen = false;
+                }
+                if (isArchiveMenuOpen) {
+                    hideArchiveMegaMenu();
+                    isArchiveMenuOpen = false;
+                }
+            }
+        });
+    </script>
+    
+      <section class="trusted-section">
+    <h2>20+ Indexing Partners</h2>
+
+    <div class="logo-row">
+      <div class="logos">
+        <img src="https://via.placeholder.com/120x60?text=Logo+1" alt="Logo 1">
+        <img src="https://via.placeholder.com/120x60?text=Logo+2" alt="Logo 2">
+        <img src="https://via.placeholder.com/120x60?text=Logo+3" alt="Logo 3">
+        <img src="https://via.placeholder.com/120x60?text=Logo+4" alt="Logo 4">
+        <img src="https://via.placeholder.com/120x60?text=Logo+5" alt="Logo 5">
+        <!-- repeat for scroll -->
+        <img src="https://via.placeholder.com/120x60?text=Logo+1" alt="Logo 1">
+        <img src="https://via.placeholder.com/120x60?text=Logo+2" alt="Logo 2">
+        <img src="https://via.placeholder.com/120x60?text=Logo+3" alt="Logo 3">
+        <img src="https://via.placeholder.com/120x60?text=Logo+4" alt="Logo 4">
+        <img src="https://via.placeholder.com/120x60?text=Logo+5" alt="Logo 5">
+      </div>
+    </div>
+
+    <div class="logo-row">
+      <div class="logos reverse">
+        <img src="https://via.placeholder.com/120x60?text=Logo+A" alt="Logo A">
+        <img src="https://via.placeholder.com/120x60?text=Logo+B" alt="Logo B">
+        <img src="https://via.placeholder.com/120x60?text=Logo+C" alt="Logo C">
+        <img src="https://via.placeholder.com/120x60?text=Logo+D" alt="Logo D">
+        <img src="https://via.placeholder.com/120x60?text=Logo+E" alt="Logo E">
+        <!-- repeat for scroll -->
+        <img src="https://via.placeholder.com/120x60?text=Logo+A" alt="Logo A">
+        <img src="https://via.placeholder.com/120x60?text=Logo+B" alt="Logo B">
+        <img src="https://via.placeholder.com/120x60?text=Logo+C" alt="Logo C">
+        <img src="https://via.placeholder.com/120x60?text=Logo+D" alt="Logo D">
+        <img src="https://via.placeholder.com/120x60?text=Logo+E" alt="Logo E">
+      </div>
+    </div>
+  </section>
+ <style>
+    .trusted-section {
+      padding: 2rem 125px;
+    }
+
+    .trusted-section h2 {
+      font-size: 1.3rem;
+      font-weight: 600;
+      margin-bottom: 2rem;
+      color: #444;
+      letter-spacing: 0.3px;
+      text-align: left;
+    }
+
+    .logo-row {
+      overflow: hidden;
+      white-space: nowrap;
+      margin-bottom: 1.5rem;
+      position: relative;
+      mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+      -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+    }
+
+    .logos {
+      display: inline-block;
+      animation: scroll-left 25s linear infinite;
+    }
+
+    .logos.reverse {
+      animation: scroll-right 25s linear infinite;
+    }
+
+    .logos img {
+      width: 110px;
+      margin: 0 16px;
+      vertical-align: middle;
+      transition: transform 0.3s ease, opacity 0.3s ease;
+      filter: grayscale(100%) brightness(0.9);
+    }
+
+    .logos img:hover {
+      transform: scale(1.05);
+      filter: grayscale(0%) brightness(1);
+    }
+
+    @keyframes scroll-left {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+
+    @keyframes scroll-right {
+      0% { transform: translateX(-50%); }
+      100% { transform: translateX(0); }
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+      .trusted-section {
+        padding: 2rem 16px;
+      }
+
+      .trusted-section h2 {
+        font-size: 1.1rem;
+        text-align: left;
+      }
+
+      .logos img {
+        width: 80px;
+        margin: 0 12px;
+      }
+    }
+  </style>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        <div class="wrap section__container--small">
+        <div class="left-section">
+            <!-- Digital Marketing Mentorship Program Section -->
+            <h2 class="text-heading mb-6">Still wondering If Digital Marketing Mentorship Program is for you?</h2>
+            <p class="text-body mb-8">First of all, the Digital Marketing Intensive Program is not just for job seekers; it also caters to digital marketing enthusiasts, product managers, growth managers, performance marketers, and content and creative teams.</p>
+    
+            <div class="bg-accent p-8 rounded-2xl">
+                <div class="grid grid-cols-2 gap-5">
+                    <div class="flex items-start">
+                        <div class="mt-1 mr-3 text-icon">
+                            <svg class="checkmark-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M7 13L10 16L17 9" stroke="#4CAF50" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                                <circle cx="12" cy="12" r="10" stroke="#4CAF50" stroke-width="2"></circle>
+                            </svg>
+                        </div>
+                        <span class="text-item">Professionals</span>
+                    </div>
+                    <div class="flex items-start">
+                        <div class="mt-1 mr-3 text-icon">
+                            <svg class="checkmark-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M7 13L10 16L17 9" stroke="#4CAF50" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                                <circle cx="12" cy="12" r="10" stroke="#4CAF50" stroke-width="2"></circle>
+                            </svg>
+                        </div>
+                        <span class="text-item">Freelancers</span>
+                    </div>
+                    <div class="flex items-start">
+                        <div class="mt-1 mr-3 text-icon">
+                            <svg class="checkmark-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M7 13L10 16L17 9" stroke="#4CAF50" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                                <circle cx="12" cy="12" r="10" stroke="#4CAF50" stroke-width="2"></circle>
+                            </svg>
+                        </div>
+                        <span class="text-item">Product Managers</span>
+                    </div>
+                    <div class="flex items-start">
+                        <div class="mt-1 mr-3 text-icon">
+                            <svg class="checkmark-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M7 13L10 16L17 9" stroke="#4CAF50" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                                <circle cx="12" cy="12" r="10" stroke="#4CAF50" stroke-width="2"></circle>
+                            </svg>
+                        </div>
+                        <span class="text-item">Entrepreneurs</span>
+                    </div>
+                    <div class="flex items-start">
+                        <div class="mt-1 mr-3 text-icon">
+                            <svg class="checkmark-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M7 13L10 16L17 9" stroke="#4CAF50" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                                <circle cx="12" cy="12" r="10" stroke="#4CAF50" stroke-width="2"></circle>
+                            </svg>
+                        </div>
+                        <span class="text-item">Founders</span>
+                    </div>
+                    <div class="flex items-start">
+                        <div class="mt-1 mr-3 text-icon">
+                            <svg class="checkmark-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M7 13L10 16L17 9" stroke="#4CAF50" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                                <circle cx="12" cy="12" r="10" stroke="#4CAF50" stroke-width="2"></circle>
+                            </svg>
+                        </div>
+                        <span class="text-item">Growth managers</span>
+                    </div>
+                    <div class="flex items-start">
+                        <div class="mt-1 mr-3 text-icon">
+                            <svg class="checkmark-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M7 13L10 16L17 9" stroke="#4CAF50" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                                <circle cx="12" cy="12" r="10" stroke="#4CAF50" stroke-width="2"></circle>
+                            </svg>
+                        </div>
+                        <span class="text-item">Professionals</span>
+                    </div>
+                    <div class="flex items-start">
+                        <div class="mt-1 mr-3 text-icon">
+                            <svg class="checkmark-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M7 13L10 16L17 9" stroke="#4CAF50" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                                <circle cx="12" cy="12" r="10" stroke="#4CAF50" stroke-width="2"></circle>
+                            </svg>
+                        </div>
+                        <span class="text-item">Freelancers</span>
+                    </div>
+                    <div class="flex items-start">
+                        <div class="mt-1 mr-3 text-icon">
+                            <svg class="checkmark-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M7 13L10 16L17 9" stroke="#4CAF50" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                                <circle cx="12" cy="12" r="10" stroke="#4CAF50" stroke-width="2"></circle>
+                            </svg>
+                        </div>
+                        <span class="text-item">Product Managers</span>
+                    </div>
+                    <div class="flex items-start">
+                        <div class="mt-1 mr-3 text-icon">
+                            <svg class="checkmark-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M7 13L10 16L17 9" stroke="#4CAF50" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                                <circle cx="12" cy="12" r="10" stroke="#4CAF50" stroke-width="2"></circle>
+                            </svg>
+                        </div>
+                        <span class="text-item">Entrepreneurs</span>
+                    </div>
+                    <div class="flex items-start">
+                        <div class="mt-1 mr-3 text-icon">
+                            <svg class="checkmark-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M7 13L10 16L17 9" stroke="#4CAF50" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                                <circle cx="12" cy="12" r="10" stroke="#4CAF50" stroke-width="2"></circle>
+                            </svg>
+                        </div>
+                        <span class="text-item">Founders</span>
+                    </div>
+                    <div class="flex items-start">
+                        <div class="mt-1 mr-3 text-icon">
+                            <svg class="checkmark-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M7 13L10 16L17 9" stroke="#4CAF50" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                                <circle cx="12" cy="12" r="10" stroke="#4CAF50" stroke-width="2"></circle>
+                            </svg>
+                        </div>
+                        <span class="text-item">Growth managers</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Upskill Your Team Section -->
+            <div class="py-10 bg-section" id="business">
+                <div class="w-90 mx-auto mb-12">
+                    <div class="flex flex-col md--flex-row justify-start mb-8 md--mb-12">
+                        <div class="md--w-3-4 text-left">
+                            <p class="text-label mb-4">Skill Up, Scale Up</p>
+                            <h2 class="text-subheading mb-4">Upskill your Team; Upscale your Business</h2>
+                            <p class="text-body">Elevate your team's skills to fuel efficiency and ongoing innovation for sustained business growth.</p>
+                        </div>
+                        <div class="mt-6 md--mt-0 md--w-1-4 flex justify-end">
+                            <a class="button hidden md--block" href="https://home.growthschool.io/b2b">Upskill Your Team</a>
+                        </div>
+                    </div>
+                    <h3 class="text-feature mb-3">Why learn with ITHNAS</h3>
+                    <div class="grid grid-cols-1 gap-4">
+                        <div class="flex items-start gap-4 md--p-4">
+                            <div class="flex-shrink-0 w-74px h-74px rounded-xl flex items-center justify-center bg-icon">
+                                <img alt="Self-paced video content" loading="lazy" width="42" height="42" decoding="async" src="https://d3kl8zsmmx4oop.cloudfront.net/si_Movie_e70fcd3f84.svg" class="img-contain">
+                            </div>
+                            <div>
+                                <div class="text-feature mb-2">Self-paced video content</div>
+                                <p class="text-body">Master new skills on your schedule with our flexible, self-paced video content.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-4 md--p-4">
+                            <div class="flex-shrink-0 w-74px h-74px rounded-xl flex items-center justify-center bg-icon">
+                                <img alt="Office hours with Mentors for clearing blockers" loading="lazy" width="42" height="42" decoding="async" src="https://d3kl8zsmmx4oop.cloudfront.net/si_Target_c6f22015fa.svg" class="img-contain">
+                            </div>
+                            <div>
+                                <div class="text-feature mb-2">Office hours with Mentors for clearing blockers</div>
+                                <p class="text-body">Overcome challenges fast with dedicated mentor office hours.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-4 md--p-4">
+                            <div class="flex-shrink-0 w-74px h-74px rounded-xl flex items-center justify-center bg-icon">
+                                <img alt="Project driven approach to achieve outcomes" loading="lazy" width="42" height="42" decoding="async" src="https://d3kl8zsmmx4oop.cloudfront.net/si_Copy_alt_6d34ac6c00.svg" class="img-contain">
+                            </div>
+                            <div>
+                                <div class="text-feature mb-2">Project driven approach to achieve outcomes</div>
+                                <p class="text-body">Gain practical skills through our project-driven approach for real results.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-4 md--p-4">
+                            <div class="flex-shrink-0 w-74px h-74px rounded-xl flex items-center justify-center bg-icon">
+                                <img alt="Access to network of 1000+ learners" loading="lazy" width="42" height="42" decoding="async" src="https://d3kl8zsmmx4oop.cloudfront.net/si_User_alt_cc0bd5ef2f.svg" class="img-contain">
+                            </div>
+                            <div>
+                                <div class="text-feature mb-2">Access to network of 1000+ learners</div>
+                                <p class="text-body">Tap into our vibrant network of learners, enhancing your learning experience.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="w-full pb-10 sm--py-10">
+                    <div class="w-90 sm--w-4-5 mx-auto">
+                        <div class="mb-8">
+                            <h3 class="text-feature">Brands in Collaboration</h3>
+                        </div>
+                        <div class="block md--hidden">
+                            <div class="flex justify-start gap-4 items-start mb-4">
+                                <div class="h-60px flex items-start justify-start">
+                                    <img alt="Uber" loading="lazy" width="60" height="60" decoding="async" src="https://d31bwppm8yl9g2.cloudfront.net/learner/website/gsb1.svg" class="img-contain">
+                                </div>
+                                <div class="h-60px flex items-start justify-start">
+                                    <img alt="Shiprocket" loading="lazy" width="60" height="60" decoding="async" src="https://d31bwppm8yl9g2.cloudfront.net/learner/website/gsb2.svg" class="img-contain">
+                                </div>
+                                <div class="h-60px flex items-start justify-start">
+                                    <img alt="Domino's" loading="lazy" width="97" height="60" decoding="async" src="https://d31bwppm8yl9g2.cloudfront.net/learner/website/gsb3.svg" class="img-contain">
+                                </div>
+                                <div class="h-60px flex items-start justify-start">
+                                    <img alt="Aditya Birla Group" loading="lazy" width="60" height="60" decoding="async" src="https://d31bwppm8yl9g2.cloudfront.net/learner/website/gsb4.svg" class="img-contain">
+                                </div>
+                            </div>
+                            <div class="flex justify-start gap-4 items-start">
+                                <div class="h-60px flex items-start justify-start">
+                                    <img alt="Shell" loading="lazy" width="109" height="60" decoding="async" src="https://d31bwppm8yl9g2.cloudfront.net/learner/website/gsb5.svg" class="img-contain">
+                                </div>
+                                <div class="h-60px flex items-start justify-start">
+                                    <img alt="Tata Communications" loading="lazy" width="60" height="60" decoding="async" src="https://d31bwppm8yl9g2.cloudfront.net/learner/website/gsb6.svg" class="img-contain">
+                                </div>
+                                <div class="h-60px flex items-start justify-start">
+                                    <img alt="Adobe" loading="lazy" width="60" height="60" decoding="async" src="https://d31bwppm8yl9g2.cloudfront.net/learner/website/gsb7.svg" class="img-contain">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="hidden md--flex gap-6 justify-start items-start">
+                            <div class="h-104px flex items-start justify-start">
+                                <img alt="Uber" loading="lazy" width="104" height="104" decoding="async" src="https://d31bwppm8yl9g2.cloudfront.net/learner/website/gsb1.svg" class="img-contain">
+                            </div>
+                            <div class="h-104px flex items-start justify-start">
+                                <img alt="Shiprocket" loading="lazy" width="104" height="104" decoding="async" src="https://d31bwppm8yl9g2.cloudfront.net/learner/website/gsb2.svg" class="img-contain">
+                            </div>
+                            <div class="h-104px flex items-start justify-start">
+                                <img alt="Domino's" loading="lazy" width="157" height="104" decoding="async" src="https://d31bwppm8yl9g2.cloudfront.net/learner/website/gsb3.svg" class="img-contain">
+                            </div>
+                            <div class="h-104px flex items-start justify-start">
+                                <img alt="Aditya Birla Group" loading="lazy" width="104" height="104" decoding="async" src="https://d31bwppm8yl9g2.cloudfront.net/learner/website/gsb4.svg" class="img-contain">
+                            </div>
+                            <div class="h-104px flex items-start justify-start">
+                                <img alt="Shell" loading="lazy" width="180" height="104" decoding="async" src="https://d31bwppm8yl9g2.cloudfront.net/learner/website/gsb5.svg" class="img-contain">
+                            </div>
+                            <div class="h-104px flex items-start justify-start">
+                                <img alt="Tata Communications" loading="lazy" width="104" height="104" decoding="async" src="https://d31bwppm8yl9g2.cloudfront.net/learner/website/gsb6.svg" class="img-contain">
+                            </div>
+                            <div class="h-104px flex items-start justify-start">
+                                <img alt="Adobe" loading="lazy" width="104" height="104" decoding="async" src="https://d31bwppm8yl9g2.cloudfront.net/learner/website/gsb7.svg" class="img-contain">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="w-full flex justify-center">
+                    <a class="button w-full block md--hidden" href="https://home.growthschool.io/b2b">Upskill Your Team</a>
+                </div>
+            </div>
+        </div>
+        <div class="right-section">
+            <div class="submissions-container">
+                <h4 class="text-heading">Recent Submissions</h4>
+                <a href="#" class="submission-tile">
+                    <div class="title">AI-Based Traffic Control Using Deep Learning</div>
+                    <div class="authors">Author: Ravi Kumar</div>
+                    <div class="details">Published: June 2025 | Volume 1, Issue 1</div>
+                    <div class="tap-to-view">Tap to view ➔</div>
+                </a>
+                <a href="#" class="submission-tile">
+                    <div class="title">IoT-Enabled Smart Farming in Rural India</div>
+                    <div class="authors">Author: Neha Sharma</div>
+                    <div class="details">Published: June 2025 | Volume 1, Issue 1</div>
+                    <div class="tap-to-view">Tap to view ➔</div>
+                </a>
+                <a href="#" class="submission-tile">
+                    <div class="title">Comparative Study of Solar Inverter Systems</div>
+                    <div class="authors">Author: Arjun Patel</div>
+                    <div class="details">Published: June 2025 | Volume 1, Issue 1</div>
+                    <div class="tap-to-view">Tap to view ➔</div>
+                </a>
+                <a href="#" class="submission-tile">
+                    <div class="title">Low-Cost Drones for Medical Supply Delivery</div>
+                    <div class="authors">Author: Sneha Reddy</div>
+                    <div class="details">Published: June 2025 | Volume 1, Issue 1</div>
+                    <div class="tap-to-view">Tap to view ➔</div>
+                </a>
+                <a href="#" class="submission-tile">
+                    <div class="title">Review on Machine Learning in Healthcare</div>
+                    <div class="authors">Author: Aditya Verma</div>
+                    <div class="details">Published: June 2025 | Volume 1, Issue 1</div>
+                    <div class="tap-to-view">Tap to view ➔</div>
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="scroll-to-top" id="scrollToTop">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18" />
+        </svg>
+    </div>
+
+    <script>
+        // Scroll-to-top functionality
+        const scrollToTopBtn = document.getElementById('scrollToTop');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 300) {
+                scrollToTopBtn.classList.add('visible');
+            } else {
+                scrollToTopBtn.classList.remove('visible');
+            }
+        });
+
+        scrollToTopBtn.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+    </script>
+<style>
+        :root {
+            --primary: #2563EB;
+            --background: #Ffffff;
+            --card-bg: #FFFFFF;
+            --text: #1E293B;
+            --text-secondary: #64748B;
+            --border: #E2E8F0;
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
+            --spacing-unit: 8px;
+            --font-size-base: 16px;
+            --easing: cubic-bezier(0.4, 0, 0.2, 1);
+            --color-black: #000;
+            --color-white: #fff;
+            --color-gray-600: #475569;
+            --color-custom-green: #4CAF50;
+            --color-custom-dark: #002726;
+            --color-custom-bg: #fffaf1;
+            --color-icon-bg: rgba(3, 10, 33, 0.05);
+            --text-sm: 0.875rem;
+            --text-base: 1rem;
+            --text-xl: 1.25rem;
+            --text-2xl: 1.5rem;
+            --text-3xl: 1.875rem;
+            --font-weight-normal: 400;
+            --font-weight-medium: 500;
+            --tracking-wide: 0.025em;
+            --radius-xl: 0.75rem;
+            --radius-2xl: 1rem;
+            --button-height: 48px;
+        }
+
+        .mobile-header {
+            display: none;
+            text-align: center;
+            padding: calc(var(--spacing-unit) * 2) 12px;
+            background: var(--card-bg);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .mobile-logo {
+            width: 200px;
+            height: 30px;
+            display: block;
+            margin: 0 auto;
+        }
+
+        .wrap.section__container--small {
+            display: flex;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: calc(var(--spacing-unit) * 8) 12px;
+            gap: calc(var(--spacing-unit) * 6);
+            animation: fadeIn 0.8s var(--easing);
+        }
+
+        .left-section {
+            width: 60%;
+            display: flex;
+            flex-direction: column;
+            gap: calc(var(--spacing-unit) * 4);
+        }
+
+        .right-section {
+            width: 40%;
+        }
+
+        .w-90 {
+            width: 90%;
+        }
+
+        .w-80 {
+            width: 80%;
+        }
+
+        .w-3-4 {
+            width: 75%;
+        }
+
+        .w-1-4 {
+            width: 25%;
+        }
+
+        .w-74px {
+            width: 74px;
+        }
+
+        .h-74px {
+            height: 74px;
+        }
+
+        .h-60px {
+            height: 60px;
+        }
+
+        .h-104px {
+            height: 104px;
+        }
+
+        .mx-auto {
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .mt-6 {
+            margin-top: calc(var(--spacing-unit) * 0.75);
+        }
+
+        .mt-16 {
+            margin-top: calc(var(--spacing-unit) * 2);
+        }
+
+        .mb-3 {
+            margin-bottom: calc(var(--spacing-unit) * 0.375);
+        }
+
+        .mb-4 {
+            margin-bottom: calc(var(--spacing-unit) * 0.5);
+        }
+
+        .mb-6 {
+            margin-bottom: calc(var(--spacing-unit) * 0.75);
+        }
+
+        .mb-8 {
+            margin-bottom: calc(var(--spacing-unit) * 1);
+        }
+
+        .mb-12 {
+            margin-bottom: calc(var(--spacing-unit) * 1.5);
+        }
+
+        .mt-1 {
+            margin-top: calc(var(--spacing-unit) * 0.125);
+        }
+
+        .mr-3 {
+            margin-right: calc(var(--spacing-unit) * 0.375);
+        }
+
+        .py-10 {
+            padding-top: calc(var(--spacing-unit) * 1.25);
+            padding-bottom: calc(var(--spacing-unit) * 1.25);
+        }
+
+        .pb-10 {
+            padding-bottom: calc(var(--spacing-unit) * 1.25);
+        }
+
+        .py-20 {
+            padding-top: calc(var(--spacing-unit) * 2.5);
+            padding-bottom: calc(var(--spacing-unit) * 2.5);
+        }
+
+        .p-8 {
+            padding: calc(var(--spacing-unit) * 3) !important; /* Updated to 24px */
+        }
+
+        .p-4 {
+            padding: calc(var(--spacing-unit) * 0.5);
+        }
+
+        .px-6 {
+            padding-left: calc(var(--spacing-unit) * 0.75);
+            padding-right: calc(var(--spacing-unit) * 0.75);
+        }
+
+        .py-3 {
+            padding-top: calc(var(--spacing-unit) * 0.375);
+            padding-bottom: calc(var(--spacing-unit) * 0.375);
+        }
+
+        .py-2 {
+            padding-top: calc(var(--spacing-unit) * 0.25);
+            padding-bottom: calc(var(--spacing-unit) * 0.25);
+        }
+
+        .gap-4 {
+            gap: calc(var(--spacing-unit) * 0.5);
+        }
+
+        .gap-5 {
+            gap: calc(var(--spacing-unit) * 0.625);
+        }
+
+        .gap-6 {
+            gap: calc(var(--spacing-unit) * 0.75);
+        }
+
+        .gap-8 {
+            gap: calc(var(--spacing-unit) * 1);
+        }
+
+        .grid {
+            display: grid;
+        }
+
+        .grid-cols-1 {
+            grid-template-columns: repeat(1, minmax(0, 1fr));
+        }
+
+        .grid-cols-2 {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+
+        .flex {
+            display: flex;
+        }
+
+        .flex-col {
+            flex-direction: column;
+        }
+
+        .flex-row {
+            flex-direction: row;
+        }
+
+        .items-start {
+            align-items: flex-start;
+        }
+
+        .items-center {
+            align-items: center;
+        }
+
+        .justify-between {
+            justify-content: space-between;
+        }
+
+        .justify-start {
+            justify-content: flex-start;
+        }
+
+        .justify-center {
+            justify-content: center;
+        }
+
+        .justify-end {
+            justify-content: flex-end;
+        }
+
+        .flex-shrink-0 {
+            flex-shrink: 0;
+        }
+
+        .text-left {
+            text-align: left;
+        }
+
+        .text-heading {
+            color: var(--color-custom-dark);
+            font-size: var(--text-2xl);
+            line-height: calc(2 / 1.5);
+            font-weight: var(--font-weight-medium);
+        }
+
+        .text-subheading {
+            font-size: var(--text-3xl);
+            line-height: calc(2.25 / 1.875);
+            font-weight: var(--font-weight-medium);
+            color: var(--color-black);
+        }
+
+        .text-body {
+            color: var(--color-custom-dark);
+            font-size: var(--text-sm);
+            line-height: calc(1.25 / 0.875);
+            font-weight: var(--font-weight-normal);
+        }
+
+        .text-item {
+            color: var(--color-custom-dark);
+            font-size: var(--text-sm);
+            line-height: calc(1.25 / 0.875);
+            font-weight: var(--font-weight-normal);
+        }
+
+        .text-label {
+            color: var(--color-gray-600);
+            font-size: var(--text-sm);
+            line-height: calc(1.25 / 0.875);
+            font-weight: var(--font-weight-medium);
+            text-transform: uppercase;
+            letter-spacing: var(--tracking-wide);
+        }
+
+        .text-feature {
+            color: var(--color-black);
+            font-size: var(--text-base);
+            line-height: calc(1.5 / 1);
+            font-weight: var(--font-weight-medium);
+        }
+
+        .text-button {
+            color: var(--color-black);
+            font-size: var(--text-sm);
+            line-height: calc(1.25 / 0.875);
+            font-weight: var(--font-weight-medium);
+            text-align: center;
+        }
+
+        .text-icon {
+            color: var(--color-custom-green);
+        }
+
+        .bg-accent {
+            background-color: var(--color-custom-bg);
+        }
+
+        .bg-section {
+            background-color: var(--card-bg);
+        }
+
+        .bg-icon {
+            background-color: var(--color-icon-bg);
+        }
+
+        .bg-white {
+            background-color: var(--color-white);
+        }
+
+        .bg-dark-hover {
+            background-color: var(--color-custom-dark);
+        }
+
+        .rounded-xl {
+            border-radius: var(--radius-xl);
+        }
+
+        .rounded-2xl {
+            border-radius: var(--radius-2xl);
+        }
+
+        .border {
+            border-width: 1px;
+            border-style: solid;
+            border-color: var(--color-black);
+        }
+
+        .cursor-pointer {
+            cursor: pointer;
+        }
+
+        .hover-text-white:hover {
+            color: var(--color-white);
+        }
+
+        .hover-bg-dark:hover {
+            background-color: var(--color-custom-dark);
+        }
+
+        .block {
+            display: block;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .img-contain {
+            object-fit: contain;
+            color: transparent;
+        }
+
+        .checkmark-icon {
+            width: 20px;
+            height: 20px;
+        }
+
+        .checkmark-icon path {
+            stroke: var(--color-custom-green);
+            stroke-width: 2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        .checkmark-icon circle {
+            stroke: var(--color-custom-green);
+            stroke-width: 2;
+        }
+
+        .submissions-container {
+            position: sticky;
+            top: 100px;
+            background: var(--card-bg);
+            border-radius: 16px;
+            padding: calc(var(--spacing-unit) * 3);
+            box-shadow: var(--shadow);
+            transition: transform 0.3s var(--easing);
+        }
+
+        .submissions-container:hover {
+            transform: translateY(-4px);
+        }
+
+        .submission-tile {
+            padding: calc(var(--spacing-unit) * 2);
+            transition: background-color 0.2s var(--easing);
+            cursor: pointer;
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+
+        .submission-tile + .submission-tile {
+            border-top: 1px solid var(--border);
+        }
+
+        .submission-tile:hover {
+            background-color: #F1F5F9;
+        }
+
+        .submission-tile .title {
+            font-size: clamp(1rem, 2.5vw, 1.125rem);
+            font-weight: 600;
+            color: var(--text);
+            margin-bottom: calc(var(--spacing-unit) * 0.75);
+        }
+
+        .submission-tile .authors {
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+            margin-bottom: calc(var(--spacing-unit) * 0.5);
+        }
+
+        .submission-tile .details {
+            font-size: 0.8125rem;
+            color: var(--text-secondary);
+            margin-bottom: calc(var(--spacing-unit));
+        }
+
+        .submission-tile .tap-to-view {
+            font-size: 0.875rem;
+            color: var(--primary);
+            font-weight: 500;
+        }
+
+        .scroll-to-top {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: var(--primary);
+            color: #FFFFFF;
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: var(--shadow);
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s var(--easing), visibility 0.3s var(--easing), transform 0.3s var(--easing);
+            cursor: pointer;
+        }
+
+        .scroll-to-top.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .scroll-to-top:hover {
+            transform: translateY(-4px);
+        }
+
+        .button {
+            height: var(--button-height);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0 24px;
+            border-radius: var(--radius-2xl);
+            border: 1px solid var(--color-black);
+            background-color: var(--color-white);
+            transition: all 0.3s var(--easing);
+            cursor: pointer;
+            text-decoration: none;
+            font-weight: var(--font-weight-medium);
+            font-size: var(--text-sm);
+        }
+
+        .button:hover {
+            background-color: var(--color-custom-dark);
+            color: var(--color-white);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .wrap.section__container--small,
+            .submissions-container,
+            .scroll-to-top {
+                animation: none;
+                transition: none;
+            }
+        }
+
+        @media (min-width: 640px) {
+            .sm--py-10 {
+                padding-top: calc(var(--spacing-unit) * 1.25);
+                padding-bottom: calc(var(--spacing-unit) * 1.25);
+            }
+
+            .sm--w-4-5 {
+                width: 80%;
+            }
+        }
+
+        @media (min-width: 768px) {
+            .md--text-heading {
+                font-size: 32px;
+                line-height: calc(2.25 / 2);
+            }
+
+            .md--text-subheading {
+                font-size: 36px;
+                line-height: calc(2.5 / 2.25);
+            }
+
+            .md--text-body {
+                font-size: var(--text-base);
+                line-height: calc(1.5 / 1);
+            }
+
+            .md--text-item {
+                font-size: var(--text-xl);
+                line-height: calc(1.75 / 1.25);
+                font-weight: var(--font-weight-medium);
+            }
+
+            .md--text-button {
+                font-size: var(--text-base);
+                line-height: calc(1.5 / 1);
+            }
+
+            .md--flex-row {
+                flex-direction: row;
+            }
+
+            .md--gap-6 {
+                gap: calc(var(--spacing-unit) * 0.75);
+            }
+
+            .md--bg-accent {
+                background-color: var(--color-custom-bg);
+            }
+
+            .md--p-8 {
+                padding: calc(var(--spacing-unit) * 3) !important; /* Updated to 24px */
+            }
+
+            .md--p-4 {
+                padding: calc(var(--spacing-unit) * 0.5);
+            }
+
+            .md--py-20 {
+                padding-top: calc(var(--spacing-unit) * 2.5);
+                padding-bottom: calc(var(--spacing-unit) * 2.5);
+            }
+
+            .md--mb-0 {
+                margin-bottom: 0;
+            }
+
+            .md--mb-12 {
+                margin-bottom: calc(var(--spacing-unit) * 1.5);
+            }
+
+            .md--mt-0 {
+                margin-top: 0;
+            }
+
+            .md--w-80 {
+                width: 80%;
+            }
+
+            .md--w-3-4 {
+                width: 75%;
+            }
+
+            .md--w-1-4 {
+                width: 25%;
+            }
+
+            .md--block {
+                display: block;
+            }
+
+            .md--hidden {
+                display: none;
+            }
+        }
+
+        @media (min-width: 993px) {
+            .wrap.section__container--small {
+                padding-left: 125px;
+                padding-right: 125px;
+            }
+        }
+
+        @media (max-width: 992px) {
+            .wrap.section__container--small {
+                flex-direction: column;
+                padding: calc(var(--spacing-unit) * 4) 12px;
+            }
+
+            .left-section, .right-section {
+                width: 100%;
+            }
+
+            .right-section {
+                display: none;
+            }
+
+            .mobile-header {
+                display: block;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .mobile-header {
+                padding: calc(var(--spacing-unit) * 1.5) 12px;
+            }
+
+            .mobile-logo {
+                width: 160px;
+                height: 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <script type="text/javascript">
+        var gk_isXlsx = false;
+        var gk_xlsxFileLookup = {};
+        var gk_fileData = {};
+        function filledCell(cell) {
+          return cell !== '' && cell != null;
+        }
+        function loadFileData(filename) {
+        if (gk_isXlsx && gk_xlsxFileLookup[filename]) {
+            try {
+                var workbook = XLSX.read(gk_fileData[filename], { type: 'base64' });
+                var firstSheetName = workbook.SheetNames[0];
+                var worksheet = workbook.Sheets[firstSheetName];
+                var jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 1, blankrows: false, defval: '' });
+                var filteredData = jsonData.filter(row => row.some(filledCell));
+                var headerRowIndex = filteredData.findIndex((row, index) =>
+                  row.filter(filledCell).length >= filteredData[index + 1]?.filter(filledCell).length
+                );
+                if (headerRowIndex === -1 || headerRowIndex > 25) {
+                  headerRowIndex = 0;
+                }
+                var csv = XLSX.utils.aoa_to_sheet(filteredData.slice(headerRowIndex));
+                csv = XLSX.utils.sheet_to_csv(csv, { header: 1 });
+                return csv;
+            } catch (e) {
+                console.error(e);
+                return "";
+            }
+        }
+        return gk_fileData[filename] || "";
+        }
+    </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+      <div>
+        <footer class="w-full bg-042626 text-white py-16">
+            <div class="w-90 md-w-80 mx-auto">
+                <div class="flex flex-col md-flex-row gap-10 md-gap-20 mb-12">
+                    <div class="md-w-2-5">
+                        <div class="mb-8">
+                            <img alt="SYNCSKILL" loading="lazy" width="280" height="50" decoding="async" data-nimg="1" class="h-12 md-h-18 w-auto" style="color:transparent" src="/footer.png">
+                        </div>
+                        <div class="space-x-6 mb-8">
+                            <a href="https://www.facebook.com/growthschoolio" class="transition hover-opacity-80" target="_blank" rel="noopener noreferrer">
+                                <img alt="Facebook" loading="lazy" width="24" height="24" decoding="async" data-nimg="1" class="w-10 h-10" style="color:transparent" src="https://d31bwppm8yl9g2.cloudfront.net/learner/website/Facebook.svg">
+                            </a>
+                            <a href="https://x.com/growthschoolio" class="transition hover-opacity-80" target="_blank" rel="noopener noreferrer">
+                                <img alt="Twitter" loading="lazy" width="24" height="24" decoding="async" data-nimg="1" class="w-10 h-10" style="color:transparent" src="https://d31bwppm8yl9g2.cloudfront.net/learner/website/Twitter.svg">
+                            </a>
+                            <a href="https://www.linkedin.com/school/growthschoolio/" class="transition hover-opacity-80" target="_blank" rel="noopener noreferrer">
+                                <img alt="LinkedIn" loading="lazy" width="24" height="24" decoding="async" data-nimg="1" class="w-10 h-10" style="color:transparent" src="https://d31bwppm8yl9g2.cloudfront.net/learner/website/LinkedIn.svg">
+                            </a>
+                        </div>
+                    </div>
+                    <div class="md-w-3-5 md-max-w-md ml-auto">
+                        <h3 class="text-xl font-medium mb-2">Best Kept Secrets ✨</h3>
+                        <p class="text-gray-300 mb-4 text-sm">Be the first to find out about the newest programs, workshops, and community activities - plus industry news, articles, and special reports.</p>
+                        <form class="flex flex-col sm-flex-row gap-3">
+                            <input type="email" placeholder="Enter your email" class="flex-grow px-4 py-3 rounded-lg bg-0B3837 border border-1A4544 text-white focus-outline-none focus-ring-1 focus-ring-33c375" required value="">
+                            <button type="submit" class="px-6 py-3 bg-33c375 text-042626 font-medium rounded-lg transition-colors whitespace-nowrap hover-bg-2ba764">Subscribe</button>
+                        </form>
+                    </div>
+                </div>
+                <div class="w-full h-px bg-1A4544 my-10"></div>
+                <div class="grid grid-cols-2 md-grid-cols-4 gap-8 mb-14">
+                    <div>
+                        <h4 class="text-lg font-medium mb-5">Mentorship Programs</h4>
+                        <ul class="space-y-3 list-none">
+                            <li><a class="text-gray-300 hover-text-white transition" href="/digital-marketing-mentorship-program">Digital Marketing</a></li>
+                            <li><a class="text-gray-300 hover-text-white transition" href="/performance-marketing-mentorship-program">Performance Marketing</a></li>
+                            <li><a class="text-gray-300 hover-text-white transition" href="/ui-ux-design-mentorship-program">UI UX Design</a></li>
+                            <li><a class="text-gray-300 hover-text-white transition" href="/product-management-mentorship-program">Product Management</a></li>
+                            <li><a class="text-gray-300 hover-text-white transition" href="/management-consulting-mentorship-program">Management Consulting</a></li>
+                            <li><a class="text-gray-300 hover-text-white transition" href="/product-marketing-mentorship-program">Product Marketing</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 class="text-lg font-medium mb-5">Workshops</h4>
+                        <ul class="space-y-3 list-none">
+                            <li><a class="text-gray-300 hover-text-white transition" href="/workshops/chatgpt-workshop">ChatGPT</a></li>
+                            <li><a class="text-gray-300 hover-text-white transition" href="/workshops/linkedin-growth">Linkedin Growth</a></li>
+                            <li><a class="text-gray-300 hover-text-white transition" href="/workshops/ai-for-consultants">AI For Consultants</a></li>
+                            <li><a class="text-gray-300 hover-text-white transition" href="/workshops/product-management">Product Management</a></li>
+                            <li><a class="text-gray-300 hover-text-white transition" href="/workshops/marketing-mastermind">Marketing Mastermind</a></li>
+                            <li><a class="text-gray-300 hover-text-white transition" href="/workshops/business-mastermind">Business Mastermind</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 class="text-lg font-medium mb-5">Company</h4>
+                        <ul class="space-y-3 list-none">
+                            <li><a class="text-gray-300 hover-text-white transition" href="/about-us">About Us</a></li>
+                            <li><a class="text-gray-300 hover-text-white transition" href="/contact-us">Contact Us</a></li>
+                            <li><a class="text-gray-300 hover-text-white transition" href="https://home.growthschool.io/careers">Careers</a></li>
+                            <li><a class="text-gray-300 hover-text-white transition" href="https://growthschool.freshdesk.com/support/home">Help</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 class="text-lg font-medium mb-5">Engage</h4>
+                        <ul class="space-y-3 list-none">
+                            <li><a class="text-gray-300 hover-text-white transition" href="https://home.growthschool.io/b2b">Upskill Your Team</a></li>
+                            <li><a class="text-gray-300 hover-text-white transition" href="https://forms.growthschool.io/custom/apply-as-a-mentor-at-growthschool/8125ff18-d4a1-42d1-a6f6-0f3bcd3c840a">Apply as Mentor</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="w-full h-px bg-1A4544 mb-6"></div>
+                <div class="flex flex-col md-flex-row justify-between items-center text-sm text-gray-400 gap-4">
+                    <div>© 2025 Sisinty Pvt. Ltd. All rights reserved</div>
+                    <div class="flex flex-wrap gap-4 md-gap-6">
+                        <a class="text-gray-400 hover-text-white transition" href="/privacy-policy">Privacy Policy</a>
+                        <a class="text-gray-400 hover-text-white transition" href="/refund-policy">Refund Policy</a>
+                        <a class="text-gray-400 hover-text-white transition" href="/terms-and-conditions">Terms & Conditions</a>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+        <style>
+        /* w-full */
+        .w-full {
+            width: 100%;
+        }
+
+        /* bg-[#042626] */
+        .bg-042626 {
+            background-color: #042626;
+        }
+
+        /* text-white */
+        .text-white {
+            color: #fff;
+        }
+
+        /* py-16 */
+        .py-16 {
+            padding-top: 4rem;
+            padding-bottom: 4rem;
+        }
+
+        /* w-[90%] */
+        .w-90 {
+            width: 90%;
+        }
+
+        /* md:w-[80%] */
+        @media (min-width: 48rem) {
+            .md-w-80 {
+                width: 80%;
+            }
+        }
+
+        /* mx-auto */
+        .mx-auto {
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* flex */
+        .flex {
+            display: flex;
+        }
+
+        /* flex-col */
+        .flex-col {
+            flex-direction: column;
+        }
+
+        /* md:flex-row */
+        @media (min-width: 48rem) {
+            .md-flex-row {
+                flex-direction: row;
+            }
+        }
+
+        /* gap-10 */
+        .gap-10 {
+            gap: 2.5rem;
+        }
+
+        /* md:gap-20 */
+        @media (min-width: 48rem) {
+            .md-gap-20 {
+                gap: 5rem;
+            }
+        }
+
+        /* mb-12 */
+        .mb-12 {
+            margin-bottom: 3rem;
+        }
+
+        /* md:w-2/5 */
+        @media (min-width: 48rem) {
+            .md-w-2-5 {
+                width: 40%;
+            }
+        }
+
+        /* mb-8 */
+        .mb-8 {
+            margin-bottom: 2rem;
+        }
+
+        /* h-12 */
+        .h-12 {
+            height: 3rem;
+        }
+
+        /* md:h-18 */
+        @media (min-width: 48rem) {
+            .md-h-18 {
+                height: 4.5rem;
+            }
+        }
+
+        /* w-auto */
+        .w-auto {
+            width: auto;
+        }
+
+        /* space-x-6 */
+        .space-x-6 > *:not(:last-child) {
+            margin-right: 1.5rem;
+        }
+
+        /* transition */
+        .transition {
+            transition-property: color, background-color, border-color, outline-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, translate, scale, rotate, filter;
+            transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+            transition-duration: 0.15s;
+        }
+
+        /* hover:opacity-80 */
+        @media (hover: hover) {
+            .hover-opacity-80:hover {
+                opacity: 0.8;
+            }
+        }
+
+        /* w-10 */
+        .w-10 {
+            width: 2.5rem;
+        }
+
+        /* h-10 */
+        .h-10 {
+            height: 2.5rem;
+        }
+
+        /* md:w-3/5 */
+        @media (min-width: 48rem) {
+            .md-w-3-5 {
+                width: 60%;
+            }
+        }
+
+        /* md:max-w-md */
+        @media (min-width: 48rem) {
+            .md-max-w-md {
+                max-width: 28rem;
+            }
+        }
+
+        /* ml-auto */
+        .ml-auto {
+            margin-left: auto;
+        }
+
+        /* text-xl */
+        .text-xl {
+            font-size: 1.25rem;
+            line-height: 1.4;
+        }
+
+        /* font-medium */
+        .font-medium {
+            font-weight: 500;
+        }
+
+        /* mb-2 */
+        .mb-2 {
+            margin-bottom: 0.5rem;
+        }
+
+        /* text-gray-300 */
+        .text-gray-300 {
+            color: oklch(87.2% 0.01 258.338);
+        }
+
+        /* mb-4 */
+        .mb-4 {
+            margin-bottom: 1rem;
+        }
+
+        /* text-sm */
+        .text-sm {
+            font-size: 0.875rem;
+            line-height: 1.429;
+        }
+
+        /* sm:flex-row */
+        @media (min-width: 40rem) {
+            .sm-flex-row {
+                flex-direction: row;
+            }
+        }
+
+        /* gap-3 */
+        .gap-3 {
+            gap: 0.75rem;
+        }
+
+        /* flex-grow */
+        .flex-grow {
+            flex-grow: 1;
+        }
+
+        /* px-4 */
+        .px-4 {
+            padding-left: 1rem;
+            padding-right: 1rem;
+        }
+
+        /* py-3 */
+        .py-3 {
+            padding-top: 0.75rem;
+            padding-bottom: 0.75rem;
+        }
+
+        /* rounded-lg */
+        .rounded-lg {
+            border-radius: 0.5rem;
+        }
+
+        /* bg-[#0B3837] */
+        .bg-0B3837 {
+            background-color: #0B3837;
+        }
+
+        /* border */
+        .border {
+            border-style: solid;
+            border-width: 1px;
+        }
+
+        /* border-[#1A4544] */
+        .border-1A4544 {
+            border-color: #1A4544;
+        }
+
+        /* focus:outline-none */
+        .focus-outline-none:focus {
+            outline-style: none;
+        }
+
+        /* focus:ring-1 */
+        .focus-ring-1:focus {
+            box-shadow: 0 0 0 1px currentColor;
+        }
+
+        /* focus:ring-[#33c375] */
+        .focus-ring-33c375:focus {
+            box-shadow: 0 0 0 1px #33c375;
+        }
+
+        /* px-6 */
+        .px-6 {
+            padding-left: 1.5rem;
+            padding-right: 1.5rem;
+        }
+
+        /* bg-[#33c375] */
+        .bg-33c375 {
+            background-color: #33c375;
+        }
+
+        /* text-[#042626] */
+        .text-042626 {
+            color: #042626;
+        }
+
+        /* transition-colors */
+        .transition-colors {
+            transition-property: color, background-color, border-color, outline-color, text-decoration-color, fill, stroke;
+            transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+            transition-duration: 0.15s;
+        }
+
+        /* whitespace-nowrap */
+        .whitespace-nowrap {
+            white-space: nowrap;
+        }
+
+        /* hover:bg-[#2ba764] */
+        @media (hover: hover) {
+            .hover-bg-2ba764:hover {
+                background-color: #2ba764;
+            }
+        }
+
+        /* h-px */
+        .h-px {
+            height: 1px;
+        }
+
+        /* bg-[#1A4544] */
+        .bg-1A4544 {
+            background-color: #1A4544;
+        }
+
+        /* my-10 */
+        .my-10 {
+            margin-top: 2.5rem;
+            margin-bottom: 2.5rem;
+        }
+
+        /* grid */
+        .grid {
+            display: grid;
+        }
+
+        /* grid-cols-2 */
+        .grid-cols-2 {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+
+        /* md:grid-cols-4 */
+        @media (min-width: 48rem) {
+            .md-grid-cols-4 {
+                grid-template-columns: repeat(4, minmax(0, 1fr));
+            }
+        }
+
+        /* gap-8 */
+        .gap-8 {
+            gap: 2rem;
+        }
+
+        /* mb-14 */
+        .mb-14 {
+            margin-bottom: 3.5rem;
+        }
+
+        /* text-lg */
+        .text-lg {
+            font-size: 1.125rem;
+            line-height: 1.556;
+        }
+
+        /* mb-5 */
+        .mb-5 {
+            margin-bottom: 1.25rem;
+        }
+
+        /* list-none */
+        .list-none {
+            list-style-type: none;
+        }
+
+        /* space-y-3 */
+        .space-y-3 > *:not(:last-child) {
+            margin-bottom: 0.75rem;
+        }
+
+        /* hover:text-white */
+        @media (hover: hover) {
+            .hover-text-white:hover {
+                color: #fff;
+            }
+        }
+
+        /* mb-6 */
+        .mb-6 {
+            margin-bottom: 1.5rem;
+        }
+
+        /* justify-between */
+        .justify-between {
+            justify-content: space-between;
+        }
+
+        /* items-center */
+        .items-center {
+            align-items: center;
+        }
+
+        /* text-gray-400 */
+        .text-gray-400 {
+            color: oklch(70.7% 0.022 261.325);
+        }
+
+        /* gap-4 */
+        .gap-4 {
+            gap: 1rem;
+        }
+
+        /* flex-wrap */
+        .flex-wrap {
+            flex-wrap: wrap;
+        }
+
+        /* md:gap-6 */
+        @media (min-width: 48rem) {
+            .md-gap-6 {
+                gap: 1.5rem;
+            }
+        }
+
+        /* Inline styles and other adjustments */
+        img[style*="color:transparent"] {
+            color: transparent;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: inherit;
+        }
+    </style>
+
+
+    
+
+</body>
+</html>
