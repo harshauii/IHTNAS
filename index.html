@@ -5,7 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SYNCSKILL</title>
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/assets/footer-styles.css">
+
+        <link rel="stylesheet" href="styles.css" />
     <style>
         /* Universal box-sizing */
         * {
@@ -629,197 +630,6 @@
                 display: none !important;
             }
         }
-
-        /* Featured section styles */
-        .section-container {
-            width: 90%;
-            margin-left: auto;
-            margin-right: auto;
-            background: #FFFFFF);
-        }
-
-        .section-content {
-            max-width: 1280px;
-            width: 100%;
-            margin: 0 auto;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 48px;
-            box-sizing: border-box;
-            padding: 40px 0;
-        }
-
-        @media (min-width: 48rem) {
-            .section-container {
-                width: 80%;
-            }
-        }
-
-        @media (max-width: 768px) {
-            .section-container {
-                width: 100%;
-                padding-left: 16px;
-                padding-right: 16px;
-            }
-            .section-content {
-                padding: 24px 0;
-            }
-        }
-
-        .section-text {
-            max-width: 540px;
-            width: 100%;
-        }
-
-        .section-text h2 {
-            font-size: 40px;
-            font-weight: 600;
-            line-height: 48px;
-            color: #111827;
-            margin: 0 0 24px 0;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .section-text h2 span.top-line {
-            color: #111827;
-        }
-
-        .section-text h2 span.top-line span.highlight {
-            color: #FF6666;
-        }
-
-        .section-text h2 span.bottom-line {
-            font-size: 40px;
-            font-weight: 600;
-            line-height: 48px;
-            color: #111827;
-        }
-
-        .section-text p {
-            font-size: 18px;
-            font-weight: 400;
-            line-height: 28px;
-            color: #4B5563;
-            margin: 0 0 32px 0;
-        }
-
-        .section-image {
-            max-width: 560px;
-            width: 100%;
-            aspect-ratio: 560 / 360;
-            position: relative;
-            overflow: hidden;
-            border-radius: 12px;
-            background-color: #f0f0f0;
-        }
-
-        .section-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
-            object-position: center;
-            border-radius: 12px;
-            position: absolute;
-            top: 0;
-            left: 0;
-        }
-
-        .section-image img.placeholder {
-            background-color: #e5e7eb;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #6b7280;
-            font-size: 16px;
-            font-weight: 600;
-            text-align: center;
-        }
-
-        .syncskill-button {
-            display: inline-flex;
-            align-items: center;
-            background-color: #33C375;
-            color: var(--color-dark-teal);
-            font-family: var(--font-sans);
-            font-size: 18px;
-            font-weight: 600;
-            padding: 14px 28px;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            box-shadow: 0 2px 8px rgba(0, 39, 38, 0.2);
-            transition: all 0.3s ease;
-        }
-
-        .syncskill-button:hover {
-            background-color: #2CAC66;
-            box-shadow: 0 4px 12px rgba(0, 39, 38, 0.3);
-            transform: translateY(-2px) scale(1.05);
-        }
-
-        .syncskill-button:active {
-            transform: translateY(0) scale(0.98);
-            box-shadow: 0 2px 6px rgba(0, 39, 38, 0.2);
-        }
-
-        .syncskill-button-icon {
-            margin-left: 10px;
-            transition: transform 0.3s ease;
-        }
-
-        .syncskill-button:hover .syncskill-button-icon {
-            transform: translateY(2px);
-        }
-
-        @media (max-width: 768px) {
-            .section-content {
-                flex-direction: column;
-                gap: 24px;
-                align-items: flex-start;
-            }
-
-            .section-text {
-                max-width: 100%;
-                text-align: left;
-                order: 1;
-            }
-
-            .section-text h2 {
-                font-size: 24px;
-                line-height: 32px;
-                margin-bottom: 16px;
-            }
-
-            .section-text h2 span.top-line {
-                font-size: 24px;
-                line-height: 32px;
-            }
-
-            .section-text h2 span.bottom-line {
-                font-size: 24px;
-                line-height: 32px;
-            }
-
-            .section-text p {
-                font-size: 16px;
-                line-height: 24px;
-                margin-bottom: 24px;
-            }
-
-            .section-image {
-                max-width: 100%;
-                width: 100%;
-                aspect-ratio: 560 / 360;
-                order: 2;
-            }
-
-            .syncskill-button {
-                font-size: 14px;
-                padding: 10px 20px;
-            }
-        }
     </style>
 </head>
 <body>
@@ -1304,33 +1114,6 @@
             <div class="divider"></div>
         </div>
     </header>
-
-    <section class="section-container" role="region" aria-label="Syncskill Featured Section">
-        <div class="section-content">
-            <div class="section-text">
-                <h2>
-                    <span class="top-line">The <span class="highlight">IHTNAS</span></span>
-                    <span class="bottom-line">International Hub for Technology, Novelty and Applied Sciences</span>
-                </h2>
-                <p>Whether it's Product, Growth, Design, Business, Tech, or Data, Syncskill is the place to learn from top experts and join the elite.</p>
-                <button class="syncskill-button">
-                    Submit Paper
-                    <svg xmlns="http://www.w3.org/2000/svg" width="10" height="13" viewBox="0 0 12 13" fill="none" class="syncskill-button-icon">
-                        <path d="M1 7.11108L6 12L11 7.11108" stroke="#012726" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
-                        <path d="M1 1L6 5.88889L11 1" stroke="#012726" stroke-opacity="0.5" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
-                    </svg>
-                </button>
-            </div>
-            <div class="section-image">
-                <img src="https://framerusercontent.com/images/kkOygtHRHYPv76o5PniXD7eNI.png?scale-down-to=1024" 
-                     onerror="this.src='https://via.placeholder.com/560x360?text=Image+Failed+to+Load'; this.classList.add('placeholder');" 
-                     alt="Syncskill Program Mockup">
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer should be included here, styled by /assets/footer-styles.css -->
-
     <script>
         // Learn Mega Menu
         const learningPathsBtn = document.getElementById('learningPathsBtn');
@@ -1453,990 +1236,107 @@
             }
         });
     </script>
-    
-      <section class="trusted-section">
-    <h2>20+ Indexing Partners</h2>
 
-    <div class="logo-row">
-      <div class="logos">
-        <img src="https://via.placeholder.com/120x60?text=Logo+1" alt="Logo 1">
-        <img src="https://via.placeholder.com/120x60?text=Logo+2" alt="Logo 2">
-        <img src="https://via.placeholder.com/120x60?text=Logo+3" alt="Logo 3">
-        <img src="https://via.placeholder.com/120x60?text=Logo+4" alt="Logo 4">
-        <img src="https://via.placeholder.com/120x60?text=Logo+5" alt="Logo 5">
-        <!-- repeat for scroll -->
-        <img src="https://via.placeholder.com/120x60?text=Logo+1" alt="Logo 1">
-        <img src="https://via.placeholder.com/120x60?text=Logo+2" alt="Logo 2">
-        <img src="https://via.placeholder.com/120x60?text=Logo+3" alt="Logo 3">
-        <img src="https://via.placeholder.com/120x60?text=Logo+4" alt="Logo 4">
-        <img src="https://via.placeholder.com/120x60?text=Logo+5" alt="Logo 5">
-      </div>
-    </div>
 
-    <div class="logo-row">
-      <div class="logos reverse">
-        <img src="https://via.placeholder.com/120x60?text=Logo+A" alt="Logo A">
-        <img src="https://via.placeholder.com/120x60?text=Logo+B" alt="Logo B">
-        <img src="https://via.placeholder.com/120x60?text=Logo+C" alt="Logo C">
-        <img src="https://via.placeholder.com/120x60?text=Logo+D" alt="Logo D">
-        <img src="https://via.placeholder.com/120x60?text=Logo+E" alt="Logo E">
-        <!-- repeat for scroll -->
-        <img src="https://via.placeholder.com/120x60?text=Logo+A" alt="Logo A">
-        <img src="https://via.placeholder.com/120x60?text=Logo+B" alt="Logo B">
-        <img src="https://via.placeholder.com/120x60?text=Logo+C" alt="Logo C">
-        <img src="https://via.placeholder.com/120x60?text=Logo+D" alt="Logo D">
-        <img src="https://via.placeholder.com/120x60?text=Logo+E" alt="Logo E">
-      </div>
-    </div>
-  </section>
- <style>
-    .trusted-section {
-      padding: 2rem 125px;
+
+
+
+
+
+
+  <style>
+
+    .ag-container {
+      padding-left: 16px;
+      padding-right: 16px;
+      max-width: 1200px;
+      margin: 0 auto;
     }
+    @media (min-width: 768px) {
+      .ag-container {
+        padding: 30px 125px 50px 125px;
 
-    .trusted-section h2 {
-      font-size: 1.3rem;
-      font-weight: 600;
-      margin-bottom: 2rem;
-      color: #444;
-      letter-spacing: 0.3px;
-      text-align: left;
-    }
-
-    .logo-row {
-      overflow: hidden;
-      white-space: nowrap;
-      margin-bottom: 1.5rem;
-      position: relative;
-      mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
-      -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
-    }
-
-    .logos {
-      display: inline-block;
-      animation: scroll-left 25s linear infinite;
-    }
-
-    .logos.reverse {
-      animation: scroll-right 25s linear infinite;
-    }
-
-    .logos img {
-      width: 110px;
-      margin: 0 16px;
-      vertical-align: middle;
-      transition: transform 0.3s ease, opacity 0.3s ease;
-      filter: grayscale(100%) brightness(0.9);
-    }
-
-    .logos img:hover {
-      transform: scale(1.05);
-      filter: grayscale(0%) brightness(1);
-    }
-
-    @keyframes scroll-left {
-      0% { transform: translateX(0); }
-      100% { transform: translateX(-50%); }
-    }
-
-    @keyframes scroll-right {
-      0% { transform: translateX(-50%); }
-      100% { transform: translateX(0); }
-    }
-
-    /* Responsive adjustments */
-    @media (max-width: 768px) {
-      .trusted-section {
-        padding: 2rem 16px;
-      }
-
-      .trusted-section h2 {
-        font-size: 1.1rem;
-        text-align: left;
-      }
-
-      .logos img {
-        width: 80px;
-        margin: 0 12px;
       }
     }
+    .ag-title { font-size: 24px; font-weight: bold; margin-top: 40px; margin-bottom: 16px; }
+    .ag-section-title { font-size: 20px; font-weight: bold; margin-top: 32px; margin-bottom: 12px; }
+    .ag-text { margin-bottom: 16px; }
+    .ag-list { padding-left: 20px; margin-bottom: 16px; }
+    .ag-list-item { margin-bottom: 8px; }
+    .ag-emphasis { font-style: italic; }
+    .ag-strong { font-weight: bold; }
   </style>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div class="dmmp-container">
-    <div class="dmmp-left-section">
-        <!-- Digital Marketing Mentorship Program Section -->
-        <div class="dmmp-section-card">
-            <div class="dmmp-section-header">
-                <h2 class="dmmp-text-heading">Still Wondering if Academic Paper Publishing is Right for You?</h2>
-                <p class="dmmp-text-body">First of all, publishing with us isn’t just for researchers seeking career advancement. Our platform is built for:</p>
-            </div>
-            
-            <div class="dmmp-section-content">
-                <div class="dmmp-accent-box">
-                    <div class="dmmp-audience-grid">
-                        <div class="dmmp-audience-item">
-                            <div class="dmmp-checkmark-container">
-                                <svg class="dmmp-checkmark-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M7 13L10 16L17 9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                </svg>
-                            </div>
-                            <span class="dmmp-text-item">Academicians</span>
-                        </div>
-                        <div class="dmmp-audience-item">
-                            <div class="dmmp-checkmark-container">
-                                <svg class="dmmp-checkmark-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M7 13L10 16L17 9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                </svg>
-                            </div>
-                            <span class="dmmp-text-item">Research Scholars</span>
-                        </div>
-                        <div class="dmmp-audience-item">
-                            <div class="dmmp-checkmark-container">
-                                <svg class="dmmp-checkmark-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M7 13L10 16L17 9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                </svg>
-                            </div>
-                            <span class="dmmp-text-item">Ph.D. Candidates</span>
-                        </div>
-                        <div class="dmmp-audience-item">
-                            <div class="dmmp-checkmark-container">
-                                <svg class="dmmp-checkmark-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M7 13L10 16L17 9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                </svg>
-                            </div>
-                            <span class="dmmp-text-item">Independent Researchers</span>
-                        </div>
-                        <div class="dmmp-audience-item">
-                            <div class="dmmp-checkmark-container">
-                                <svg class="dmmp-checkmark-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M7 13L10 16L17 9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                </svg>
-                            </div>
-                            <span class="dmmp-text-item">Professors & Lecturers</span>
-                        </div>
-                        <div class="dmmp-audience-item">
-                            <div class="dmmp-checkmark-container">
-                                <svg class="dmmp-checkmark-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M7 13L10 16L17 9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                </svg>
-                            </div>
-                            <span class="dmmp-text-item">Research Coordinators</span>
-                        </div>
-                        <div class="dmmp-audience-item">
-                            <div class="dmmp-checkmark-container">
-                                <svg class="dmmp-checkmark-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M7 13L10 16L17 9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                </svg>
-                            </div>
-                            <span class="dmmp-text-item">Research Institutions</span>
-                        </div>
-                        <div class="dmmp-audience-item">
-                            <div class="dmmp-checkmark-container">
-                                <svg class="dmmp-checkmark-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M7 13L10 16L17 9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                </svg>
-                            </div>
-                            <span class="dmmp-text-item">University Departments</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Upskill Your Team Section -->
-        <div class="dmmp-section-card">
-            <div class="dmmp-section-header">
-                <span class="dmmp-text-label">Skill Up, Scale Up</span>
-                <h2 class="dmmp-text-subheading">Publish with Purpose. Publish with Impact.</h2>
-                <p class="dmmp-text-body">Whether you're submitting your first paper or you're a seasoned researcher, our journal publishing ecosystem is designed to simplify, support, and elevate every step of the publication journey.</p>
-            </div>
-            
-            <div class="dmmp-section-content">
-                <h3 class="dmmp-text-heading" style="font-size: 1.5rem; margin-bottom: 30px;">Why Publish with IHTNAS?</h3>
-                
-                <div class="dmmp-feature-grid">
-                    <div class="dmmp-feature-item">
-                        <div class="dmmp-feature-icon">
-                            <img alt="Self-paced video content" loading="lazy" width="42" height="42" decoding="async" src="https://d3kl8zsmmx4oop.cloudfront.net/si_Movie_e70fcd3f84.svg" class="dmmp-feature-img">
-                        </div>
-                        <div class="dmmp-feature-text">
-                            <div class="dmmp-text-feature">Comprehensive Author Support</div>
-                            <p class="dmmp-text-body" style="margin-bottom: 0;">Get detailed guidance, templates, and submission resources to make publishing easier—even if it's your first time.</p>
-                        </div>
-                    </div>
-                    <div class="dmmp-feature-item">
-                        <div class="dmmp-feature-icon">
-                            <img alt="Office hours with Mentors" loading="lazy" width="42" height="42" decoding="async" src="https://d3kl8zsmmx4oop.cloudfront.net/si_Target_c6f22015fa.svg" class="dmmp-feature-img">
-                        </div>
-                        <div class="dmmp-feature-text">
-                            <div class="dmmp-text-feature">Ethical, Transparent Process</div>
-                            <p class="dmmp-text-body" style="margin-bottom: 0;">From peer review to final acceptance, our process is fast, fair, and clearly communicated.</p>
-                        </div>
-                    </div>
-                    <div class="dmmp-feature-item">
-                        <div class="dmmp-feature-icon">
-                            <img alt="Project driven approach" loading="lazy" width="42" height="42" decoding="async" src="https://d3kl8zsmmx4oop.cloudfront.net/si_Copy_alt_6d34ac6c00.svg" class="dmmp-feature-img">
-                        </div>
-                        <div class="dmmp-feature-text">
-                            <div class="dmmp-text-feature">Fast-Track Publication</div>
-                            <p class="dmmp-text-body" style="margin-bottom: 0;">Rapid review and decision-making process ensures your work is published without unnecessary delays.</p>
-                        </div>
-                    </div>
-                    <div class="dmmp-feature-item">
-                        <div class="dmmp-feature-icon">
-                            <img alt="Network access" loading="lazy" width="42" height="42" decoding="async" src="https://d3kl8zsmmx4oop.cloudfront.net/si_User_alt_cc0bd5ef2f.svg" class="dmmp-feature-img">
-                        </div>
-                        <div class="dmmp-feature-text">
-                            <div class="dmmp-text-feature">Expert Editorial Mentorship</div>
-                            <p class="dmmp-text-body" style="margin-bottom: 0;">Our editorial team is here to support you through revisions, formatting, and compliance with international academic standards.</p>
-                        </div>
-                    </div>
-                    <div class="dmmp-feature-item">
-                        <div class="dmmp-feature-icon">
-                            <img alt="Network access" loading="lazy" width="42" height="42" decoding="async" src="https://d3kl8zsmmx4oop.cloudfront.net/si_User_alt_cc0bd5ef2f.svg" class="dmmp-feature-img">
-                        </div>
-                        <div class="dmmp-feature-text">
-                            <div class="dmmp-text-feature">Global Indexing & Visibility</div>
-                            <p class="dmmp-text-body" style="margin-bottom: 0;">Get your paper indexed in reputed academic databases and reach thousands of readers worldwide.</p>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="dmmp-cta-container">
-                    <a class="dmmp-button-action" href="#">
-                        <span>Submit Paper</span>
-                        <i class="fas fa-arrow-right"></i>
-                    </a>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="dmmp-right-section">
-        <div class="dmmp-submissions-container">
-            <h4 class="dmmp-text-heading" style="font-size: 1.5rem; margin-bottom: 25px;">Recent Submissions</h4>
-            <a href="#" class="dmmp-submission-tile">
-                <div class="dmmp-submission-title">AI-Based Traffic Control Using Deep Learning</div>
-                <div class="dmmp-submission-authors">Author: Ravi Kumar</div>
-                <div class="dmmp-submission-details">Published: June 2025 | Volume 1, Issue 1</div>
-                <div class="dmmp-submission-tap">
-                    Tap to view <i class="fas fa-arrow-right"></i>
-                </div>
-            </a>
-            <a href="#" class="dmmp-submission-tile">
-                <div class="dmmp-submission-title">IoT-Enabled Smart Farming in Rural India</div>
-                <div class="dmmp-submission-authors">Author: Neha Sharma</div>
-                <div class="dmmp-submission-details">Published: June 2025 | Volume 1, Issue 1</div>
-                <div class="dmmp-submission-tap">
-                    Tap to view <i class="fas fa-arrow-right"></i>
-                </div>
-            </a>
-            <a href="#" class="dmmp-submission-tile">
-                <div class="dmmp-submission-title">Comparative Study of Solar Inverter Systems</div>
-                <div class="dmmp-submission-authors">Author: Arjun Patel</div>
-                <div class="dmmp-submission-details">Published: June 2025 | Volume 1, Issue 1</div>
-                <div class="dmmp-submission-tap">
-                    Tap to view <i class="fas fa-arrow-right"></i>
-                </div>
-            </a>
-            <a href="#" class="dmmp-submission-tile">
-                <div class="dmmp-submission-title">Low-Cost Drones for Medical Supply Delivery</div>
-                <div class="dmmp-submission-authors">Author: Sneha Reddy</div>
-                <div class="dmmp-submission-details">Published: June 2025 | Volume 1, Issue 1</div>
-                <div class="dmmp-submission-tap">
-                    Tap to view <i class="fas fa-arrow-right"></i>
-                </div>
-            </a>
-            <a href="#" class="dmmp-submission-tile">
-                <div class="dmmp-submission-title">Review on Machine Learning in Healthcare</div>
-                <div class="dmmp-submission-authors">Author: Aditya Verma</div>
-                <div class="dmmp-submission-details">Published: June 2025 | Volume 1, Issue 1</div>
-                <div class="dmmp-submission-tap">
-                    Tap to view <i class="fas fa-arrow-right"></i>
-                </div>
-            </a>
-        </div>
-    </div>
-</div>
-
-<style>
-.dmmp-container {
-    display: flex;
-    max-width: 1600px;
-    margin: 0 auto;
-    padding: 80px 125px;
-    gap: 70px;
-    animation: dmmp-fadeIn 0.8s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.dmmp-left-section {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    gap: 60px;
-    max-width: calc(60% - 35px);
-}
-
-.dmmp-right-section {
-    flex: 1;
-    max-width: calc(40% - 35px);
-    box-sizing: border-box;
-}
-
-/* Section Styling */
-.dmmp-section-card {
-    background: #FFFFFF;
-    border-radius: 20px;
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.03);
-    overflow: hidden;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    border: 1px solid #E2E8F0;
-}
-
-.dmmp-section-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.08);
-}
-
-.dmmp-section-header {
-    padding: 40px 40px 25px;
-    border-bottom: 1px solid #EDF2F7;
-}
-
-.dmmp-section-content {
-    padding: 30px 40px 40px;
-}
-
-.dmmp-text-label {
-    color: #4CAF50;
-    font-size: 0.875rem;
-    line-height: 1.429;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    margin-bottom: 12px;
-    display: block;
-}
-
-.dmmp-text-subheading {
-    font-size: 2rem;
-    line-height: 1.25;
-    font-weight: 700;
-    color: #002726;
-    margin-bottom: 20px;
-}
-
-.dmmp-text-heading {
-    font-size: 1.75rem;
-    line-height: 1.3;
-    font-weight: 700;
-    color: #002726;
-    margin-bottom: 20px;
-}
-
-.dmmp-text-body {
-    color: #4A5568;
-    font-size: 1.05rem;
-    line-height: 1.7;
-    font-weight: 400;
-    margin-bottom: 25px;
-}
-
-.dmmp-text-feature {
-    color: #002726;
-    font-size: 1.15rem;
-    line-height: 1.5;
-    font-weight: 600;
-    margin-bottom: 8px;
-}
-
-.dmmp-text-item {
-    color: #002726;
-    font-size: 1.05rem;
-    line-height: 1.5;
-    font-weight: 500;
-}
-
-.dmmp-accent-box {
-    background: linear-gradient(135deg, #fffaf1 0%, #fff4e0 100%);
-    border-radius: 16px;
-    padding: 35px 30px;
-}
-
-/* Audience Grid with 2 columns */
-.dmmp-audience-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 20px;
-}
-
-.dmmp-audience-item {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-}
-
-.dmmp-checkmark-container {
-    width: 28px;
-    height: 28px;
-    background: rgba(76, 175, 80, 0.1);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-}
-
-.dmmp-checkmark-icon {
-    width: 16px;
-    height: 16px;
-    color: #4CAF50;
-}
-
-/* Feature Items - Always side by side */
-.dmmp-feature-grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 30px;
-}
-
-.dmmp-feature-item {
-    display: flex;
-    align-items: center;
-    gap: 25px;
-}
-
-.dmmp-feature-icon {
-    width: 80px;
-    height: 80px;
-    border-radius: 16px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: linear-gradient(135deg, rgba(76, 175, 80, 0.1) 0%, rgba(76, 175, 80, 0.05) 100%);
-    flex-shrink: 0;
-}
-
-.dmmp-feature-img {
-    width: 45px;
-    height: 45px;
-    object-fit: contain;
-}
-
-.dmmp-feature-text {
-    flex-grow: 1;
-}
-
-.dmmp-cta-container {
-    margin-top: 30px;
-    display: flex;
-    justify-content: center;
-}
-
-.dmmp-button-action {
-    height: 56px;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    padding: 0 45px;
-    border-radius: 14px;
-    border: 2px solid #4CAF50;
-    background: linear-gradient(135deg, #4CAF50 0%, #43A047 100%);
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    cursor: pointer;
-    text-decoration: none;
-    font-weight: 600;
-    font-size: 1.05rem;
-    color: white;
-    box-shadow: 0 5px 15px rgba(76, 175, 80, 0.2);
-}
-
-.dmmp-button-action:hover {
-    background: linear-gradient(135deg, #43A047 0%, #388E3C 100%);
-    transform: translateY(-3px);
-    box-shadow: 0 8px 20px rgba(76, 175, 80, 0.3);
-}
-
-.dmmp-button-action i {
-    margin-left: 10px;
-    transition: transform 0.3s ease;
-}
-
-.dmmp-button-action:hover i {
-    transform: translateX(5px);
-}
-
-/* Right Section Styling */
-.dmmp-submissions-container {
-    position: sticky;
-    top: 120px;
-    background: #FFFFFF;
-    border-radius: 20px;
-    padding: 35px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
-    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    border: 1px solid #E2E8F0;
-}
-
-.dmmp-submissions-container:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.08);
-}
-
-.dmmp-submission-tile {
-    padding: 25px;
-    transition: background-color 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-    cursor: pointer;
-    text-decoration: none;
-    color: inherit;
-    display: block;
-    border-radius: 12px;
-}
-
-.dmmp-submission-tile + .dmmp-submission-tile {
-    border-top: 1px solid #EDF2F7;
-    margin-top: 10px;
-    padding-top: 25px;
-}
-
-.dmmp-submission-tile:hover {
-    background-color: #F8FAFC;
-}
-
-.dmmp-submission-title {
-    font-size: 1.15rem;
-    font-weight: 700;
-    color: #1E293B;
-    margin-bottom: 10px;
-    line-height: 1.4;
-}
-
-.dmmp-submission-authors {
-    font-size: 0.95rem;
-    color: #4A5568;
-    margin-bottom: 8px;
-    font-weight: 500;
-}
-
-.dmmp-submission-details {
-    font-size: 0.9rem;
-    color: #718096;
-    margin-bottom: 15px;
-}
-
-.dmmp-submission-tap {
-    font-size: 0.95rem;
-    color: #4CAF50;
-    font-weight: 600;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-}
-
-.dmmp-submission-tap i {
-    transition: transform 0.3s ease;
-}
-
-.dmmp-submission-tile:hover .dmmp-submission-tap i {
-    transform: translateX(5px);
-}
-
-/* Scroll to top button */
-.dmmp-scroll-top {
-    position: fixed;
-    bottom: 32px;
-    right: 32px;
-    background: linear-gradient(135deg, #4CAF50 0%, #43A047 100%);
-    color: #FFFFFF;
-    width: 56px;
-    height: 56px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-shadow: 0 5px 15px rgba(76, 175, 80, 0.3);
-    opacity: 0;
-    visibility: hidden;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    cursor: pointer;
-    z-index: 100;
-}
-
-.dmmp-scroll-top.visible {
-    opacity: 1;
-    visibility: visible;
-}
-
-.dmmp-scroll-top:hover {
-    transform: translateY(-5px) scale(1.05);
-    box-shadow: 0 8px 20px rgba(76, 175, 80, 0.4);
-}
-
-/* Animations */
-@keyframes dmmp-fadeIn {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-
-@keyframes dmmp-slideUp {
-    from { opacity: 0; transform: translateY(10px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-
-/* Responsive Design */
-@media (max-width: 1200px) {
-    .dmmp-container {
-        padding: 60px 80px;
-        gap: 50px;
-    }
-}
-
-@media (max-width: 1024px) {
-    .dmmp-container {
-        flex-direction: column;
-        padding: 50px 30px;
-        gap: 40px;
-    }
-    
-    .dmmp-left-section, .dmmp-right-section {
-        max-width: 100%;
-        width: 100%;
-    }
-    
-    .dmmp-section-header, .dmmp-section-content {
-        padding: 25px;
-    }
-    
-    .dmmp-submissions-container {
-        position: static;
-        margin-top: 0;
-        padding: 25px;
-    }
-}
-
-@media (max-width: 768px) {
-    .dmmp-container {
-        padding: 30px 20px;
-        gap: 30px;
-    }
-    
-    .dmmp-text-subheading {
-        font-size: 1.6rem;
-        line-height: 1.3;
-    }
-    
-    .dmmp-text-heading {
-        font-size: 1.4rem;
-        margin-bottom: 15px;
-    }
-    
-    .dmmp-text-body {
-        font-size: 0.95rem;
-        line-height: 1.6;
-        margin-bottom: 20px;
-    }
-    
-    .dmmp-audience-grid {
-        grid-template-columns: 1fr;
-        gap: 15px;
-    }
-    
-    .dmmp-audience-item {
-        gap: 10px;
-    }
-    
-    .dmmp-checkmark-container {
-        width: 24px;
-        height: 24px;
-    }
-    
-    .dmmp-checkmark-icon {
-        width: 14px;
-        height: 14px;
-    }
-    
-    .dmmp-text-item {
-        font-size: 0.95rem;
-    }
-    
-    .dmmp-accent-box {
-        padding: 25px 20px;
-    }
-    
-    .dmmp-feature-grid {
-        gap: 25px;
-    }
-    
-    .dmmp-feature-item {
-        gap: 15px;
-        align-items: flex-start;
-    }
-    
-    .dmmp-feature-icon {
-        width: 60px;
-        height: 60px;
-    }
-    
-    .dmmp-feature-img {
-        width: 35px;
-        height: 35px;
-    }
-    
-    .dmmp-text-feature {
-        font-size: 1.05rem;
-        margin-bottom: 5px;
-    }
-    
-    .dmmp-button-action {
-        height: 48px;
-        font-size: 0.95rem;
-        padding: 0 30px;
-        width: 100%;
-    }
-    
-    .dmmp-submission-tile {
-        padding: 20px;
-        border-radius: 10px;
-    }
-    
-    .dmmp-submission-tile + .dmmp-submission-tile {
-        margin-top: 10px;
-        padding-top: 20px;
-    }
-    
-    .dmmp-submission-title {
-        font-size: 1.05rem;
-        line-height: 1.4;
-        margin-bottom: 8px;
-    }
-    
-    .dmmp-submission-authors {
-        font-size: 0.9rem;
-        margin-bottom: 6px;
-    }
-    
-    .dmmp-submission-details {
-        font-size: 0.85rem;
-        margin-bottom: 12px;
-    }
-    
-    .dmmp-submission-tap {
-        font-size: 0.9rem;
-        gap: 6px;
-    }
-}
-
-@media (max-width: 480px) {
-    .dmmp-container {
-        padding: 20px 15px;
-        gap: 25px;
-    }
-    
-    .dmmp-section-header, .dmmp-section-content {
-        padding: 20px;
-    }
-    
-    .dmmp-text-subheading {
-        font-size: 1.4rem;
-        line-height: 1.3;
-    }
-    
-    .dmmp-text-heading {
-        font-size: 1.3rem;
-        margin-bottom: 12px;
-    }
-    
-    .dmmp-text-body {
-        font-size: 0.9rem;
-        line-height: 1.5;
-        margin-bottom: 15px;
-    }
-    
-    .dmmp-text-label {
-        font-size: 0.8rem;
-        margin-bottom: 10px;
-    }
-    
-    .dmmp-audience-grid {
-        gap: 12px;
-    }
-    
-    .dmmp-checkmark-container {
-        width: 22px;
-        height: 22px;
-    }
-    
-    .dmmp-checkmark-icon {
-        width: 12px;
-        height: 12px;
-    }
-    
-    .dmmp-text-item {
-        font-size: 0.9rem;
-    }
-    
-    .dmmp-accent-box {
-        padding: 20px 15px;
-        border-radius: 12px;
-    }
-    
-    .dmmp-feature-grid {
-        gap: 20px;
-    }
-    
-    .dmmp-feature-item {
-        gap: 12px;
-    }
-    
-    .dmmp-feature-icon {
-        width: 50px;
-        height: 50px;
-        border-radius: 12px;
-    }
-    
-    .dmmp-feature-img {
-        width: 30px;
-        height: 30px;
-    }
-    
-    .dmmp-text-feature {
-        font-size: 1rem;
-        margin-bottom: 5px;
-    }
-    
-    .dmmp-button-action {
-        height: 44px;
-        font-size: 0.9rem;
-        padding: 0 25px;
-        border-radius: 10px;
-    }
-    
-    .dmmp-cta-container {
-        margin-top: 20px;
-    }
-    
-    .dmmp-submissions-container {
-        padding: 20px;
-        border-radius: 12px;
-    }
-    
-    .dmmp-submission-tile {
-        padding: 15px;
-    }
-    
-    .dmmp-submission-tile + .dmmp-submission-tile {
-        margin-top: 8px;
-        padding-top: 15px;
-    }
-    
-    .dmmp-submission-title {
-        font-size: 1rem;
-        margin-bottom: 6px;
-    }
-    
-    .dmmp-submission-authors {
-        font-size: 0.85rem;
-        margin-bottom: 5px;
-    }
-    
-    .dmmp-submission-details {
-        font-size: 0.8rem;
-        margin-bottom: 10px;
-    }
-    
-    .dmmp-submission-tap {
-        font-size: 0.85rem;
-        gap: 5px;
-    }
-    
-    .dmmp-scroll-top {
-        width: 48px;
-        height: 48px;
-        bottom: 20px;
-        right: 20px;
-    }
-}
-
-@media (max-width: 360px) {
-    .dmmp-container {
-        padding: 15px 12px;
-    }
-    
-    .dmmp-section-header, .dmmp-section-content {
-        padding: 15px;
-    }
-    
-    .dmmp-text-subheading {
-        font-size: 1.3rem;
-    }
-    
-    .dmmp-text-heading {
-        font-size: 1.2rem;
-    }
-    
-    .dmmp-text-body {
-        font-size: 0.85rem;
-    }
-    
-    .dmmp-text-feature {
-        font-size: 0.95rem;
-    }
-    
-    .dmmp-text-item {
-        font-size: 0.85rem;
-    }
-    
-    .dmmp-feature-icon {
-        width: 45px;
-        height: 45px;
-    }
-    
-    .dmmp-feature-img {
-        width: 28px;
-        height: 28px;
-    }
-    
-    .dmmp-button-action {
-        height: 40px;
-        font-size: 0.85rem;
-        padding: 0 20px;
-    }
-    
-    .dmmp-submissions-container {
-        padding: 15px;
-    }
-}
-</style>
-
-
-
-
+  <div class="ag-container">
+    <h2 class="ag-title">Author Guidelines</h2>
+    <p class="ag-text">This section outlines the mandatory standards and procedural requirements for manuscript submission, authorship attribution, ethical compliance, and publication within this journal. All contributors are expected to adhere strictly to the principles outlined herein. Failure to comply may result in immediate rejection, retraction, or notification to affiliated institutions and regulatory bodies.</p>
+    <h3 class="ag-section-title">1. Scope of Submission</h3>
+    <p class="ag-text">We accept original, unpublished research that aligns with the journal’s stated aims and scope. Submissions must demonstrate scholarly merit, methodological soundness, and relevance to the academic community. Simultaneous submission to other journals is strictly prohibited.</p>
+    <h3 class="ag-section-title">2. Authorship Criteria</h3>
+    <p class="ag-text">Authorship must reflect substantial intellectual contribution in accordance with the ICMJE guidelines. Each author must meet all of the following criteria:</p>
+    <ul class="ag-list">
+      <li class="ag-list-item">Significant participation in the conception, design, execution, or interpretation of the research.</li>
+      <li class="ag-list-item">Drafting or critical revision of the manuscript for intellectual content.</li>
+      <li class="ag-list-item">Final approval of the version submitted for publication.</li>
+      <li class="ag-list-item">Full accountability for all aspects of the work, including data integrity and ethical compliance.</li>
+    </ul>
+    <p class="ag-text">Guest authorship, honorary authorship, and undisclosed contributors are considered ethical violations.</p>
+    <p class="ag-text"><span class="ag-emphasis">Author contributions must be clearly detailed during submission using the CRediT (Contributor Roles Taxonomy) model.</span></p>
+    <h3 class="ag-section-title">3. Ethical Compliance</h3>
+    <p class="ag-text">Authors are responsible for adhering to internationally accepted ethical standards, including but not limited to:</p>
+    <ul class="ag-list">
+      <li class="ag-list-item"><span class="ag-strong">Human and Animal Subjects:</span> Research involving human participants must include Institutional Review Board (IRB) approval. Animal research must comply with international guidelines for humane treatment. Documentation must be available upon request.</li>
+      <li class="ag-list-item"><span class="ag-strong">Informed Consent:</span> When applicable, authors must confirm that informed consent was obtained and documented in compliance with relevant privacy laws.</li>
+      <li class="ag-list-item"><span class="ag-strong">Competing Interests:</span> All financial or non-financial conflicts of interest must be disclosed at the time of submission. Undisclosed conflicts are grounds for withdrawal or retraction.</li>
+      <li class="ag-list-item"><span class="ag-strong">Funding Acknowledgment:</span> All sources of research funding must be transparently declared.</li>
+      <li class="ag-list-item"><span class="ag-strong">Data Transparency:</span> Authors must preserve original data for a minimum of five years post-publication and provide access upon reasonable request or when mandated by editorial review.</li>
+    </ul>
+    <h3 class="ag-section-title">4. Plagiarism and Originality</h3>
+    <p class="ag-text">The journal maintains a zero-tolerance policy on plagiarism, self-plagiarism, and unauthorized reuse of content. All manuscripts undergo plagiarism screening using licensed software. Authors are advised that:</p>
+    <ul class="ag-list">
+      <li class="ag-list-item">Text recycling beyond standard academic practice constitutes misconduct.</li>
+      <li class="ag-list-item">Previously published data, figures, or tables must be clearly cited with explicit reuse permissions, if required.</li>
+      <li class="ag-list-item">All sources must be properly attributed. Verbatim text from external sources without quotation and citation is impermissible.</li>
+    </ul>
+    <p class="ag-text">Any detected violation will be referred to the Committee on Publication Ethics (COPE) guidelines for resolution.</p>
+    <h3 class="ag-section-title">5. Manuscript Preparation</h3>
+    <p class="ag-text">Authors must comply with the journal’s formatting and referencing requirements. Submissions not adhering to these guidelines will be returned without review.</p>
+    <ul class="ag-list">
+      <li class="ag-list-item"><span class="ag-strong">File Format:</span> Manuscripts must be submitted in editable formats (e.g., DOCX, LaTeX) with clearly labeled sections.</li>
+      <li class="ag-list-item"><span class="ag-strong">Referencing Style:</span> All references must follow the journal's prescribed citation style without exception.</li>
+      <li class="ag-list-item"><span class="ag-strong">Language:</span> Manuscripts must be in English and professionally proofread. Linguistic deficiencies may result in desk rejection.</li>
+      <li class="ag-list-item"><span class="ag-strong">Figures and Tables:</span> All visual content must be original, high resolution, and accompanied by descriptive captions. Permissions for reused material must be documented at submission.</li>
+    </ul>
+    <h3 class="ag-section-title">6. Peer Review Policy</h3>
+    <p class="ag-text">Submissions are subject to double-blind peer review by qualified experts. Reviewers are selected based on subject-matter relevance and absence of conflicts of interest.</p>
+    <ul class="ag-list">
+      <li class="ag-list-item">Authors must not attempt to identify, contact, or influence reviewers.</li>
+      <li class="ag-list-item">Revisions must be accompanied by a detailed point-by-point response to reviewer comments.</li>
+      <li class="ag-list-item">Editorial decisions are final and not subject to appeal, except in cases of demonstrated procedural error.</li>
+    </ul>
+    <p class="ag-text">The journal reserves the right to reject manuscripts at any stage of review for ethical or procedural noncompliance.</p>
+    <h3 class="ag-section-title">7. Copyright and Licensing</h3>
+    <p class="ag-text">Upon acceptance, authors must sign a formal copyright transfer or licensing agreement, depending on the journal’s publication model (Open Access or Subscription-based). Authors retain moral rights to their work.</p>
+    <ul class="ag-list">
+      <li class="ag-list-item">Articles published under Open Access will be licensed under a Creative Commons license as specified at acceptance.</li>
+      <li class="ag-list-item">Authors are responsible for obtaining permission to reproduce third-party content prior to publication.</li>
+    </ul>
+    <h3 class="ag-section-title">8. Post-Publication Corrections and Retractions</h3>
+    <p class="ag-text">The journal maintains the right to issue errata, corrigenda, expressions of concern, or retractions in line with COPE recommendations and industry standards.</p>
+    <ul class="ag-list">
+      <li class="ag-list-item">Authors are required to cooperate fully in any post-publication investigation.</li>
+      <li class="ag-list-item">Retractions may be initiated by authors, editors, or institutional bodies when significant ethical or factual issues arise.</li>
+    </ul>
+    <h3 class="ag-section-title">9. Submission Declaration</h3>
+    <p class="ag-text">By submitting to this journal, authors affirm that:</p>
+    <ul class="ag-list">
+      <li class="ag-list-item">The manuscript is original and has not been published or submitted elsewhere.</li>
+      <li class="ag-list-item">All authors have read and approved the final manuscript.</li>
+      <li class="ag-list-item">All disclosures, conflicts, and ethical declarations are accurate and complete.</li>
+    </ul>
+    <p class="ag-text">Submissions that fail to meet the criteria outlined above will be summarily rejected. Repeat violations may result in a permanent ban from future submissions.</p>
+    <p class="ag-text"><span class="ag-strong">For full procedural details, including technical submission steps, consult the journal’s submission portal.</span></p>
+  </div>
 
 
 
@@ -2470,7 +1370,7 @@
                         </div>
                     </div>
                     <div class="md-w-3-5 md-max-w-md ml-auto">
-                        <h3 class="text-xl font-medium mb-2">Stay Ahead in Research ✨</h3>
+                        <h3 class="text-xl font-medium mb-2">Stay Ahead in Research ✨/h3>
                         <p class="text-gray-300 mb-4 text-sm">Be the first to discover new journal calls, special issue announcements, publication deadlines, expert editorials, and the latest in research trends, insights, and scholarly events.</p>
                         <form class="flex flex-col sm-flex-row gap-3">
                             <input type="email" placeholder="Enter your email" class="flex-grow px-4 py-3 rounded-lg bg-0B3837 border border-1A4544 text-white focus-outline-none focus-ring-1 focus-ring-33c375" required value="">
@@ -2484,7 +1384,7 @@
                         <h4 class="text-lg font-medium mb-5">For Authors</h4>
                         <ul class="space-y-3 list-none">
                             <li><a class="text-gray-300 hover-text-white transition" href="#">Submit Paper</a></li>
-                            <li><a class="text-gray-300 hover-text-white transition" href="guidelines.html">Author Guidelines</a></li>
+                            <li><a class="text-gray-300 hover-text-white transition" href="#">Author Guidelines</a></li>
                             <li><a class="text-gray-300 hover-text-white transition" href="#">Paper Format</a></li>
                             <li><a class="text-gray-300 hover-text-white transition" href="#">Publication Charges</a></li>
                             <li><a class="text-gray-300 hover-text-white transition" href="#">Sample Certificate</a></li>
