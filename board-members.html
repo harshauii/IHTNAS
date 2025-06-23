@@ -13,21 +13,126 @@
       background: #ffffff;
     }
 
-    .testimonial-section {
-      display: none; /* Hidden by default */
+    /* Desktop Styles */
+    .desktop-testimonial-section {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 60px 125px;
+      flex-wrap: wrap;
+    }
+
+    .desktop-left-content, .desktop-right-content {
+      flex: 1;
+      max-width: 420px;
+    }
+
+    .desktop-label {
+      margin-bottom: 12px;
+      font-size: 14px;
+      text-transform: uppercase;
+      color: #546E7A;
+      letter-spacing: 1px;
+    }
+
+    .desktop-name-heading {
+      margin: 0 0 24px;
+      font-size: 36px;
+      line-height: 1.3;
+      font-weight: 600;
+      color: #0F2A24;
+    }
+
+    .desktop-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 20px;
+    }
+
+    .desktop-buttons a {
+      text-decoration: none;
+      background: #0F2A24;
+      color: #FFFFFF;
+      padding: 12px 20px;
+      border-radius: 8px;
+      font-size: 15px;
+      font-weight: 500;
+      transition: background 0.3s;
+    }
+
+    .desktop-buttons a:hover {
+      background: #1A4D40;
+    }
+
+    .desktop-testimonial-card {
+      background: #0F2A24;
+      border-radius: 20px;
+      padding: 36px 40px;
+      color: #FFFFFF;
+      display: flex;
+      align-items: center;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+      max-height: 240px;
+      flex: 1;
+    }
+
+    .desktop-testimonial-card .desktop-profile-pic {
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      overflow: hidden;
+      background: #0A1B18;
+      flex-shrink: 0;
+    }
+
+    .desktop-testimonial-card .desktop-profile-pic img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .desktop-testimonial-card .desktop-text-content {
+      margin-left: 32px;
+    }
+
+    .desktop-testimonial-card .desktop-text-content p {
+      margin: 0;
+    }
+
+    .desktop-quote {
+      font-size: 16px;
+      line-height: 26px;
+      opacity: 0.9;
+    }
+
+    .desktop-name {
+      margin: 24px 0 6px;
+      font-size: 18px;
+      font-weight: 600;
+    }
+
+    .desktop-title {
+      font-size: 14px;
+      opacity: 0.65;
+    }
+
+    .desktop-divider {
+      height: 1px;
+      background: #E0E0E0;
+      margin: 20px 0;
+      width: 100%;
+    }
+
+    /* Mobile Styles */
+    .mobile-testimonial-section {
+      display: none;
       justify-content: center;
       padding: 0 12px;
       flex-wrap: wrap;
     }
 
-    /* Show on mobile (max-width: 768px) */
-    @media (max-width: 768px) {
-      .testimonial-section {
-        display: flex;
-      }
-    }
-
-    .testimonial-card {
+    .mobile-testimonial-card {
       background: #0F2A24;
       border-radius: 16px;
       padding: 20px 24px;
@@ -40,7 +145,7 @@
       gap: 16px;
     }
 
-    .profile-pic {
+    .mobile-profile-pic {
       width: 80px;
       height: 80px;
       border-radius: 50%;
@@ -49,41 +154,41 @@
       flex-shrink: 0;
     }
 
-    .profile-pic img {
+    .mobile-profile-pic img {
       width: 100%;
       height: 100%;
       object-fit: cover;
     }
 
-    .text-content {
+    .mobile-text-content {
       flex: 1;
     }
 
-    .name {
+    .mobile-name {
       font-size: 18px;
       font-weight: 600;
       margin: 0 0 6px;
     }
 
-    .title {
+    .mobile-title {
       font-size: 14px;
       margin: 0 0 4px;
       opacity: 0.9;
     }
 
-    .college {
+    .mobile-college {
       font-size: 13px;
       margin-bottom: 12px;
       opacity: 0.75;
     }
 
-    .buttons {
+    .mobile-buttons {
       display: flex;
       flex-wrap: wrap;
       gap: 8px;
     }
 
-    .buttons a {
+    .mobile-buttons a {
       text-decoration: none;
       background: #FFFFFF;
       color: #0F2A24;
@@ -94,31 +199,95 @@
       transition: background 0.3s;
     }
 
-    .buttons a:hover {
+    .mobile-buttons a:hover {
       background: #E0E0E0;
     }
 
-    .divider {
+    .mobile-divider {
       height: 1px;
       background: #E0E0E0;
       margin: 24px auto;
       width: 90%;
     }
+
+    /* Responsive Styles */
+    @media screen and (max-width: 768px) {
+      .desktop-testimonial-section, .desktop-divider {
+        display: none;
+      }
+      .mobile-testimonial-section, .mobile-divider {
+        display: flex;
+      }
+    }
+
+    @media screen and (min-width: 769px) {
+      .mobile-testimonial-section, .mobile-divider {
+        display: none;
+      }
+      .desktop-testimonial-section, .desktop-divider {
+        display: flex;
+      }
+    }
   </style>
 </head>
 <body>
-
+  <!-- Desktop Layout -->
   <!-- Testimonial 1 -->
-  <section class="testimonial-section">
-    <aside class="testimonial-card">
-      <div class="profile-pic">
+  <section class="desktop-testimonial-section">
+    <div class="desktop-left-content">
+      <p class="desktop-label">Academic Excellence</p>
+      <h2 class="desktop-name-heading">Dr. Ramesh Iyer</h2>
+      <div class="desktop-buttons">
+        <a href="https://linkedin.com/in/ramesh-iyer" target="_blank">View LinkedIn</a>
+        <a href="mailto:ramesh.iyer@iitm.ac.in">Send Email</a>
+      </div>
+    </div>
+    <aside class="desktop-testimonial-card">
+      <div class="desktop-profile-pic">
         <img src="professor-image.png" alt="Dr. Ramesh Iyer">
       </div>
-      <div class="text-content">
-        <p class="name">Dr. Ramesh Iyer</p>
-        <p class="title">Professor of Computer Science</p>
-        <p class="college">Indian Institute of Technology Madras (IIT Madras)</p>
-        <div class="buttons">
+      <div class="desktop-text-content">
+        <p class="desktop-name">Dr. Ramesh Iyer</p>
+        <p class="desktop-title">Professor of Computer Science,<br>Indian Institute of Technology Madras (IIT Madras)</p>
+      </div>
+    </aside>
+  </section>
+
+  <div class="desktop-divider"></div>
+
+  <!-- Testimonial 2 -->
+  <section class="desktop-testimonial-section">
+    <aside class="desktop-testimonial-card">
+      <div class="desktop-text-content">
+        <p class="desktop-name">Dr. Meera Krishnan</p>
+        <p class="desktop-title">Professor of Data Science,<br>Indian Institute of Science, Bangalore (IISc)</p>
+      </div>
+      <div class="desktop-profile-pic" style="margin-left: 32px;">
+        <img src="meera-krishnan.png" alt="Dr. Meera Krishnan">
+      </div>
+    </aside>
+    <div class="desktop-right-content" style="text-align: right;">
+      <p class="desktop-label">Academic Excellence</p>
+      <h2 class="desktop-name-heading">Dr. Meera Krishnan</h2>
+      <div class="desktop-buttons" style="justify-content: flex-end;">
+        <a href="https://linkedin.com/in/meera-krishnan" target="_blank">View LinkedIn</a>
+        <a href="mailto:meera.krishnan@iisc.ac.in">Send Email</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Mobile Layout -->
+  <!-- Testimonial 1 -->
+  <section class="mobile-testimonial-section">
+    <aside class="mobile-testimonial-card">
+      <div class="mobile-profile-pic">
+        <img src="professor-image.png" alt="Dr. Ramesh Iyer">
+      </div>
+      <div class="mobile-text-content">
+        <p class="mobile-name">Dr. Ramesh Iyer</p>
+        <p class="mobile-title">Professor of Computer Science</p>
+        <p class="mobile-college">Indian Institute of Technology Madras (IIT Madras)</p>
+        <div class="mobile-buttons">
           <a href="https://linkedin.com/in/ramesh-iyer" target="_blank">View LinkedIn</a>
           <a href="mailto:ramesh.iyer@iitm.ac.in">Send Email</a>
         </div>
@@ -126,25 +295,24 @@
     </aside>
   </section>
 
-  <div class="divider"></div>
+  <div class="mobile-divider"></div>
 
   <!-- Testimonial 2 -->
-  <section class="testimonial-section">
-    <aside class="testimonial-card">
-      <div class="profile-pic">
+  <section class="mobile-testimonial-section">
+    <aside class="mobile-testimonial-card">
+      <div class="mobile-profile-pic">
         <img src="meera-krishnan.png" alt="Dr. Meera Krishnan">
       </div>
-      <div class="text-content">
-        <p class="name">Dr. Meera Krishnan</p>
-        <p class="title">Professor of Data Science</p>
-        <p class="college">Indian Institute of Science, Bangalore (IISc)</p>
-        <div class="buttons">
+      <div class="mobile-text-content">
+        <p class="mobile-name">Dr. Meera Krishnan</p>
+        <p class="mobile-title">Professor of Data Science</p>
+        <p class="mobile-college">Indian Institute of Science, Bangalore (IISc)</p>
+        <div class="mobile-buttons">
           <a href="https://linkedin.com/in/meera-krishnan" target="_blank">View LinkedIn</a>
           <a href="mailto:meera.krishnan@iisc.ac.in">Send Email</a>
         </div>
       </div>
     </aside>
   </section>
-
 </body>
 </html>
