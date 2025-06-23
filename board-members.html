@@ -19,6 +19,7 @@
       justify-content: space-between;
       padding: 60px 125px;
       flex-wrap: wrap;
+      gap: 32px; /* Increased spacing between sections */
     }
 
     .left-content, .right-content {
@@ -27,62 +28,66 @@
     }
 
     .label {
-      margin-bottom: 12px;
-      font-size: 14px;
+      margin-bottom: 16px; /* Increased spacing */
+      font-size: 1.1rem; /* Increased from 14px */
       text-transform: uppercase;
       color: #546E7A;
-      letter-spacing: 1px;
+      letter-spacing: 1.2px;
     }
 
     .name-heading {
-      margin: 0 0 24px;
-      font-size: 36px;
-      line-height: 1.3;
+      margin: 0 0 32px; /* Increased spacing */
+      font-size: 2.5rem; /* Increased from 36px */
+      line-height: 1.4;
       font-weight: 600;
-      color: #0F2A24;
+      color: #1A2523;
     }
 
     .buttons {
       display: flex;
       flex-wrap: wrap;
-      gap: 12px;
-      margin-top: 20px;
+      gap: 20px; /* Increased spacing */
+      margin-top: 28px; /* Increased spacing */
     }
 
     .buttons a {
       text-decoration: none;
-      background: #0F2A24;
+      background: #2A3C4A;
       color: #FFFFFF;
-      padding: 12px 20px;
-      border-radius: 8px;
-      font-size: 15px;
-      font-weight: 500;
-      transition: background 0.3s;
+      padding: 14px 28px; /* Increased padding */
+      border-radius: 10px;
+      font-size: 1.1rem; /* Increased from 16px */
+      font-weight: 600;
+      text-align: center;
+      transition: background 0.3s ease, transform 0.2s ease;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
     }
 
     .buttons a:hover {
-      background: #1A4D40;
+      background: #3f5873;
+      transform: translateY(-2px);
     }
 
     .testimonial-card {
-      background: #0F2A24;
-      border-radius: 20px;
-      padding: 36px 40px;
-      color: #FFFFFF;
+      background: #2A3C4A;
+      border-radius: 16px;
+      padding: 24px; /* Adjusted for balance */
+      color: #E8ECEF;
       display: flex;
       align-items: center;
       box-shadow: 0 8px 24px rgba(0,0,0,0.1);
-      max-height: 240px;
+      max-height: 280px; /* Adjusted for larger content */
       flex: 1;
       box-sizing: border-box;
+      border: 1px solid #ffffff;
     }
 
     .testimonial-card .profile-pic {
-      width: 150px;
-      height: 150px;
+      width: 160px; /* Slightly increased */
+      height: 160px;
       border-radius: 50%;
       overflow: hidden;
-      background: #0A1B18;
+      background: #1A252F;
       flex-shrink: 0;
     }
 
@@ -93,7 +98,7 @@
     }
 
     .testimonial-card .text-content {
-      margin-left: 32px;
+      margin-left: 40px; /* Increased spacing */
     }
 
     .testimonial-card .text-content p {
@@ -101,26 +106,27 @@
     }
 
     .quote {
-      font-size: 16px;
-      line-height: 26px;
-      opacity: 0.9;
+      font-size: 1.2rem; /* Increased from 16px */
+      line-height: 1.8; /* Increased for readability */
+      opacity: 0.95;
     }
 
     .name {
-      margin: 24px 0 6px;
-      font-size: 18px;
+      margin: 32px 0 8px; /* Increased spacing */
+      font-size: 1.4rem; /* Increased from 18px */
       font-weight: 600;
     }
 
     .title {
-      font-size: 14px;
-      opacity: 0.65;
+      font-size: 1.1rem; /* Increased from 14px */
+      line-height: 1.6;
+      opacity: 0.8;
     }
 
     .divider {
       height: 1px;
-      background: #E0E0E0;
-      margin: 20px 0;
+      background: #333;
+      margin: 32px 0; /* Increased spacing */
       width: 100%;
     }
 
@@ -134,7 +140,7 @@
       .left-content, .right-content {
         max-width: 100%;
         text-align: center;
-        order: -1; /* Ensure content appears above card */
+        order: -1;
       }
 
       .testimonial-card {
@@ -145,28 +151,34 @@
         width: 100%;
         max-width: 100%;
         box-sizing: border-box;
-        order: 0; /* Ensure card appears below content */
+        order: 0;
+        border: 1px solid #ffffff;
       }
 
       .name-heading {
-        font-size: 28px;
-        margin-bottom: 16px;
+        font-size: 2rem; /* Increased from 28px */
+        margin-bottom: 20px; /* Increased spacing */
+        color: #1A2523;
       }
 
       .label {
-        font-size: 12px;
-        margin-bottom: 8px;
+        font-size: 1rem; /* Increased from 12px */
+        margin-bottom: 12px; /* Increased spacing */
+        color: #546E7A;
       }
 
       .buttons {
         justify-content: center;
-        margin-top: 16px;
-        gap: 8px;
+        margin-top: 20px; /* Increased spacing */
+        gap: 16px; /* Increased spacing */
+        flex-direction: row;
       }
 
       .buttons a {
-        font-size: 14px;
-        padding: 10px 16px;
+        font-size: 1rem; /* Increased from 14px */
+        padding: 12px 24px; /* Increased padding */
+        min-width: 140px;
+        border-radius: 8px;
       }
 
       .buttons[style*="justify-content"] {
@@ -178,8 +190,8 @@
       }
 
       .testimonial-card .profile-pic {
-        width: 120px;
-        height: 120px;
+        width: 100px;
+        height: 100px;
         margin: 0 auto;
       }
 
@@ -189,54 +201,58 @@
 
       .testimonial-card .text-content {
         margin-left: 0;
-        margin-top: 16px;
+        margin-top: 20px; /* Increased spacing */
         width: 100%;
       }
 
       .quote {
-        font-size: 14px;
-        line-height: 22px;
+        font-size: 1.1rem; /* Increased from 14px */
+        line-height: 1.7; /* Increased for readability */
+        color: #E8ECEF;
       }
 
       .name {
-        font-size: 16px;
-        margin: 16px 0 4px;
+        font-size: 1.2rem; /* Increased from 16px */
+        margin: 20px 0 6px; /* Increased spacing */
+        color: #E8ECEF;
       }
 
       .title {
-        font-size: 12px;
+        font-size: 1rem; /* Increased from 12px */
+        line-height: 1.6;
+        color: #B0BEC5;
       }
     }
 
     @media screen and (max-width: 480px) {
       .testimonial-section {
         padding: 24px 16px;
-        gap: 16px;
+        gap: 20px;
       }
 
       .name-heading {
-        font-size: 24px;
-        margin-bottom: 12px;
+        font-size: 1.8rem; /* Increased from 24px */
+        margin-bottom: 16px;
       }
 
       .label {
-        font-size: 10px;
-        margin-bottom: 6px;
+        font-size: 0.9rem; /* Increased from 10px */
+        margin-bottom: 10px;
       }
 
       .buttons {
         flex-direction: column;
         align-items: center;
-        margin-top: 12px;
-        gap: 8px;
+        margin-top: 16px;
+        gap: 12px;
       }
 
       .buttons a {
-        font-size: 13px;
-        padding: 8px 14px;
+        font-size: 0.9rem; /* Increased from 13px */
+        padding: 10px 20px;
         width: 100%;
-        max-width: 240px;
-        text-align: center;
+        max-width: 280px;
+        border-radius: 6px;
       }
 
       .testimonial-card {
@@ -244,22 +260,37 @@
       }
 
       .testimonial-card .profile-pic {
-        width: 100px;
-        height: 100px;
+        width: 80px;
+        height: 80px;
       }
 
       .quote {
-        font-size: 13px;
-        line-height: 20px;
+        font-size: 1rem; /* Increased from 13px */
+        line-height: 1.6;
       }
 
       .name {
-        font-size: 14px;
-        margin: 12px 0 4px;
+        font-size: 1.1rem; /* Increased from 14px */
+        margin: 16px 0 6px;
       }
 
       .title {
-        font-size: 11px;
+        font-size: 0.9rem; /* Increased from 11px */
+      }
+    }
+
+    @media screen and (max-width: 320px) {
+      .testimonial-section {
+        padding: 20px 12px;
+        gap: 16px;
+      }
+
+      .testimonial-card {
+        padding: 16px;
+      }
+
+      .buttons a {
+        max-width: 100%;
       }
     }
   </style>
