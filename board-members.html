@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Reviewer Testimonials</title>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'IBM Plex Sans', sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #ffffff;
+    }
+
+    .testimonial-section {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 60px 125px;
+      flex-wrap: wrap;
+    }
+
+    .left-content, .right-content {
+      flex: 1;
+      max-width: 420px;
+    }
+
+    .label {
+      margin-bottom: 12px;
+      font-size: 14px;
+      text-transform: uppercase;
+      color: #546E7A;
+      letter-spacing: 1px;
+    }
+
+    .name-heading {
+      margin: 0 0 24px;
+      font-size: 36px;
+      line-height: 1.3;
+      font-weight: 600;
+      color: #0F2A24;
+    }
+
+    .buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 20px;
+    }
+
+    .buttons a {
+      text-decoration: none;
+      background: #0F2A24;
+      color: #FFFFFF;
+      padding: 12px 20px;
+      border-radius: 8px;
+      font-size: 15px;
+      font-weight: 500;
+      transition: background 0.3s;
+    }
+
+    .buttons a:hover {
+      background: #1A4D40;
+    }
+
+    .testimonial-card {
+      background: #0F2A24;
+      border-radius: 20px;
+      padding: 36px 40px;
+      color: #FFFFFF;
+      display: flex;
+      align-items: center;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+      max-height: 240px;
+      flex: 1;
+      box-sizing: border-box;
+    }
+
+    .testimonial-card .profile-pic {
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      overflow: hidden;
+      background: #0A1B18;
+      flex-shrink: 0;
+    }
+
+    .testimonial-card .profile-pic img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .testimonial-card .text-content {
+      margin-left: 32px;
+    }
+
+    .testimonial-card .text-content p {
+      margin: 0;
+    }
+
+    .quote {
+      font-size: 16px;
+      line-height: 26px;
+      opacity: 0.9;
+    }
+
+    .name {
+      margin: 24px 0 6px;
+      font-size: 18px;
+      font-weight: 600;
+    }
+
+    .title {
+      font-size: 14px;
+      opacity: 0.65;
+    }
+
+    .divider {
+      height: 1px;
+      background: #E0E0E0;
+      margin: 20px 0;
+      width: 100%;
+    }
+
+    @media screen and (max-width: 768px) {
+      .testimonial-section {
+        flex-direction: column;
+        padding: 32px 16px;
+        gap: 24px;
+      }
+
+      .left-content, .right-content {
+        max-width: 100%;
+        text-align: center;
+        order: -1; /* Ensure content appears above card */
+      }
+
+      .testimonial-card {
+        flex-direction: column;
+        text-align: left;
+        padding: 24px;
+        max-height: none;
+        width: 100%;
+        max-width: 100%;
+        box-sizing: border-box;
+        order: 0; /* Ensure card appears below content */
+      }
+
+      .name-heading {
+        font-size: 28px;
+        margin-bottom: 16px;
+      }
+
+      .label {
+        font-size: 12px;
+        margin-bottom: 8px;
+      }
+
+      .buttons {
+        justify-content: center;
+        margin-top: 16px;
+        gap: 8px;
+      }
+
+      .buttons a {
+        font-size: 14px;
+        padding: 10px 16px;
+      }
+
+      .buttons[style*="justify-content"] {
+        justify-content: center;
+      }
+
+      .right-content[style*="text-align"] {
+        text-align: center;
+      }
+
+      .testimonial-card .profile-pic {
+        width: 120px;
+        height: 120px;
+        margin: 0 auto;
+      }
+
+      .testimonial-card .profile-pic[style*="margin-left"] {
+        margin-left: 0;
+      }
+
+      .testimonial-card .text-content {
+        margin-left: 0;
+        margin-top: 16px;
+        width: 100%;
+      }
+
+      .quote {
+        font-size: 14px;
+        line-height: 22px;
+      }
+
+      .name {
+        font-size: 16px;
+        margin: 16px 0 4px;
+      }
+
+      .title {
+        font-size: 12px;
+      }
+    }
+
+    @media screen and (max-width: 480px) {
+      .testimonial-section {
+        padding: 24px 16px;
+        gap: 16px;
+      }
+
+      .name-heading {
+        font-size: 24px;
+        margin-bottom: 12px;
+      }
+
+      .label {
+        font-size: 10px;
+        margin-bottom: 6px;
+      }
+
+      .buttons {
+        flex-direction: column;
+        align-items: center;
+        margin-top: 12px;
+        gap: 8px;
+      }
+
+      .buttons a {
+        font-size: 13px;
+        padding: 8px 14px;
+        width: 100%;
+        max-width: 240px;
+        text-align: center;
+      }
+
+      .testimonial-card {
+        padding: 20px;
+      }
+
+      .testimonial-card .profile-pic {
+        width: 100px;
+        height: 100px;
+      }
+
+      .quote {
+        font-size: 13px;
+        line-height: 20px;
+      }
+
+      .name {
+        font-size: 14px;
+        margin: 12px 0 4px;
+      }
+
+      .title {
+        font-size: 11px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Original Layout -->
+  <section class="testimonial-section">
+    <!-- Left -->
+    <div class="left-content">
+      <p class="label">Academic Excellence</p>
+      <h2 class="name-heading">Dr. Ramesh Iyer</h2>
+      <div class="buttons">
+        <a href="https://linkedin.com/in/ramesh-iyer" target="_blank">View LinkedIn</a>
+        <a href="mailto:ramesh.iyer@iitm.ac.in">Send Email</a>
+      </div>
+    </div>
+
+    <!-- Right -->
+    <aside class="testimonial-card">
+      <div class="profile-pic">
+        <img src="professor-image.png" alt="Dr. Ramesh Iyer">
+      </div>
+      <div class="text-content">
+        <p class="quote">
+          “Dr. Iyer is deeply invested in advancing AI ethics and education, and his contributions have shaped modern academic publishing standards.”
+        </p>
+        <p class="name">Dr. Ramesh Iyer</p>
+        <p class="title">Professor of Computer Science,<br>Indian Institute of Technology Madras (IIT Madras)</p>
+      </div>
+    </aside>
+  </section>
+
+  <!-- Divider -->
+  <div class="divider"></div>
+
+  <!-- Mirrored Layout (Restored for Desktop) -->
+  <section class="testimonial-section">
+    <!-- Left (Card First) -->
+    <aside class="testimonial-card">
+      <div class="profile-pic">
+        <img src="meera-krishnan.png" alt="Dr. Meera Krishnan">
+      </div>
+      <div class="text-content">
+        <p class="quote">
+          “Dr. Meera is a pioneer in data-driven decision science and leads impactful research in ethical AI.”
+        </p>
+        <p class="name">Dr. Meera Krishnan</p>
+        <p class="title">Professor of Data Science,<br>Indian Institute of Science, Bangalore (IISc)</p>
+      </div>
+    </aside>
+
+    <!-- Right (Buttons & Info) -->
+    <div class="right-content" style="text-align: right;">
+      <p class="label">Academic Excellence</p>
+      <h2 class="name-heading">Dr. Meera Krishnan</h2>
+      <div class="buttons" style="justify-content: flex-end;">
+        <a href="https://linkedin.com/in/meera-krishnan" target="_blank">View LinkedIn</a>
+        <a href="mailto:meera.krishnan@iisc.ac.in">Send Email</a>
+      </div>
+    </div>
+  </section>
+
+</body>
+</html>
