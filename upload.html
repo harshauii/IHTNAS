@@ -7,21 +7,20 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
     :root {
-      --bg: #f5f5f7;
+      --bg: #f5f5f5;
       --card-bg: #ffffff;
-      --border: #d2d2d7;
-      --primary: #0071e3;
-      --primary-hover: #005bb5;
-      --text-primary: #1d1d1f;
-      --text-secondary: #6e6e73;
-      --success: #34c759;
-      --danger: #ff3b30;
+      --border: #dee2e6;
+      --primary: #007bff;
+      --text-primary: #212529;
+      --text-secondary: #6c757d;
+      --success: #28a745;
+      --danger: #dc3545;
+      --tick-color: #28a745;
+      --cross-color: #dc3545;
       --radius: 12px;
-      --shadow-sm: 0 2px 6px rgba(0, 0, 0, 0.05);
-      --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.08);
-      --transition: all 0.2s ease-in-out;
+      --shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
       --spacing-unit: 8px;
-      --spacing-half: calc(var(--spacing-unit) / 2);
+      --transition: all 0.2s ease;
     }
 
     * {
@@ -31,7 +30,7 @@
     }
 
     body {
-      font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
       background: var(--bg);
       display: flex;
       flex-direction: column;
@@ -41,8 +40,6 @@
       padding: calc(var(--spacing-unit) * 4);
       color: var(--text-primary);
       line-height: 1.5;
-      -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
     }
 
     .popup-overlay {
@@ -52,80 +49,72 @@
       left: 0;
       width: 100%;
       height: 100%;
-      background: rgba(0, 0, 0, 0.4);
+      background: rgba(0, 0, 0, 0.5);
       z-index: 1000;
       justify-content: center;
       align-items: center;
-      backdrop-filter: blur(4px);
     }
 
     .uploader {
       background: var(--card-bg);
       border-radius: var(--radius);
-      box-shadow: var(--shadow-md);
+      box-shadow: var(--shadow);
       width: 100%;
       max-width: 480px;
       overflow: hidden;
-      position: relative;
-      margin: var(--spacing-unit);
     }
 
     .uploader__header {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: var(--spacing-unit) calc(var(--spacing-unit) * 2);
-      border-bottom: 1px solid var(--border);
+      padding: calc(var(--spacing-unit) * 2) calc(var(--spacing-unit) * 3);
+      background: linear-gradient(90deg, #007bff, #0056b3);
+      color: #ffffff;
     }
 
     .uploader__header-title {
       display: flex;
       align-items: center;
-      font-size: 0.875rem;
+      font-size: 1rem;
       font-weight: 500;
-      color: var(--text-primary);
     }
 
     .uploader__header-title i {
-      margin-right: var(--spacing-unit);
-      font-size: 1rem;
-      color: var(--text-secondary);
+      margin-right: calc(var(--spacing-unit) * 1.5);
+      font-size: 1.125rem;
     }
 
     .uploader__close {
       cursor: pointer;
       font-size: 1rem;
-      color: var(--text-secondary);
-      padding: var(--spacing-half) var(--spacing-unit);
+      padding: calc(var(--spacing-unit) * 1.5);
       border-radius: 50%;
       transition: var(--transition);
     }
 
     .uploader__close:hover {
-      color: var(--text-primary);
-      background: rgba(0, 0, 0, 0.05);
+      background: rgba(255, 255, 255, 0.2);
       transform: scale(1.1);
     }
 
     .uploader__content {
-      padding: calc(var(--spacing-unit) * 2);
+      padding: calc(var(--spacing-unit) * 3);
     }
 
     .uploader__drop {
       border: 2px dashed var(--border);
       border-radius: var(--radius);
       text-align: center;
-      padding: calc(var(--spacing-unit) * 3);
+      padding: calc(var(--spacing-unit) * 5);
       color: var(--text-secondary);
       transition: var(--transition);
       cursor: pointer;
-      background: var(--card-bg);
     }
 
-    .uploader__drop:hover, .uploader__drop.drag-over {
+    .uploader__drop:hover {
       border-color: var(--primary);
-      background: #f5f5f7;
-      box-shadow: var(--shadow-sm);
+      background: #f8f9fa;
       transform: translateY(-2px);
     }
 
@@ -138,18 +127,17 @@
 
     .uploader__drop:hover i {
       color: var(--primary);
-      transform: scale(1.1);
     }
 
     .uploader__drop p {
       font-size: 0.875rem;
-      margin-bottom: var(--spacing-half);
+      margin-bottom: var(--spacing-unit);
     }
 
     .uploader__drop .formats {
       font-size: 0.75rem;
       color: var(--text-secondary);
-      margin-bottom: var(--spacing-unit);
+      margin-bottom: calc(var(--spacing-unit) * 2);
     }
 
     .btn-browse {
@@ -162,18 +150,15 @@
       font-weight: 500;
       cursor: pointer;
       transition: var(--transition);
-      min-height: 48px;
     }
 
     .btn-browse:hover {
-      background: #f5f5f7;
+      background: #e9ecef;
       border-color: var(--primary);
-      transform: translateY(-1px);
-      box-shadow: var(--shadow-sm);
     }
 
     .uploader__files {
-      padding: 0 calc(var(--spacing-unit) * 2) calc(var(--spacing-unit) * 2);
+      padding: 0 calc(var(--spacing-unit) * 3) calc(var(--spacing-unit) * 3);
       display: none;
     }
 
@@ -181,81 +166,58 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: var(--spacing-unit);
-      padding-bottom: var(--spacing-half);
+      margin-bottom: calc(var(--spacing-unit) * 2);
+      padding-bottom: calc(var(--spacing-unit) * 1.5);
       border-bottom: 1px solid var(--border);
     }
 
     .files-header h4 {
       font-size: 0.875rem;
-      font-weight: 600;
+      font-weight: 500;
       color: var(--text-primary);
-    }
-
-    .files-count {
-      background: linear-gradient(135deg, var(--primary), var(--primary-hover));
-      color: white;
-      font-size: 0.75rem;
-      font-weight: 600;
-      padding: var(--spacing-half) calc(var(--spacing-unit) * 1.5);
-      border-radius: 9999px;
-      box-shadow: var(--shadow-sm);
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
     }
 
     .file-list {
       display: flex;
       flex-direction: column;
+@sayantanm19
       gap: var(--spacing-unit);
     }
 
     .file-row {
       display: flex;
       align-items: center;
-      padding: var(--spacing-unit) calc(var(--spacing-unit) * 1.5);
-      border-radius: calc(var(--radius) * 0.75);
-      background: #fafafa;
+      padding: calc(var(--spacing-unit) * 2);
+      border-radius: var(--radius);
+      background: var(--card-bg);
       border: 1px solid var(--border);
       transition: var(--transition);
-      animation: fadeIn 0.3s ease-out;
     }
 
     .file-row:hover {
+      background: #f8f9fa;
       transform: translateY(-1px);
-      box-shadow: var(--shadow-sm);
-      background: #f5f5f7;
     }
 
     .file-icon {
       width: 32px;
       height: 32px;
-      border-radius: 8px;
+      border-radius: 6px;
       display: flex;
       align-items: center;
       justify-content: center;
       flex-shrink: 0;
-      margin-right: var(--spacing-unit);
+      margin-right: calc(var(--spacing-unit) * 2);
       font-size: 1rem;
-      color: white;
+      color: #ffffff;
     }
 
-    .pdf-icon {
-      background: linear-gradient(135deg, #ff3b30, #ff6b6b);
-    }
-
-    .jpg-icon, .png-icon {
-      background: linear-gradient(135deg, #0071e3, #3399ff);
-    }
-
-    .mp4-icon {
-      background: linear-gradient(135deg, #34c759, #7bed9f);
-    }
+    .pdf-icon { background: #dc3545; }
+    .word-icon { background: #007bff; }
 
     .file-info {
       flex: 1;
       overflow: hidden;
-      min-width: 0;
     }
 
     .file-info .name {
@@ -265,7 +227,7 @@
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
-      margin-bottom: var(--spacing-half);
+      margin-bottom: calc(var(--spacing-unit) * 0.5);
     }
 
     .file-info .meta {
@@ -273,40 +235,37 @@
       color: var(--text-secondary);
       display: flex;
       align-items: center;
-      gap: var(--spacing-half);
+      gap: calc(var(--spacing-unit) * 0.5);
+      flex-wrap: wrap;
     }
 
-    .progress-container {
-      width: 100%;
-      height: 4px;
-      background: #e8e8ed;
-      border-radius: 2px;
-      overflow: hidden;
-      margin-top: var(--spacing-unit);
+    .file-info .meta .status {
+      display: flex;
+      align-items: center;
+      gap: calc(var(--spacing-unit) * 0.5);
+      font-weight: 500;
     }
 
-    .progress-bar {
-      width: 0%;
-      height: 100%;
-      background: var(--primary);
-      border-radius: 2px;
-      transition: width 0.3s ease-out;
+    .file-info .meta .status.completed {
+      color: var(--tick-color);
+    }
+
+    .file-info .meta .status.failed {
+      color: var(--cross-color);
     }
 
     .file-actions {
-      display: flex;
-      gap: var(--spacing-half);
-      margin-left: var(--spacing-unit);
+      margin-left: calc(var(--spacing-unit) * 2);
     }
 
     .btn-action {
-      width: 32px;
-      height: 32px;
-      border-radius: 8px;
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
-      background: #f5f5f7;
+      background: #e9ecef;
       border: none;
       cursor: pointer;
       transition: var(--transition);
@@ -315,88 +274,43 @@
 
     .btn-action:hover {
       background: var(--primary);
-      color: white;
-      transform: scale(1.1);
-    }
-
-    .file-row.completed .progress-bar {
-      background: var(--success);
+      color: #ffffff;
     }
 
     .file-row.completed .status {
-      color: var(--success);
+      color: var(--tick-color);
     }
 
-    .file-row.error {
-      border-color: #ffd9d6;
-      background: #fffafa;
-    }
-
-    .file-row.error .file-icon {
-      background: linear-gradient(135deg, #ff3b30, #ff6b6b);
-    }
-
-    .file-row.error .status {
-      color: var(--danger);
-    }
-
-    .file-row.error .btn-action {
-      background: #fffafa;
-      color: var(--danger);
-    }
-
-    .file-row.error .btn-action:hover {
-      background: var(--danger);
-      color: white;
-    }
-
-    .empty-state {
-      text-align: center;
-      padding: calc(var(--spacing-unit) * 2);
-      color: var(--text-secondary);
-    }
-
-    .empty-state i {
-      font-size: 1.5rem;
-      margin-bottom: var(--spacing-unit);
-      color: #d2d2d7;
-    }
-
-    .empty-state p {
-      font-size: 0.875rem;
-      font-weight: 400;
+    .file-row.failed .status {
+      color: var(--cross-color);
     }
 
     .upload-actions {
       display: none;
-      gap: var(--spacing-unit);
-      padding: calc(var(--spacing-unit) * 2);
-      border-top: 1px solid var(--border);
+      gap: calc(var(--spacing-unit) * 2);
+      padding: calc(var(--spacing-unit) * 3);
+      border: 1px solid var(--border);
       background: var(--card-bg);
     }
 
     .btn-upload {
-      flex: 1;
-      padding: calc(var(--spacing-unit) * 1.5) calc(var(--spacing-unit) * 3);
+      padding: calc(var(--spacing-unit) * 1.5) calc(var(--spacing-unit) * 4);
       border-radius: var(--radius);
       border: none;
-      font-size: 0.9375rem;
+      font-size: 0.875rem;
       font-weight: 500;
       cursor: pointer;
       transition: var(--transition);
-      min-height: 48px;
+      flex: 1;
     }
 
     .btn-primary {
       background: var(--primary);
-      color: white;
-      box-shadow: var(--shadow-sm);
+      color: #ffffff;
     }
 
     .btn-primary:hover {
-      background: var(--primary-hover);
-      transform: translateY(-1px);
-      box-shadow: var(--shadow-md);
+      background: #0056b3;
     }
 
     .btn-secondary {
@@ -406,9 +320,7 @@
     }
 
     .btn-secondary:hover {
-      background: #f5f5f7;
-      transform: translateY(-1px);
-      box-shadow: var(--shadow-sm);
+      background: #e9ecef;
     }
 
     .btn-open-popup {
@@ -416,96 +328,34 @@
       border-radius: var(--radius);
       border: none;
       background: var(--primary);
-      color: white;
+      color: #ffffff;
       font-size: 1rem;
       font-weight: 500;
       cursor: pointer;
       transition: var(--transition);
-      box-shadow: var(--shadow-md);
-      min-height: 48px;
+      box-shadow: var(--shadow);
     }
 
     .btn-open-popup:hover {
-      background: var(--primary-hover);
-      transform: translateY(-2px);
-      box-shadow: var(--shadow-md);
+      background: #0056b3;
+      transform: translateY(-1px);
     }
 
     input[type="file"] {
       display: none;
     }
 
-    @media (max-width: 640px) {
+    @media (max-width: 480px) {
       .uploader {
-        max-width: 360px;
-        margin: var(--spacing-half);
+        margin: var(--spacing-unit);
       }
-      
+
       .uploader__content {
-        padding: var(--spacing-unit);
-      }
-      
-      .uploader__drop {
         padding: calc(var(--spacing-unit) * 2);
       }
-      
-      .uploader__drop p {
-        font-size: 0.8125rem;
-      }
-
-      .uploader__drop .formats {
-        font-size: 0.6875rem;
-      }
-
-      .btn-browse {
-        padding: calc(var(--spacing-unit) * 1) calc(var(--spacing-unit) * 2);
-        font-size: 0.8125rem;
-      }
-
-      .uploader__files {
-        padding: 0 var(--spacing-unit) var(--spacing-unit);
-      }
-
-      .file-row {
-        padding: var(--spacing-half) var(--spacing-unit);
-      }
-
-      .file-icon {
-        width: 28px;
-        height: 28px;
-        margin-right: var(--spacing-half);
-      }
-
-      .file-info .name {
-        font-size: 0.8125rem;
-      }
-
-      .file-info .meta {
-        font-size: 0.6875rem;
-      }
-
-      .upload-actions {
-        flex-direction: column;
-        padding: var(--spacing-unit);
-      }
-
-      .btn-upload {
-        padding: var(--spacing-unit) calc(var(--spacing-unit) * 2);
-        font-size: 0.875rem;
-      }
-    }
-
-    @media (max-width: 400px) {
-      .uploader {
-        max-width: 320px;
-      }
 
       .uploader__drop {
-        padding: calc(var(--spacing-unit) * 1.5);
-      }
-
-      .uploader__drop i {
-        font-size: 1.25rem;
+        padding: calc(var(--spacing-unit) * 3);
       }
 
       .uploader__drop p {
@@ -517,22 +367,27 @@
       }
 
       .btn-browse {
-        padding: calc(var(--spacing-half) * 3) calc(var(--spacing-unit) * 1.5);
+        padding: calc(var(--spacing-unit) * 1) calc(var(--spacing-unit) * 2);
         font-size: 0.75rem;
       }
 
+      .file-info .meta {
+        font-size: 0.625rem;
+      }
+
       .file-row {
-        gap: var(--spacing-half);
+        padding: calc(var(--spacing-unit) * 1.5);
       }
 
-      .file-actions {
-        margin-left: var(--spacing-half);
+      .upload-actions {
+        flex-direction: column;
+        padding: calc(var(--spacing-unit) * 2);
       }
-    }
 
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(8px); }
-      to { opacity: 1; transform: translateY(0); }
+      .btn-upload {
+        padding: calc(var(--spacing-unit) * 1) calc(var(--spacing-unit) * 3);
+        font-size: 0.75rem;
+      }
     }
   </style>
 </head>
@@ -553,7 +408,7 @@
         <div class="uploader__drop" id="dropZone">
           <i class="fas fa-cloud-upload-alt"></i>
           <p>Choose a file or drag and drop it here.</p>
-          <div class="formats">JPEG, PNG, PDF, and MP4 formats, up to 50 MB.</div>
+          <div class="formats">PDF and Word formats, up to 50 MB.</div>
           <input type="file" id="fileInput" hidden multiple>
           <button class="btn-browse">Browse File</button>
         </div>
@@ -561,7 +416,6 @@
         <div class="uploader__files" id="uploaderFiles">
           <div class="files-header">
             <h4>Uploaded Files</h4>
-            <div class="files-count" id="fileCount">0 files</div>
           </div>
           
           <div class="file-list" id="filesList">
@@ -587,20 +441,22 @@
     const dropZone = document.getElementById('dropZone');
     const fileInput = document.getElementById('fileInput');
     const filesList = document.getElementById('filesList');
-    const fileCount = document.getElementById('fileCount');
     const uploaderFiles = document.getElementById('uploaderFiles');
     const uploadActions = document.getElementById('uploadActions');
     
     // Allowed file types and size limit
-    const allowedTypes = ['image/jpeg', 'image/png', 'application/pdf', 'video/mp4'];
+    const allowedTypes = [
+      'application/pdf',
+      'application/msword',
+      'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
+    ];
     const maxSize = 50 * 1024 * 1024; // 50 MB in bytes
     
     // File type extensions for display
     const fileTypeExtensions = {
-      'image/jpeg': 'JPEG',
-      'image/png': 'PNG',
       'application/pdf': 'PDF',
-      'video/mp4': 'MP4'
+      'application/msword': 'DOC',
+      'application/vnd.openxmlformats-officedocument.wordprocessingml.document': 'DOCX'
     };
     
     // Popup controls
@@ -620,7 +476,6 @@
       `;
       uploaderFiles.style.display = 'none';
       uploadActions.style.display = 'none';
-      updateFileCount();
     });
 
     // Handle drag events
@@ -662,38 +517,70 @@
     
     // Handle files
     function handleFiles(files) {
-      // Show files section and actions
       uploaderFiles.style.display = 'block';
       uploadActions.style.display = 'flex';
       
-      // Remove empty state if it exists
       const emptyState = filesList.querySelector('.empty-state');
       if (emptyState) emptyState.remove();
       
       for (let file of files) {
-        // Validate file type and size
         const isValidType = allowedTypes.includes(file.type);
         const isValidSize = file.size <= maxSize;
         
         if (!isValidType || !isValidSize) {
-          alert(`Invalid file: ${file.name}. Only JPEG, PNG, PDF, MP4 up to 50 MB are allowed.`);
+          const fileExt = file.name.split('.').pop().toLowerCase();
+          alert(`Invalid file: ${file.name}. Only PDF and Word files up to 50 MB are allowed.`);
+          
+          const row = document.createElement('div');
+          row.className = 'file-row failed';
+          
+          row.innerHTML = `
+            <div class="file-icon">
+              <i class="fas fa-file"></i>
+            </div>
+            <div class="file-info">
+              <div class="name">${file.name}</div>
+              <div class="meta">
+                <span class="type">${fileExt.toUpperCase()}</span> • 
+                <span class="size">${formatFileSize(file.size)}</span> • 
+                <span class="status failed">${fileExt} failed <i class="fas fa-times-circle"></i></span>
+              </div>
+            </div>
+            <div class="file-actions">
+              <button class="btn-action btn-delete" title="Remove file">
+                <i class="fas fa-times"></i>
+              </button>
+            </div>
+          `;
+          
+          filesList.appendChild(row);
+          
+          const deleteBtn = row.querySelector('.btn-delete');
+          deleteBtn.addEventListener('click', () => {
+            row.remove();
+            if (filesList.children.length === 0) {
+              filesList.innerHTML = `
+                <div class="empty-state">
+                  <i class="fas fa-folder-open"></i>
+                  <p>No files uploaded yet</p>
+                </div>
+              `;
+              uploaderFiles.style.display = 'none';
+              uploadActions.style.display = 'none';
+            }
+          });
           continue;
         }
         
-        // Create file row
         const row = document.createElement('div');
         row.className = 'file-row';
         
-        // Get file extension for icon
-        const fileExtClass = file.type === 'application/pdf' ? 'pdf-icon' :
-                          file.type === 'video/mp4' ? 'mp4-icon' :
-                          'jpg-icon';
+        const fileExtClass = file.type === 'application/pdf' ? 'pdf-icon' : 'word-icon';
+        const fileType = fileTypeExtensions[file.type].toLowerCase();
         
         row.innerHTML = `
           <div class="file-icon ${fileExtClass}">
-            <i class="${file.type === 'application/pdf' ? 'fas fa-file-pdf' :
-                       file.type === 'video/mp4' ? 'fas fa-file-video' :
-                       'fas fa-file-image'}"></i>
+            <i class="${file.type === 'application/pdf' ? 'fas fa-file-pdf' : 'fas fa-file-word'}"></i>
           </div>
           <div class="file-info">
             <div class="name">${file.name}</div>
@@ -702,25 +589,19 @@
               <span class="size">${formatFileSize(file.size)}</span> • 
               <span class="status">Ready to upload</span>
             </div>
-            <div class="progress-container">
-              <div class="progress-bar"></div>
-            </div>
           </div>
           <div class="file-actions">
             <button class="btn-action btn-delete" title="Remove file">
-              <i class="fas fa-trash"></i>
+              <i class="fas fa-times"></i>
             </button>
           </div>
         `;
         
         filesList.appendChild(row);
         
-        // Add event listener for delete button
         const deleteBtn = row.querySelector('.btn-delete');
         deleteBtn.addEventListener('click', () => {
           row.remove();
-          updateFileCount();
-          // If no files left, show empty state and hide files section and actions
           if (filesList.children.length === 0) {
             filesList.innerHTML = `
               <div class="empty-state">
@@ -733,38 +614,28 @@
           }
         });
         
-        // Simulate upload progress
-        simulateUpload(row, file);
+        simulateUpload(row, file, fileType);
       }
-      
-      updateFileCount();
     }
     
-    // Simulate file upload progress
-    function simulateUpload(row, file) {
-      const progressBar = row.querySelector('.progress-bar');
+    // Simulate file upload
+    function simulateUpload(row, file, fileType) {
       const status = row.querySelector('.status');
-      let progress = 0;
-      const totalSize = file.size;
-      const interval = setInterval(() => {
-        progress += Math.floor(Math.random() * 1024 * 10); // Simulate byte upload
-        const percentage = Math.min((progress / totalSize) * 100, 100);
-        progressBar.style.width = `${percentage}%`;
-        status.textContent = `${formatFileSize(progress)} of ${formatFileSize(totalSize)} • Uploading...`;
-        
-        if (percentage >= 100) {
-          clearInterval(interval);
-          progressBar.style.width = '100%';
-          status.innerHTML = `<i class="fas fa-check"></i> Completed`;
+      
+      const isSuccess = Math.random() > 0.2; // 80% chance of success
+      const delay = Math.random() * 2000 + 1000;
+      
+      setTimeout(() => {
+        if (isSuccess) {
+          status.innerHTML = `${fileType} completed <i class="fas fa-check-circle"></i>`;
+          status.classList.add('completed');
           row.classList.add('completed');
+        } else {
+          status.innerHTML = `${fileType} failed <i class="fas fa-times-circle"></i>`;
+          status.classList.add('failed');
+          row.classList.add('failed');
         }
-      }, 200);
-    }
-    
-    // Update file count display
-    function updateFileCount() {
-      const count = filesList.querySelectorAll('.file-row').length;
-      fileCount.textContent = `${count} file${count !== 1 ? 's' : ''}`;
+      }, delay);
     }
     
     // Format file size
@@ -778,19 +649,17 @@
     
     // Upload button functionality
     document.querySelector('.btn-primary').addEventListener('click', () => {
-      const files = filesList.querySelectorAll('.file-row:not(.error)');
+      const files = filesList.querySelectorAll('.file-row');
       if (files.length === 0) {
         alert('Please add files to upload.');
         return;
       }
-      
-      alert(`Uploading ${files.length} files...`);
       files.forEach(file => {
-        if (!file.classList.contains('completed')) {
-          const progressBar = file.querySelector('.progress-bar');
-          const status = file.querySelector('.status');
-          progressBar.style.width = '100%';
-          status.innerHTML = `<i class="fas fa-check"></i> Completed`;
+        const status = file.querySelector('.status');
+        const fileType = file.querySelector('.type').textContent.toLowerCase();
+        if (!file.classList.contains('completed') && !file.classList.contains('failed')) {
+          status.innerHTML = `${fileType} completed <i class="fas fa-check-circle"></i>`;
+          status.classList.add('completed');
           file.classList.add('completed');
         }
       });
@@ -806,7 +675,6 @@
       `;
       uploaderFiles.style.display = 'none';
       uploadActions.style.display = 'none';
-      updateFileCount();
     });
   </script>
 </body>
