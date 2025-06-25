@@ -307,38 +307,25 @@
     </div>
     
     <script>
-  document.getElementById("userForm").addEventListener("submit", function(e) {
-    e.preventDefault(); // Prevent the default form submission
+document.getElementById("userForm").addEventListener("submit", function(e) {
+  e.preventDefault();
 
-    // Gather data from form inputs
-    const formData = {
-      name: document.querySelector('input[name="name"]').value,
-      email: document.querySelector('input[name="email"]').value,
-      phone: document.querySelector('input[name="phone"]').value
-    };
+  const form = e.target;
+  const formData = new FormData(form);
 
-    // URL of the deployed Google Apps Script web app
-    const scriptURL = "https://script.google.com/macros/s/AKfycbwxdxfd-4aXvzJZpE5e4QDbsCGj6Dw2HrgmX_BjDjUWA8HzwqZZ7q-4a24as8Y0FjSU/exec";  // Replace with your actual URL
-
-    // Send the data using fetch
-    fetch(scriptURL, {
-      method: "POST",
-      mode: "cors", // adjust if necessary (or use "no-cors" but note the limitations)
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify(formData)
-    })
-    .then(response => response.json())
-    .then(data => {
-      console.log("Success:", data);
-      // Optionally display a success message or redirect the user.
-    })
-    .catch((error) => {
-      console.error("Error:", error);
-      // Optionally display an error message.
-    });
+  fetch("https://script.google.com/macros/s/AKfycbwxdxfd-4aXvzJZpE5e4QDbsCGj6Dw2HrgmX_BjDjUWA8HzwqZZ7q-4a24as8Y0FjSU/exec", {
+    method: "POST",
+    body: formData, // sends as x-www-form-urlencoded automatically
+    mode: "no-cors" // this disables CORS errors (but limits response access)
+  }).then(() => {
+    alert("Form submitted successfully!");
+    form.reset();
+  }).catch(err => {
+    alert("There was an error submitting the form.");
+    console.error(err);
   });
+});
+
 </script>
 </body>
 </html>
