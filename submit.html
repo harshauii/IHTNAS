@@ -17,7 +17,7 @@
             -webkit-user-select: none;
             -webkit-tap-highlight-color: transparent
         }
-        input, textarea {
+        input, .user-input {
             user-select: text;
             -webkit-user-select: text
         }
@@ -273,31 +273,37 @@
                     </div>
                 </div>
             </div>
-<div class="user-form-container">
-  <form class="user-form" id="userForm">
-    <div class="user-input-box">
-      <label class="user-input-label" for="name">Full Name <span>*</span></label>
-      <input id="name" class="user-input" name="name" maxlength="50" type="text" placeholder="e.g., Jane Doe" required>
-    </div>
-    <div class="user-input-box">
-      <label class="user-input-label" for="email">Email Address <span>*</span></label>
-      <input id="email" class="user-input" name="email" maxlength="50" type="email" pattern=".*@.*\.[a-zA-Z]{2,}" placeholder="e.g., example@gmail.com" required>
-    </div>
-    <div class="user-input-box">
-      <label class="user-input-label" for="phone">Contact Number <span>*</span></label>
-      <!-- Assuming you are using a library for the country code, we'll keep it simple here. -->
-      <!-- The JavaScript will grab the value from this input field. -->
-      <input id="phone" class="phone-input" maxlength="15" type="tel" name="phone" required autocomplete="off" placeholder="e.g., +911234567890">
-    </div>
-    <button type="submit" class="next-button">Next</button>
-    <div id="form-status"></div> <!-- To show success/error messages -->
-    <div class="user-policy">
-      By continuing, you agree to our 
-      <a href="https://growthschool.io/terms-and-conditions" target="_blank" rel="noreferrer noopener">Terms of Service</a> and 
-      <a href="https://growthschool.io/privacy-policy" target="_blank" rel="noreferrer noopener">Privacy Policy</a>
-    </div>
-  </form>
-</div>
+            <div class="user-form-container">
+                <form class="user-form" id="userForm">
+                    <div class="user-input-box">
+                        <label class="user-input-label" for="name">Full Name <span>*</span></label>
+                        <input id="name" class="user-input" name="name" maxlength="50" type="text" placeholder="e.g., Jane Doe" value="harsha vardhan" required>
+                    </div>
+                    <div class="user-input-box">
+                        <label class="user-input-label" for="email">Email Address <span>*</span></label>
+                        <input id="email" class="user-input" name="email" maxlength="50" type="email" pattern=".*@.*\.[a-zA-Z]{2,}" placeholder="e.g., example@gmail.com" value="example@gmail.com" required>
+                    </div>
+                    <div class="user-input-box">
+                        <label class="user-input-label" for="intl-phone">Contact Number <span>*</span></label>
+                        <div class="iti" id="intl-phone-container">
+                            <div class="iti__flag-container">
+                                <div class="iti__selected-flag" title="India">
+                                    <div class="iti__selected-dial-code">+91</div>
+                                    <div class="iti__arrow"></div>
+                                </div>
+                            </div>
+                            <input class="phone-input" id="intl-phone" maxlength="10" type="tel" name="phone" placeholder="1234567890" required autocomplete="off">
+                        </div>
+                    </div>
+                    <button type="submit" class="next-button">Next</button>
+                    <div id="form-status"></div>
+                    <div class="user-policy">
+                        By continuing, you agree to our 
+                        <a href="https://growthschool.io/terms-and-conditions" target="_blank" rel="noreferrer noopener">Terms of Service</a> and 
+                        <a href="https://growthschool.io/privacy-policy" target="_blank" rel="noreferrer noopener">Privacy Policy</a>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
     
