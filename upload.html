@@ -555,7 +555,43 @@
         </div>
     </div>
 
+    <script src="https://apis.google.com/js/api.js"></script>
     <script>
+        // Google Drive API configuration
+        const CLIENT_ID = '893004391632-73lu0r2a14fa97nie9v6fdqs32n6pvuc.apps.googleusercontent.com';
+        const API_KEY = 'AIzaSyAs2UjxiMvWL0vMmfA25ZCBNH17hGNrUeg';
+        const DISCOVERY_DOCS = ['https://www.googleapis.com/discovery/v1/apis/drive/v3/rest'];
+        const SCOPES = 'https://www.googleapis.com/auth/drive.file';
+        const FOLDER_ID = '1rcmBlCvf_EaNtR2vAgP2VHJsYRp6TZ-h'; // Replace with your Google Drive folder ID
+
+        // Initialize Google API client
+        function initClient() {
+            gapi.load('client:auth2', () => {
+                gapi.client.init({
+                    apiKey: API_KEY,
+                    clientId: CLIENT_ID,
+                    discoveryDocs: DISCOVERY_DOCS,
+                    scope: SCOPES,
+                }).then(() => {
+                    // Listen for sign-in state changes
+                    gapi.auth2.getAuthInstance().isSignedIn.listen(updateSigninStatus);
+                    // Handle initial sign-in state
+                    updateSigninStatus(gapi.auth2.getAuthInstance().isSignedIn.get());
+                }, (error) => {
+                    console.error('Error initializing Google API client:', error);
+                });
+            });
+        }
+
+        // Update UI based on sign-in status
+        function updateSigninStatus(isSignedIn) {
+            if (!isSignedIn) {
+                // Prompt user to sign in
+                gapi.auth2.getAuthInstance().signIn();
+            }
+        }
+
+        // Uploader elements
         const openPopupBtn = document.getElementById('openPopup');
         const popupOverlay = document.getElementById('popupOverlay');
         const closePopupBtn = document.getElementById('closePopup');
@@ -584,6 +620,9 @@
             'application/vnd.openxmlformats-officedocument.wordprocessingml.document': 'DOCX'
         };
         
+        // Store files for Google Drive upload
+        let fileListObject = {};
+
         // Popup controls
         openPopupBtn.addEventListener('click', () => {
             popupOverlay.style.display = 'flex';
@@ -603,6 +642,7 @@
             uploaderFiles.style.display = 'none';
             uploadActions.style.display = 'none';
             uploaderContent.style.display = 'block';
+            fileListObject = {};
         });
 
         // Handle drag events
@@ -658,6 +698,7 @@
                 alert('Please add files to submit.');
                 return;
             }
+            // Mark any pending files as completed locally
             files.forEach(file => {
                 const status = file.querySelector('.status');
                 const progressBar = file.querySelector('.progress-bar');
@@ -669,6 +710,8 @@
                     progressBar.style.backgroundColor = 'oklch(60% 0.2 150)';
                 }
             });
+            // Upload completed files to Google Drive
+            uploadToGoogleDrive();
         });
         
         // Handle files
@@ -731,6 +774,7 @@
                 } else {
                     const row = document.createElement('div');
                     row.className = 'file-row';
+                    row.dataset.fileId = Date.now() + '-' + Math.random().toString(36).substr(2, 9); // Unique ID for file
                     
                     const fileExtClass = file.type === 'application/pdf' ? 'pdf-icon' : 'word-icon';
                     const fileType = fileTypeExtensions[file.type];
@@ -764,6 +808,7 @@
                     
                     const deleteBtn = row.querySelector('.btn-delete');
                     deleteBtn.addEventListener('click', () => {
+                        delete fileListObject[row.dataset.fileId];
                         row.remove();
                         if (filesList.children.length === 0) {
                             filesList.innerHTML = `
@@ -778,6 +823,8 @@
                         }
                     });
                     
+                    // Store file in fileListObject
+                    fileListObject[row.dataset.fileId] = file;
                     simulateUpload(row, file, fileType);
                 }
             }
@@ -810,6 +857,46 @@
             }, 200);
         }
         
+        // Upload files to Google Drive
+        function uploadToGoogleDrive() {
+            if (!gapi.auth2.getAuthInstance().isSignedIn.get()) {
+                gapi.auth2.getAuthInstance().signIn().then(uploadToGoogleDrive);
+                return;
+            }
+
+            const filesToUpload = Object.entries(fileListObject);
+            if (filesToUpload.length === 0) {
+                console.log('No valid files to upload to Google Drive.');
+                return;
+            }
+
+            filesToUpload.forEach(([fileId, file]) => {
+                const metadata = {
+                    name: file.name,
+                    mimeType: file.type,
+                    parents: [FOLDER_ID]
+                };
+
+                const form = new FormData();
+                form.append('metadata', new Blob([JSON.stringify(metadata)], { type: 'application/json' }));
+                form.append('file', file);
+
+                fetch('https://www.googleapis.com/upload/drive/v3/files?uploadType=multipart', {
+                    method: 'POST',
+                    headers: new Headers({ 'Authorization': 'Bearer ' + gapi.auth2.getAuthInstance().currentUser.get().getAuthResponse().access_token }),
+                    body: form
+                }).then(response => response.json()).then(result => {
+                    if (result.error) {
+                        console.error(`Error uploading ${file.name}:`, result.error);
+                    } else {
+                        console.log(`Successfully uploaded ${file.name} to Google Drive:`, result);
+                    }
+                }).catch(error => {
+                    console.error(`Error uploading ${file.name}:`, error);
+                });
+            });
+        }
+        
         // Format file size
         function formatFileSize(bytes) {
             if (bytes === 0) return '0 Bytes';
@@ -818,6 +905,9 @@
             const i = Math.floor(Math.log(bytes) / Math.log(k));
             return `${parseFloat((bytes / Math.pow(k, i)).toFixed(2))} ${sizes[i]}`;
         }
+
+        // Initialize Google API client on page load
+        window.onload = initClient;
     </script>
 </body>
 </html>
