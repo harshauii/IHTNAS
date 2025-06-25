@@ -1,0 +1,725 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document Uploader</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    :root {
+      --bg: #f5f5f7;
+      --card-bg: #ffffff;
+      --border: #d2d2d7;
+      --primary: #0071e3;
+      --primary-hover: #005bb5;
+      --text-primary: #1d1d1f;
+      --text-secondary: #6e6e73;
+      --success: #34c759;
+      --danger: #ff3b30;
+      --radius: 12px;
+      --shadow-sm: 0 2px 6px rgba(0, 0, 0, 0.05);
+      --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.08);
+      --transition: all 0.2s ease-in-out;
+      --spacing-unit: 8px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: var(--bg);
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      align-items: center;
+      justify-content: center;
+      padding: calc(var(--spacing-unit) * 4);
+      color: var(--text-primary);
+      line-height: 1.4;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    .popup-overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.4);
+      z-index: 1000;
+      justify-content: center;
+      align-items: center;
+      backdrop-filter: blur(4px);
+    }
+
+    .uploader {
+      background: var(--card-bg);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow-md);
+      width: 100%;
+      max-width: 480px;
+      overflow: hidden;
+      position: relative;
+      margin: calc(var(--spacing-unit) * 2);
+    }
+
+    .uploader__header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: calc(var(--spacing-unit) * 2) calc(var(--spacing-unit) * 3);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .uploader__header-title {
+      display: flex;
+      align-items: center;
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: var(--text-primary);
+    }
+
+    .uploader__header-title i {
+      margin-right: calc(var(--spacing-unit) * 1.5);
+      font-size: 1rem;
+      color: var(--text-secondary);
+    }
+
+    .uploader__close {
+      cursor: pointer;
+      font-size: 1rem;
+      color: var(--text-secondary);
+      padding: calc(var(--spacing-unit) * 1.5);
+      border-radius: 50%;
+      transition: var(--transition);
+    }
+
+    .uploader__close:hover {
+      color: var(--text-primary);
+      background: rgba(0, 0, 0, 0.05);
+      transform: scale(1.1);
+    }
+
+    .uploader__content {
+      padding: calc(var(--spacing-unit) * 3);
+    }
+
+    .uploader__drop {
+      border: 2px dashed var(--border);
+      border-radius: var(--radius);
+      text-align: center;
+      padding: calc(var(--spacing-unit) * 5);
+      color: var(--text-secondary);
+      transition: var(--transition);
+      cursor: pointer;
+      background: var(--card-bg);
+    }
+
+    .uploader__drop:hover, .uploader__drop.drag-over {
+      border-color: var(--primary);
+      background: #f5f5f7;
+      box-shadow: var(--shadow-sm);
+      transform: translateY(-2px);
+    }
+
+    .uploader__drop i {
+      font-size: 1.5rem;
+      margin-bottom: var(--spacing-unit);
+      color: var(--text-secondary);
+      transition: var(--transition);
+    }
+
+    .uploader__drop:hover i {
+      color: var(--primary);
+      transform: scale(1.1);
+    }
+
+    .uploader__drop p {
+      font-size: 0.875rem;
+      margin-bottom: var(--spacing-unit);
+    }
+
+    .uploader__drop .formats {
+      font-size: 0.75rem;
+      color: var(--text-secondary);
+      margin-bottom: calc(var(--spacing-unit) * 2);
+    }
+
+    .btn-browse {
+      padding: calc(var(--spacing-unit) * 1.5) calc(var(--spacing-unit) * 3);
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      background: var(--card-bg);
+      color: var(--primary);
+      font-size: 0.875rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .btn-browse:hover {
+      background: #f5f5f7;
+      border-color: var(--primary);
+      transform: translateY(-1px);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .uploader__files {
+      padding: 0 calc(var(--spacing-unit) * 3) calc(var(--spacing-unit) * 3);
+      display: none;
+    }
+
+    .files-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: calc(var(--spacing-unit) * 2);
+      padding-bottom: calc(var(--spacing-unit) * 1.5);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .files-header h4 {
+      font-size: 0.875rem;
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+
+    .files-count {
+      background: var(--primary);
+      color: white;
+      font-size: 0.75rem;
+      font-weight: 500;
+      padding: calc(var(--spacing-unit) / 2) calc(var(--spacing-unit) * 1.25);
+      border-radius: 9999px;
+    }
+
+    .file-list {
+      display: flex;
+      flex-direction: column;
+      gap: var(--spacing-unit);
+    }
+
+    .file-row {
+      display: flex;
+      align-items: center;
+      padding: calc(var(--spacing-unit) * 2);
+      border-radius: calc(var(--radius) * 0.75);
+      background: #fafafa;
+      border: 1px solid var(--border);
+      transition: var(--transition);
+      animation: fadeIn 0.3s ease-out;
+    }
+
+    .file-row:hover {
+      transform: translateY(-1px);
+      box-shadow: var(--shadow-sm);
+      background: #f5f5f7;
+    }
+
+    .file-icon {
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      margin-right: calc(var(--spacing-unit) * 2);
+      font-size: 1rem;
+      color: white;
+    }
+
+    .pdf-icon {
+      background: linear-gradient(135deg, #ff3b30, #ff6b6b);
+    }
+
+    .jpg-icon, .png-icon {
+      background: linear-gradient(135deg, #0071e3, #3399ff);
+    }
+
+    .mp4-icon {
+      background: linear-gradient(135deg, #34c759, #7bed9f);
+    }
+
+    .file-info {
+      flex: 1;
+      overflow: hidden;
+      min-width: 0;
+    }
+
+    .file-info .name {
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: var(--text-primary);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      margin-bottom: calc(var(--spacing-unit) * 0.5);
+    }
+
+    .file-info .meta {
+      font-size: 0.75rem;
+      color: var(--text-secondary);
+      display: flex;
+      align-items: center;
+      gap: calc(var(--spacing-unit) * 0.75);
+    }
+
+    .progress-container {
+      width: 100%;
+      height: 4px;
+      background: #e8e8ed;
+      border-radius: 2px;
+      overflow: hidden;
+      margin-top: var(--spacing-unit);
+    }
+
+    .progress-bar {
+      width: 0%;
+      height: 100%;
+      background: var(--primary);
+      border-radius: 2px;
+      transition: width 0.3s ease-out;
+    }
+
+    .file-actions {
+      display: flex;
+      gap: calc(var(--spacing-unit) * 0.75);
+      margin-left: calc(var(--spacing-unit) * 2);
+    }
+
+    .btn-action {
+      width: 28px;
+      height: 28px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #f5f5f7;
+      border: none;
+      cursor: pointer;
+      transition: var(--transition);
+      color: var(--text-secondary);
+    }
+
+    .btn-action:hover {
+      background: var(--primary);
+      color: white;
+      transform: scale(1.1);
+    }
+
+    .file-row.completed .progress-bar {
+      background: var(--success);
+    }
+
+    .file-row.completed .status {
+      color: var(--success);
+    }
+
+    .file-row.error {
+      border-color: #ffd9d6;
+      background: #fffafa;
+    }
+
+    .file-row.error .file-icon {
+      background: linear-gradient(135deg, #ff3b30, #ff6b6b);
+    }
+
+    .file-row.error .status {
+      color: var(--danger);
+    }
+
+    .file-row.error .btn-action {
+      background: #fffafa;
+      color: var(--danger);
+    }
+
+    .file-row.error .btn-action:hover {
+      background: var(--danger);
+      color: white;
+    }
+
+    .empty-state {
+      text-align: center;
+      padding: calc(var(--spacing-unit) * 4);
+      color: var(--text-secondary);
+    }
+
+    .empty-state i {
+      font-size: 1.5rem;
+      margin-bottom: calc(var(--spacing-unit) * 1.5);
+      color: #d2d2d7;
+    }
+
+    .empty-state p {
+      font-size: 0.875rem;
+      font-weight: 400;
+    }
+
+    .upload-actions {
+      display: none;
+      gap: calc(var(--spacing-unit) * 2);
+      padding: calc(var(--spacing-unit) * 3);
+      border-top: 1px solid var(--border);
+      background: var(--card-bg);
+    }
+
+    .btn-upload {
+      flex: 1;
+      padding: calc(var(--spacing-unit) * 2) calc(var(--spacing-unit) * 4);
+      border-radius: var(--radius);
+      border: none;
+      font-size: 0.9375rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .btn-primary {
+      background: var(--primary);
+      color: white;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .btn-primary:hover {
+      background: var(--primary-hover);
+      transform: translateY(-1px);
+      box-shadow: var(--shadow-md);
+    }
+
+    .btn-secondary {
+      background: var(--card-bg);
+      color: var(--primary);
+      border: 1px solid var(--border);
+    }
+
+    .btn-secondary:hover {
+      background: #f5f5f7;
+      transform: translateY(-1px);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .btn-open-popup {
+      padding: calc(var(--spacing-unit) * 2.5) calc(var(--spacing-unit) * 5);
+      border-radius: var(--radius);
+      border: none;
+      background: var(--primary);
+      color: white;
+      font-size: 1.0625rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: var(--transition);
+      box-shadow: var(--shadow-md);
+    }
+
+    .btn-open-popup:hover {
+      background: var(--primary-hover);
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-md);
+    }
+
+    input[type="file"] {
+      display: none;
+    }
+
+    @media (max-width: 640px) {
+      .uploader {
+        margin: var(--spacing-unit);
+        max-width: 100%;
+      }
+      
+      .uploader__content {
+        padding: calc(var(--spacing-unit) * 2);
+      }
+      
+      .uploader__drop {
+        padding: calc(var(--spacing-unit) * 4);
+      }
+      
+      .upload-actions {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+<body>
+  <button class="btn-open-popup" id="openPopup">Open Uploader</button>
+
+  <div class="popup-overlay" id="popupOverlay">
+    <div class="uploader">
+      <div class="uploader__header">
+        <div class="uploader__header-title">
+          <i class="fas fa-cloud-upload-alt"></i>
+          Upload files
+        </div>
+        <i class="fas fa-times uploader__close" id="closePopup"></i>
+      </div>
+
+      <div class="uploader__content">
+        <div class="uploader__drop" id="dropZone">
+          <i class="fas fa-cloud-upload-alt"></i>
+          <p>Choose a file or drag and drop it here.</p>
+          <div class="formats">JPEG, PNG, PDF, and MP4 formats, up to 50 MB.</div>
+          <input type="file" id="fileInput" hidden multiple>
+          <button class="btn-browse">Browse File</button>
+        </div>
+        
+        <div class="uploader__files" id="uploaderFiles">
+          <div class="files-header">
+            <h4>Uploaded Files</h4>
+            <div class="files-count" id="fileCount">0 files</div>
+          </div>
+          
+          <div class="file-list" id="filesList">
+            <div class="empty-state">
+              <i class="fas fa-folder-open"></i>
+              <p>No files uploaded yet</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="upload-actions" id="uploadActions">
+        <button class="btn-upload btn-primary">Upload All</button>
+        <button class="btn-upload btn-secondary">Cancel</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const openPopupBtn = document.getElementById('openPopup');
+    const popupOverlay = document.getElementById('popupOverlay');
+    const closePopupBtn = document.getElementById('closePopup');
+    const dropZone = document.getElementById('dropZone');
+    const fileInput = document.getElementById('fileInput');
+    const filesList = document.getElementById('filesList');
+    const fileCount = document.getElementById('fileCount');
+    const uploaderFiles = document.getElementById('uploaderFiles');
+    const uploadActions = document.getElementById('uploadActions');
+    
+    // Allowed file types and size limit
+    const allowedTypes = ['image/jpeg', 'image/png', 'application/pdf', 'video/mp4'];
+    const maxSize = 50 * 1024 * 1024; // 50 MB in bytes
+    
+    // File type extensions for display
+    const fileTypeExtensions = {
+      'image/jpeg': 'JPEG',
+      'image/png': 'PNG',
+      'application/pdf': 'PDF',
+      'video/mp4': 'MP4'
+    };
+    
+    // Popup controls
+    openPopupBtn.addEventListener('click', () => {
+      popupOverlay.style.display = 'flex';
+      uploaderFiles.style.display = 'none';
+      uploadActions.style.display = 'none';
+    });
+
+    closePopupBtn.addEventListener('click', () => {
+      popupOverlay.style.display = 'none';
+      filesList.innerHTML = `
+        <div class="empty-state">
+          <i class="fas fa-folder-open"></i>
+          <p>No files uploaded yet</p>
+        </div>
+      `;
+      uploaderFiles.style.display = 'none';
+      uploadActions.style.display = 'none';
+      updateFileCount();
+    });
+
+    // Handle drag events
+    ['dragenter', 'dragover'].forEach(event => {
+      dropZone.addEventListener(event, e => {
+        e.preventDefault();
+        dropZone.classList.add('drag-over');
+      });
+    });
+    
+    ['dragleave', 'drop'].forEach(event => {
+      dropZone.addEventListener(event, e => {
+        e.preventDefault();
+        dropZone.classList.remove('drag-over');
+      });
+    });
+    
+    // Click to browse files
+    dropZone.addEventListener('click', (e) => {
+      if (!e.target.classList.contains('btn-browse')) {
+        fileInput.click();
+      }
+    });
+    
+    // Handle file input change
+    fileInput.addEventListener('change', e => {
+      if (e.target.files.length) {
+        handleFiles(e.target.files);
+        fileInput.value = '';
+      }
+    });
+    
+    // Handle dropped files
+    dropZone.addEventListener('drop', e => {
+      if (e.dataTransfer.files.length) {
+        handleFiles(e.dataTransfer.files);
+      }
+    });
+    
+    // Handle files
+    function handleFiles(files) {
+      // Show files section and actions
+      uploaderFiles.style.display = 'block';
+      uploadActions.style.display = 'flex';
+      
+      // Remove empty state if it exists
+      const emptyState = filesList.querySelector('.empty-state');
+      if (emptyState) emptyState.remove();
+      
+      for (let file of files) {
+        // Validate file type and size
+        const isValidType = allowedTypes.includes(file.type);
+        const isValidSize = file.size <= maxSize;
+        
+        if (!isValidType || !isValidSize) {
+          alert(`Invalid file: ${file.name}. Only JPEG, PNG, PDF, MP4 up to 50 MB are allowed.`);
+          continue;
+        }
+        
+        // Create file row
+        const row = document.createElement('div');
+        row.className = 'file-row';
+        
+        // Get file extension for icon
+        const fileExtClass = file.type === 'application/pdf' ? 'pdf-icon' :
+                          file.type === 'video/mp4' ? 'mp4-icon' :
+                          'jpg-icon';
+        
+        row.innerHTML = `
+          <div class="file-icon ${fileExtClass}">
+            <i class="${file.type === 'application/pdf' ? 'fas fa-file-pdf' :
+                       file.type === 'video/mp4' ? 'fas fa-file-video' :
+                       'fas fa-file-image'}"></i>
+          </div>
+          <div class="file-info">
+            <div class="name">${file.name}</div>
+            <div class="meta">
+              <span class="type">${fileTypeExtensions[file.type]}</span> • 
+              <span class="size">${formatFileSize(file.size)}</span> • 
+              <span class="status">Ready to upload</span>
+            </div>
+            <div class="progress-container">
+              <div class="progress-bar"></div>
+            </div>
+          </div>
+          <div class="file-actions">
+            <button class="btn-action btn-delete" title="Remove file">
+              <i class="fas fa-trash"></i>
+            </button>
+          </div>
+        `;
+        
+        filesList.appendChild(row);
+        
+        // Add event listener for delete button
+        const deleteBtn = row.querySelector('.btn-delete');
+        deleteBtn.addEventListener('click', () => {
+          row.remove();
+          updateFileCount();
+          // If no files left, show empty state and hide files section and actions
+          if (filesList.children.length === 0) {
+            filesList.innerHTML = `
+              <div class="empty-state">
+                <i class="fas fa-folder-open"></i>
+                <p>No files uploaded yet</p>
+              </div>
+            `;
+            uploaderFiles.style.display = 'none';
+            uploadActions.style.display = 'none';
+          }
+        });
+        
+        // Simulate upload progress
+        simulateUpload(row, file);
+      }
+      
+      updateFileCount();
+    }
+    
+    // Simulate file upload progress
+    function simulateUpload(row, file) {
+      const progressBar = row.querySelector('.progress-bar');
+      const status = row.querySelector('.status');
+      let progress = 0;
+      const totalSize = file.size;
+      const interval = setInterval(() => {
+        progress += Math.floor(Math.random() * 1024 * 10); // Simulate byte upload
+        const percentage = Math.min((progress / totalSize) * 100, 100);
+        progressBar.style.width = `${percentage}%`;
+        status.textContent = `${formatFileSize(progress)} of ${formatFileSize(totalSize)} • Uploading...`;
+        
+        if (percentage >= 100) {
+          clearInterval(interval);
+          progressBar.style.width = '100%';
+          status.innerHTML = `<i class="fas fa-check"></i> Completed`;
+          row.classList.add('completed');
+        }
+      }, 200);
+    }
+    
+    // Update file count display
+    function updateFileCount() {
+      const count = filesList.querySelectorAll('.file-row').length;
+      fileCount.textContent = `${count} file${count !== 1 ? 's' : ''}`;
+    }
+    
+    // Format file size
+    function formatFileSize(bytes) {
+      if (bytes === 0) return '0 Bytes';
+      const k = 1024;
+      const sizes = ['Bytes', 'KB', 'MB', 'GB'];
+      const i = Math.floor(Math.log(bytes) / Math.log(k));
+      return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+    }
+    
+    // Upload button functionality
+    document.querySelector('.btn-primary').addEventListener('click', () => {
+      const files = filesList.querySelectorAll('.file-row:not(.error)');
+      if (files.length === 0) {
+        alert('Please add files to upload.');
+        return;
+      }
+      
+      alert(`Uploading ${files.length} files...`);
+      files.forEach(file => {
+        if (!file.classList.contains('completed')) {
+          const progressBar = file.querySelector('.progress-bar');
+          const status = file.querySelector('.status');
+          progressBar.style.width = '100%';
+          status.innerHTML = `<i class="fas fa-check"></i> Completed`;
+          file.classList.add('completed');
+        }
+      });
+    });
+    
+    // Cancel button functionality
+    document.querySelector('.btn-secondary').addEventListener('click', () => {
+      filesList.innerHTML = `
+        <div class="empty-state">
+          <i class="fas fa-folder-open"></i>
+          <p>No files uploaded yet</p>
+        </div>
+      `;
+      uploaderFiles.style.display = 'none';
+      uploadActions.style.display = 'none';
+      updateFileCount();
+    });
+  </script>
+</body>
+</html>
