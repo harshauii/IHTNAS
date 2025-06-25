@@ -306,26 +306,30 @@
         </div>
     </div>
     
-    <script>
-document.getElementById("userForm").addEventListener("submit", function(e) {
-  e.preventDefault();
+  <script>
+  document.getElementById("userForm").addEventListener("submit", function (e) {
+    e.preventDefault(); // prevent default form submission
 
-  const form = e.target;
-  const formData = new FormData(form);
+    const form = e.target;
+    const formData = new FormData(form);
 
-  fetch("https://script.google.com/macros/s/AKfycbwxdxfd-4aXvzJZpE5e4QDbsCGj6Dw2HrgmX_BjDjUWA8HzwqZZ7q-4a24as8Y0FjSU/exec", {
-    method: "POST",
-    body: formData, // sends as x-www-form-urlencoded automatically
-    mode: "no-cors" // this disables CORS errors (but limits response access)
-  }).then(() => {
-    alert("Form submitted successfully!");
-    form.reset();
-  }).catch(err => {
-    alert("There was an error submitting the form.");
-    console.error(err);
+    // ✅ Replace with your actual deployed Apps Script Web App URL
+    const scriptURL = "https://script.google.com/macros/s/AKfycbwxdxfd-4aXvzJZpE5e4QDbsCGj6Dw2HrgmX_BjDjUWA8HzwqZZ7q-4a24as8Y0FjSU/exec";
+
+    fetch(scriptURL, {
+      method: "POST",
+      body: formData
+    })
+    .then(() => {
+      alert("Form submitted successfully!");
+      form.reset();
+    })
+    .catch((error) => {
+      alert("Error submitting form.");
+      console.error("Error:", error);
+    });
   });
-});
-
 </script>
+
 </body>
 </html>
