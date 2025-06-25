@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Hello, World!</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body{margin:0;font-family:IBM Plex Sans,sans-serif;-moz-osx-font-smoothing:grayscale;-webkit-font-smoothing:antialiased;overflow:scroll}
+        *{user-select:none;-webkit-user-select:none;-webkit-tap-highlight-color:transparent}
+        input,textarea{user-select:text;-webkit-user-select:text}
+        a{color:inherit;text-decoration:none}
+        button{cursor:pointer}
+        .App{display:flex;align-items:center;flex-direction:column}
+        .homepage{display:grid;grid-template-columns:1fr 1fr;width:100%}
+        .banner{background-color:#030a21;min-height:100vh;color:#fff;position:relative;overflow:hidden;width:100%}
+        .banner .arrow-watermark{position:absolute;bottom:0;display:block}
+        .banner .gs-logo{margin:50px 100px 0;width:100%}
+        .banner .gs-logo>img{height:40px}
+        .banner .content{display:flex;flex-direction:column;gap:30px;margin:0 100px;padding-top:8vw;width:calc(100% - 200px)}
+        .banner .title{font-size:40px;font-weight:500;line-height:54px}
+        .banner .description{color:#fffc;font-size:16px;font-weight:400;margin-top:8px}
+        .banner .mentor-by{font-size:20px;font-weight:500;margin-bottom:20px}
+        .banner .mentor{display:flex;flex-wrap:wrap;gap:24px;padding-bottom:50px}
+        .banner .mentor-details{display:flex;align-items:center;gap:16px}
+        .banner .mentor-details .mentor-image{border-radius:4px;height:40px;width:40px;overflow:hidden}
+        .banner .mentor-details .mentor-image>img{width:100%;height:100%;object-fit:cover}
+        .banner .mentor-name{font-size:16px;font-weight:600}
+        .banner .mentor-designation{font-size:14px;font-weight:400}
+        .user-form-container{margin:95px auto 0;padding-top:8.5vw;position:relative;width:100%}
+        .user-form{display:flex;flex-direction:column;gap:32px;margin:0 auto;max-width:400px;width:87%}
+        .user-input-box{display:flex;flex-direction:column}
+        .user-input-label{font-weight:400;line-height:24px;padding-bottom:14px}
+        .user-input-label span{color:red}
+        .user-input{border:1px solid #ddd;border-radius:8px;font-size:16px;line-height:20px;outline:none;padding:12px}
+        .user-input:focus, #intl-phone-container:has(.phone-input:focus){border:1px solid #030a21}
+        .next-button{background-color:#030a21;border:none;border-radius:12px;color:#fff;font-size:16px;font-weight:500;margin-top:8px;padding:16px 0}
+        .user-policy{font-size:14px;font-weight:400;line-height:21px;margin-top:-16px;margin-bottom:30px;text-align:center}
+        .iti{position:relative;display:inline-block;width:100%}
+        .iti *{box-sizing:border-box}
+        #intl-phone-container{border:1px solid #ddd;border-radius:9px;font-size:16px;height:48px;width:100%;position:relative}
+        .phone-input{width:100%;height:46px;padding-left:92px!important;border:none;background:0 0;font-size:16px;outline:0}
+        .iti__flag-container{position:absolute;top:0;bottom:0;left:0;padding:1px;cursor:default}
+        .iti__selected-flag{z-index:1;position:relative;display:flex;align-items:center;height:100%;padding:0 6px 0 8px}
+        .iti__arrow{display:none}
+        .iti__flag{width:20px;height:15px;box-shadow:0 0 1px 0 #888;background-image:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGwAAAAPCAMAAAATd8HwAAAAKlBMVEUAAADa2tr////MzMxmZmb39/fV1dXMzMz39/fMzMzMzMzMzMzMzMzMzMyFfNdVAAAADHRSTlMA/f6/n0/fIM9/H46qj+vvAAAAXElEQVR42u3PSQoAIAwEwcz9L5kIIi4gItvBwGf7AIbYd4zQpgDq8g2i4OD8s8bY4vL/g3qgWrtA8QkY9M4s8B3wHXA9AI/NQE2A7QJ0C9gn4A+APwD/APwA/gP8T/ifwE+A34BvAd8Dfgf8D/gH+A9wL2BvYG+AnwD/A/4D/Gckr31rY+d3AAAAAAAAAElFTkSuQmCC);background-repeat:no-repeat;background-color:#dbdbdb;background-position:0 0}
+        .iti__flag.iti__in{background-position:0 0}
+        @media only screen and (max-width:1000px){.banner .gs-logo,.banner .content{margin:50px auto 0;width:87%}}
+        @media only screen and (max-width:600px){.homepage{grid-template-columns:none;grid-template-rows:auto auto}.banner{min-height:0}.banner .gs-logo{width:fit-content}.banner .gs-logo>img{height:32px}.banner .content{gap:24px}.banner .title{font-size:20px;line-height:26px}.banner .description{font-size:14px}.banner .mentor-by{font-size:14px;margin-bottom:12px}.banner .mentor{gap:20px;padding-bottom:40px}.banner .mentor .mentor-details{gap:8px}.banner .mentor .mentor-details .mentor-designation,.banner .mentor .mentor-details .mentor-name{font-size:12px;line-height:14px}.user-form-container{margin:0;padding:40px 0}.user-form{gap:24px;max-width:87%}.user-input-label{font-size:14px;line-height:21px;padding-bottom:12px}.user-input,.phone-input,#intl-phone-container{font-size:14px}}
+    </style>
+</head>
+<body>
+<div class="App" id="app">
+    <div class="homepage">
+        <div class="banner">
+            <img src="https://applications.growthschool.io/static/media/arrow-watermark.3b6a61eba496df5516a4fda1917be812.svg" alt="arrow-watermark" class="arrow-watermark">
+            <div class="gs-logo">
+                <img alt="logo" src="https://growthschool.io/static/media/gs-logo.dda9dc995a3983ca989df2e46e06e8e9.svg">
+            </div>
+            <div class="content">
+                <div>
+                    <div class="title">6 Months Gen AI Powered Digital Marketing Mentorship Program!</div>
+                    <div class="description">Become a PRO in Digital Marketing!</div>
+                </div>
+                <div>
+                    <div class="mentor-by">Mentored By</div>
+                    <div class="mentor">
+                        <div class="mentor-details">
+                            <div class="mentor-image"><img src="https://s3.ap-south-1.amazonaws.com/user-profile-image.growthschool.io/instructors/_2024_01_04_profilePhoto.jpeg" alt="Alice Mendonca"></div>
+                            <div>
+                                <div class="mentor-name">Alice Mendonca</div>
+                                <div class="mentor-designation">Relationship Manager, Mid-Market</div>
+                            </div>
+                        </div>
+                        <div class="mentor-details">
+                            <div class="mentor-image"><img src="https://s3.ap-south-1.amazonaws.com/user-profile-image.growthschool.io/instructors/ManasBarpande_2023_08_08_profilePhoto.jpeg" alt="Manas Barpande"></div>
+                            <div>
+                                <div class="mentor-name">Manas Barpande</div>
+                                <div class="mentor-designation">Social Media Lead</div>
+                            </div>
+                        </div>
+                        <div class="mentor-details">
+                            <div class="mentor-image"><img src="https://s3.ap-south-1.amazonaws.com/user-profile-image.growthschool.io/instructors/SiddharthaKathpalia_2024_04_18_profilePhoto.png" alt="Siddhartha"></div>
+                            <div>
+                                <div class="mentor-name">Siddhartha</div>
+                                <div class="mentor-designation">Ex-US Marketing Head, VWO</div>
+                            </div>
+                        </div>
+                        <div class="mentor-details">
+                            <div class="mentor-image"><img src="https://s3.ap-south-1.amazonaws.com/user-profile-image.growthschool.io/instructors/KrishniMiglani_2024_01_25_profilePhoto.webp" alt="Krishni"></div>
+                            <div>
+                                <div class="mentor-name">Krishni</div>
+                                <div class="mentor-designation">Prime India Shopping</div>
+                            </div>
+                        </div>
+                        <div class="mentor-details">
+                            <div class="mentor-image"><img src="https://s3.ap-south-1.amazonaws.com/user-profile-image.growthschool.io/instructors/KaushikSenDeka_2024_01_25_profilePhoto.jpeg" alt="Kaushik Sen Deka"></div>
+                            <div>
+                                <div class="mentor-name">Kaushik Sen Deka</div>
+                                <div class="mentor-designation">Marketing Strategist</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="user-form-container">
+            <form class="user-form">
+                <div class="user-input-box">
+                    <label class="user-input-label">Full Name <span>*</span></label>
+                    <input class="user-input" maxlength="50" type="text" placeholder="" value="harsha vardhan">
+                </div>
+                <div class="user-input-box">
+                    <label class="user-input-label">Email Address <span>*</span></label>
+                    <input class="user-input" maxlength="50" type="email" pattern=".*@.*\.[a-zA-Z]{2,}" placeholder="" value="example@gmail.com">
+                </div>
+                <div>
+                    <div class="user-input-label">Contact Number <span>*</span></div>
+                    <div class="iti" id="intl-phone-container">
+                        <div class="iti__flag-container">
+                            <div class="iti__selected-flag" title="India">
+                                <div class="iti__flag iti__in"></div>
+                                <div class="iti__selected-dial-code">+91</div>
+                                <div class="iti__arrow"></div>
+                            </div>
+                        </div>
+                        <input class="phone-input" id="intl-phone" maxlength="10" type="tel" name="phone" required autocomplete="off" placeholder="1234567890">
+                    </div>
+                </div>
+                <button type="submit" class="next-button">Next</button>
+                <div class="user-policy">By continuing, you agree to our <a href="https://growthschool.io/terms-and-conditions" target="_blank" rel="noreferrer noopener">Terms of Service</a> and <a href="https://growthschool.io/privacy-policy" target="_blank" rel="noreferrer noopener">Privacy Policy</a></div>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>
