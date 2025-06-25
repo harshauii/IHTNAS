@@ -202,7 +202,9 @@
         .file-list {
             display: flex;
             flex-direction: column;
-            gap: calc(var(--spacing) * 4); /* Increased padding between files */
+            gap: calc(var(--spacing) * 4); /* Padding between files */
+            max-height: calc(var(--spacing) * 80); /* 20rem, enables scrolling */
+            overflow-y: auto;
         }
 
         .file-row {
@@ -459,6 +461,10 @@
                 padding: calc(var(--spacing) * 2) calc(var(--spacing) * 4);
                 font-size: var(--text-sm); /* 0.875rem */
             }
+
+            .file-list {
+                max-height: calc(var(--spacing) * 60); /* 15rem for mobile */
+            }
         }
 
         @media (max-width: 360px) {
@@ -629,7 +635,7 @@
                 const isValidSize = file.size <= maxSize;
                 
                 if (!isValidType || !isValidSize) {
-                    const fileExt = file.name.split('.').pop().toLowerCase();
+                    const fileExt = file.name.split('.').pop().toUpperCase();
                     alert(`Invalid file: ${file.name}. Only PDF and Word files up to 50 MB are allowed.`);
                     
                     const row = document.createElement('div');
@@ -642,8 +648,7 @@
                         <div class="file-info">
                             <div class="name">${file.name}</div>
                             <div class="meta">
-                                <span class="type">${fileExt.toUpperCase()}</span> • 
-                                <span class="size">${formatFileSize(file.size)}</span> • 
+                                <span class="type">${fileExt}</span> • 
                                 <span class="status failed">${fileExt} failed <i class="fas fa-times-circle"></i></span>
                             </div>
                             <div class="progress-container">
@@ -680,7 +685,7 @@
                 row.className = 'file-row';
                 
                 const fileExtClass = file.type === 'application/pdf' ? 'pdf-icon' : 'word-icon';
-                const fileType = fileTypeExtensions[file.type].toLowerCase();
+                const fileType = fileTypeExtensions[file.type];
                 
                 row.innerHTML = `
                     <div class="file-icon ${fileExtClass}">
@@ -689,8 +694,7 @@
                     <div class="file-info">
                         <div class="name">${file.name}</div>
                         <div class="meta">
-                            <span class="type">${fileTypeExtensions[file.type]}</span> • 
-                            <span class="size">${formatFileSize(file.size)}</span> • 
+                            <span class="type">${fileType}</span> • 
                             <span class="status">Uploading...</span>
                         </div>
                         <div class="progress-container">
@@ -741,12 +745,12 @@
                 if (percentage >= 100) {
                     clearInterval(interval);
                     if (isSuccess) {
-                        status.innerHTML = `${fileType} completed <i class="fas fa-check-circle"></i>`;
+                        status.innerHTML = `completed <i class="fas fa-check-circle"></i>`;
                         status.classList.add('completed');
                         row.classList.add('completed');
                         progressBar.style.backgroundColor = 'oklch(60% 0.2 150)';
                     } else {
-                        status.innerHTML = `${fileType} failed <i class="fas fa-times-circle"></i>`;
+                        status.innerHTML = `failed <i class="fas fa-times-circle"></i>`;
                         status.classList.add('failed');
                         row.classList.add('failed');
                         progressBar.style.backgroundColor = 'var(--color-red-500)';
@@ -774,10 +778,10 @@
             files.forEach(file => {
                 const status = file.querySelector('.status');
                 const progressBar = file.querySelector('.progress-bar');
-                const fileType = file.querySelector('.type').textContent.toLowerCase();
+                const fileType = file.querySelector('.type').textContent;
                 if (!file.classList.contains('completed') && !file.classList.contains('failed')) {
                     progressBar.style.width = '100%';
-                    status.innerHTML = `${fileType} completed <i class="fas fa-check-circle"></i>`;
+                    status.innerHTML = `completed <i class="fas fa-check-circle"></i>`;
                     status.classList.add('completed');
                     file.classList.add('completed');
                     progressBar.style.backgroundColor = 'oklch(60% 0.2 150)';
