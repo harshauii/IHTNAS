@@ -276,26 +276,21 @@
 <div class="user-form-container">
   <form class="user-form" id="userForm">
     <div class="user-input-box">
-      <label class="user-input-label">Full Name <span>*</span></label>
-      <input class="user-input" name="name" maxlength="50" type="text" placeholder="" value="harsha vardhan">
+      <label class="user-input-label" for="name">Full Name <span>*</span></label>
+      <input id="name" class="user-input" name="name" maxlength="50" type="text" placeholder="e.g., Jane Doe" required>
     </div>
     <div class="user-input-box">
-      <label class="user-input-label">Email Address <span>*</span></label>
-      <input class="user-input" name="email" maxlength="50" type="email" pattern=".*@.*\.[a-zA-Z]{2,}" placeholder="" value="example@gmail.com">
+      <label class="user-input-label" for="email">Email Address <span>*</span></label>
+      <input id="email" class="user-input" name="email" maxlength="50" type="email" pattern=".*@.*\.[a-zA-Z]{2,}" placeholder="e.g., example@gmail.com" required>
     </div>
-    <div>
-      <div class="user-input-label">Contact Number <span>*</span></div>
-      <div class="iti" id="intl-phone-container">
-        <div class="iti__flag-container">
-          <div class="iti__selected-flag" title="India">
-            <div class="iti__selected-dial-code">+91</div>
-            <div class="iti__arrow"></div>
-          </div>
-        </div>
-        <input class="phone-input" id="intl-phone" maxlength="10" type="tel" name="phone" required autocomplete="off" placeholder="1234567890">
-      </div>
+    <div class="user-input-box">
+      <label class="user-input-label" for="phone">Contact Number <span>*</span></label>
+      <!-- Assuming you are using a library for the country code, we'll keep it simple here. -->
+      <!-- The JavaScript will grab the value from this input field. -->
+      <input id="phone" class="phone-input" maxlength="15" type="tel" name="phone" required autocomplete="off" placeholder="e.g., +911234567890">
     </div>
     <button type="submit" class="next-button">Next</button>
+    <div id="form-status"></div> <!-- To show success/error messages -->
     <div class="user-policy">
       By continuing, you agree to our 
       <a href="https://growthschool.io/terms-and-conditions" target="_blank" rel="noreferrer noopener">Terms of Service</a> and 
@@ -307,28 +302,61 @@
     </div>
     
   <script>
-  document.getElementById("userForm").addEventListener("submit", function (e) {
-    e.preventDefault(); // prevent default form submission
+    const form = document.getElementById('userForm');
+    const submitButton = form.querySelector('button[type="submit"]');
+    const formStatus = document.getElementById('form-status');
 
-    const form = e.target;
-    const formData = new FormData(form);
+    // PASTE YOUR GOOGLE APPS SCRIPT URL HERE
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbz5YvJv9OlpHg1f_jvpjuoM_HU66KmCg2pt58gz5jMQ6ua2XVY14xWFrBf3s-n2D-3N/exec';
 
-    // ✅ Replace with your actual deployed Apps Script Web App URL
-    const scriptURL = "https://script.google.com/macros/s/AKfycbwxdxfd-4aXvzJZpE5e4QDbsCGj6Dw2HrgmX_BjDjUWA8HzwqZZ7q-4a24as8Y0FjSU/exec";
+    form.addEventListener('submit', e => {
+        // Prevent the form from submitting the traditional way
+        e.preventDefault();
 
-    fetch(scriptURL, {
-      method: "POST",
-      body: formData
-    })
-    .then(() => {
-      alert("Form submitted successfully!");
-      form.reset();
-    })
-    .catch((error) => {
-      alert("Error submitting form.");
-      console.error("Error:", error);
+        // Disable the button and show a loading message
+        submitButton.disabled = true;
+        submitButton.textContent = 'Submitting...';
+        formStatus.textContent = ''; // Clear previous status
+
+        const formData = new FormData(form);
+        const data = Object.fromEntries(formData.entries());
+
+        fetch(scriptURL, { 
+            method: 'POST',
+            // 'no-cors' mode is a common mistake. Your Apps Script is configured for CORS.
+            // But due to a redirect quirk in Apps Script, we will send it as plain text
+            // and not expect a JSON response back directly, to avoid CORS errors.
+            // The doPost function handles this. For simplicity, we can use a redirect trick.
+            // Let's use the robust JSON method instead. We need to stringify the data.
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(data),
+            // The mode should be 'cors' which is the default, but we'll be explicit.
+            mode: 'cors'
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.result === 'success') {
+                formStatus.textContent = 'Success! Your data has been submitted.';
+                formStatus.style.color = 'green';
+                form.reset(); // Clear the form fields
+            } else {
+                // This will catch errors from our Apps Script 'catch' block
+                throw new Error(data.message || 'An unknown error occurred.');
+            }
+        })
+        .catch(error => {
+            console.error('Error!', error.message);
+            formStatus.textContent = 'Error: Could not submit the form. Please try again.';
+            formStatus.style.color = 'red';
+        })
+        .finally(() => {
+            // Re-enable the button and restore its text
+            submitButton.disabled = false;
+            submitButton.textContent = 'Next';
+        });
     });
-  });
 </script>
 
 </body>
