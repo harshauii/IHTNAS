@@ -17,6 +17,7 @@
             --color-gray-400: oklch(70.7% 0.022 261.325);
             --color-gray-500: oklch(55.1% 0.027 264.364);
             --color-gray-600: oklch(44.6% 0.03 256.802);
+            --color-gray-800: oklch(30% 0.03 264.364);
             --color-blue-600: oklch(54.6% 0.245 262.881);
             --color-green-50: oklch(98.2% 0.018 155.826);
             --color-red-500: oklch(63.7% 0.237 25.331);
@@ -88,8 +89,9 @@
             align-items: center;
             justify-content: space-between;
             padding: calc(var(--spacing) * 4);
-            background: linear-gradient(to right, var(--color-blue-600), oklch(48.6% 0.245 262.881));
-            color: var(--color-white);
+            background-color: var(--color-white);
+            color: var(--color-gray-800);
+            border-bottom: 1px solid var(--color-gray-200);
         }
 
         .uploader__header-title {
@@ -97,11 +99,13 @@
             align-items: center;
             font-size: var(--text-lg);
             font-weight: var(--font-weight-semibold);
+            color: var(--color-gray-800);
         }
 
         .uploader__header-title i {
             margin-right: calc(var(--spacing) * 2);
             font-size: var(--text-xl);
+            color: var(--color-gray-800);
         }
 
         .uploader__close {
@@ -110,10 +114,11 @@
             padding: calc(var(--spacing) * 2);
             border-radius: var(--radius-full);
             transition: background-color var(--transition-duration) var(--ease-in-out);
+            color: var(--color-gray-800);
         }
 
         .uploader__close:hover {
-            background-color: var(--color-white) / 0.3;
+            background-color: var(--color-gray-200);
         }
 
         .uploader__content {
@@ -313,9 +318,14 @@
             color: var(--color-gray-600);
         }
 
-        .btn-action:hover {
-            background-color: var(--color-blue-600);
-            color: var(--color-white);
+        .btn-action.btn-delete {
+            background-color: transparent;
+            transition: none; /* Remove hover transition */
+        }
+
+        .btn-action.btn-delete svg {
+            width: calc(var(--spacing) * 6); /* 24px */
+            height: calc(var(--spacing) * 6); /* 24px */
         }
 
         .file-row.completed .progress-bar {
@@ -340,14 +350,17 @@
             padding: calc(var(--spacing) * 6);
             border-top: 1px solid var(--color-gray-200);
             background-color: var(--color-white);
+            flex-direction: row;
+            justify-content: space-between;
         }
 
         .btn-upload {
-            padding: calc(var(--spacing) * 3) calc(var(--spacing) * 6);
-            border-radius: var(--radius-md);
+            padding: 16px 0;
+            border-radius: 12px;
             border: none;
-            font-size: var(--text-sm);
-            font-weight: var(--font-weight-semibold);
+            font-size: 16px;
+            font-weight: var(--font-weight-medium);
+            text-transform: none;
             cursor: pointer;
             transition: all var(--transition-duration) var(--ease-in-out);
             flex: 1;
@@ -370,7 +383,7 @@
         .btn-secondary {
             background-color: var(--color-white);
             color: var(--color-blue-600);
-            border: 1px solid var(--color-gray-300);
+            border: none;
         }
 
         .btn-secondary:hover {
@@ -458,8 +471,8 @@
             }
 
             .btn-upload {
-                padding: calc(var(--spacing) * 2) calc(var(--spacing) * 4);
-                font-size: var(--text-sm); /* 0.875rem */
+                padding: 12px 0;
+                font-size: 14px;
             }
 
             .file-list {
@@ -493,7 +506,8 @@
             }
 
             .btn-upload {
-                font-size: var(--text-base); /* 1rem */
+                padding: 12px 0;
+                font-size: 16px;
             }
         }
     </style>
@@ -511,32 +525,32 @@
                 <i class="fas fa-times uploader__close" id="closePopup"></i>
             </div>
 
-            <div class="uploader__content">
+            <div class="uploader__content" id="uploaderContent">
                 <div class="uploader__drop" id="dropZone">
                     <i class="fas fa-cloud-upload-alt"></i>
                     <p>Choose a file or drag and drop it here.</p>
                     <div class="formats">PDF and Word formats, up to 50 MB.</div>
                     <input type="file" id="fileInput" hidden multiple>
-                    <button class="btn-browse">Browse File</button>
+                    <button class="btn-browse" id="browseButton">Browse File</button>
+                </div>
+            </div>
+            
+            <div class="uploader__files" id="uploaderFiles">
+                <div class="files-header">
+                    <h4>Uploaded Files</h4>
                 </div>
                 
-                <div class="uploader__files" id="uploaderFiles">
-                    <div class="files-header">
-                        <h4>Uploaded Files</h4>
-                    </div>
-                    
-                    <div class="file-list" id="filesList">
-                        <div class="empty-state">
-                            <i class="fas fa-folder-open"></i>
-                            <p>No files uploaded yet</p>
-                        </div>
+                <div class="file-list" id="filesList">
+                    <div class="empty-state">
+                        <i class="fas fa-folder-open"></i>
+                        <p>No files uploaded yet</p>
                     </div>
                 </div>
             </div>
             
             <div class="upload-actions" id="uploadActions">
-                <button class="btn-upload btn-primary">Upload All</button>
-                <button class="btn-upload btn-secondary">Cancel</button>
+                <button class="btn-upload btn-secondary" id="addMoreButton">Add More</button>
+                <button class="btn-upload btn-primary" id="submitButton">Submit</button>
             </div>
         </div>
     </div>
@@ -547,9 +561,13 @@
         const closePopupBtn = document.getElementById('closePopup');
         const dropZone = document.getElementById('dropZone');
         const fileInput = document.getElementById('fileInput');
+        const browseButton = document.getElementById('browseButton');
         const filesList = document.getElementById('filesList');
         const uploaderFiles = document.getElementById('uploaderFiles');
         const uploadActions = document.getElementById('uploadActions');
+        const uploaderContent = document.getElementById('uploaderContent');
+        const addMoreButton = document.getElementById('addMoreButton');
+        const submitButton = document.getElementById('submitButton');
         
         // Allowed file types and size limit
         const allowedTypes = [
@@ -571,6 +589,7 @@
             popupOverlay.style.display = 'flex';
             uploaderFiles.style.display = 'none';
             uploadActions.style.display = 'none';
+            uploaderContent.style.display = 'block';
         });
 
         closePopupBtn.addEventListener('click', () => {
@@ -583,6 +602,7 @@
             `;
             uploaderFiles.style.display = 'none';
             uploadActions.style.display = 'none';
+            uploaderContent.style.display = 'block';
         });
 
         // Handle drag events
@@ -600,11 +620,15 @@
             });
         });
         
-        // Click to browse files
-        dropZone.addEventListener('click', (e) => {
-            if (!e.target.classList.contains('btn-browse')) {
-                fileInput.click();
-            }
+        // Click drop zone to open file picker
+        dropZone.addEventListener('click', () => {
+            fileInput.click();
+        });
+        
+        // Browse button to open file picker
+        browseButton.addEventListener('click', (e) => {
+            e.stopPropagation(); // Prevent dropZone click from firing
+            fileInput.click();
         });
         
         // Handle file input change
@@ -622,10 +646,37 @@
             }
         });
         
+        // Add More button functionality
+        addMoreButton.addEventListener('click', () => {
+            uploaderContent.style.display = 'block';
+        });
+        
+        // Submit button functionality
+        submitButton.addEventListener('click', () => {
+            const files = document.querySelectorAll('.file-row');
+            if (files.length === 0) {
+                alert('Please add files to submit.');
+                return;
+            }
+            files.forEach(file => {
+                const status = file.querySelector('.status');
+                const progressBar = file.querySelector('.progress-bar');
+                const fileType = file.querySelector('.type').textContent;
+                if (!file.classList.contains('completed') && !file.classList.contains('failed')) {
+                    progressBar.style.width = '100%';
+                    status.innerHTML = `completed <i class="fas fa-check-circle"></i>`;
+                    status.classList.add('completed');
+                    file.classList.add('completed');
+                    progressBar.style.backgroundColor = 'oklch(60% 0.2 150)';
+                }
+            });
+        });
+        
         // Handle files
         function handleFiles(files) {
             uploaderFiles.style.display = 'block';
             uploadActions.style.display = 'flex';
+            uploaderContent.style.display = 'none';
             
             const emptyState = filesList.querySelector('.empty-state');
             if (emptyState) emptyState.remove();
@@ -657,7 +708,11 @@
                         </div>
                         <div class="file-actions">
                             <button class="btn-action btn-delete" title="Remove file">
-                                <i class="fas fa-times"></i>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 48 48">
+                                    <path fill="#f44336" d="M44,24c0,11.045-8.955,20-20,20S4,35.045,4,24S12.955,4,24,4S44,12.955,44,24z"></path>
+                                    <path fill="#fff" d="M29.656,15.516l2.828,2.828l-14.14,14.14l-2.828-2.828L29.656,15.516z"></path>
+                                    <path fill="#fff" d="M32.484,29.656l-2.828,2.828l-14.14-14.14l2.828-2.828L32.484,29.656z"></path>
+                                </svg>
                             </button>
                         </div>
                     `;
@@ -676,6 +731,7 @@
                             `;
                             uploaderFiles.style.display = 'none';
                             uploadActions.style.display = 'none';
+                            uploaderContent.style.display = 'block';
                         }
                     });
                     continue;
@@ -703,7 +759,11 @@
                     </div>
                     <div class="file-actions">
                         <button class="btn-action btn-delete" title="Remove file">
-                            <i class="fas fa-times"></i>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 48 48">
+                                <path fill="#f44336" d="M44,24c0,11.045-8.955,20-20,20S4,35.045,4,24S12.955,4,24,4S44,12.955,44,24z"></path>
+                                <path fill="#fff" d="M29.656,15.516l2.828,2.828l-14.14,14.14l-2.828-2.828L29.656,15.516z"></path>
+                                <path fill="#fff" d="M32.484,29.656l-2.828,2.828l-14.14-14.14l2.828-2.828L32.484,29.656z"></path>
+                            </svg>
                         </button>
                     </div>
                 `;
@@ -722,6 +782,7 @@
                         `;
                         uploaderFiles.style.display = 'none';
                         uploadActions.style.display = 'none';
+                        uploaderContent.style.display = 'block';
                     }
                 });
                 
@@ -767,39 +828,6 @@
             const i = Math.floor(Math.log(bytes) / Math.log(k));
             return `${parseFloat((bytes / Math.pow(k, i)).toFixed(2))} ${sizes[i]}`;
         }
-        
-        // Upload button functionality
-        document.querySelector('.btn-primary').addEventListener('click', () => {
-            const files = document.querySelectorAll('.file-row');
-            if (files.length === 0) {
-                alert('Please add files to upload.');
-                return;
-            }
-            files.forEach(file => {
-                const status = file.querySelector('.status');
-                const progressBar = file.querySelector('.progress-bar');
-                const fileType = file.querySelector('.type').textContent;
-                if (!file.classList.contains('completed') && !file.classList.contains('failed')) {
-                    progressBar.style.width = '100%';
-                    status.innerHTML = `completed <i class="fas fa-check-circle"></i>`;
-                    status.classList.add('completed');
-                    file.classList.add('completed');
-                    progressBar.style.backgroundColor = 'oklch(60% 0.2 150)';
-                }
-            });
-        });
-        
-        // Cancel button functionality
-        document.querySelector('.btn-secondary').addEventListener('click', () => {
-            filesList.innerHTML = `
-                <div class="empty-state">
-                    <i class="fas fa-folder-open"></i>
-                    <p>No files uploaded yet</p>
-                </div>
-            `;
-            uploaderFiles.style.display = 'none';
-            uploadActions.style.display = 'none';
-        });
     </script>
 </body>
 </html>
