@@ -180,8 +180,7 @@
     .file-list {
       display: flex;
       flex-direction: column;
-@sayantanm19
-      gap: var(--spacing-unit);
+      gap: calc(var(--spacing-unit) * 2); /* Increased padding between files */
     }
 
     .file-row {
@@ -254,6 +253,23 @@
       color: var(--cross-color);
     }
 
+    .progress-container {
+      width: 100%;
+      height: 4px;
+      background: #e9ecef;
+      border-radius: 2px;
+      overflow: hidden;
+      margin-top: var(--spacing-unit);
+    }
+
+    .progress-bar {
+      width: 0%;
+      height: 100%;
+      background: var(--primary);
+      border-radius: 2px;
+      transition: width 0.3s ease;
+    }
+
     .file-actions {
       margin-left: calc(var(--spacing-unit) * 2);
     }
@@ -277,6 +293,10 @@
       color: #ffffff;
     }
 
+    .file-row.completed .progress-bar {
+      background: var(--success);
+    }
+
     .file-row.completed .status {
       color: var(--tick-color);
     }
@@ -289,7 +309,7 @@
       display: none;
       gap: calc(var(--spacing-unit) * 2);
       padding: calc(var(--spacing-unit) * 3);
-      border: 1px solid var(--border);
+      border-top: 1px solid var(--border);
       background: var(--card-bg);
     }
 
@@ -301,6 +321,7 @@
       font-weight: 500;
       cursor: pointer;
       transition: var(--transition);
+....
       flex: 1;
     }
 
@@ -359,20 +380,28 @@
       }
 
       .uploader__drop p {
-        font-size: 0.75rem;
+        font-size: 0.875rem; /* Increased from 0.75rem */
       }
 
       .uploader__drop .formats {
-        font-size: 0.625rem;
+        font-size: 0.8125rem; /* Increased from 0.625rem */
       }
 
       .btn-browse {
         padding: calc(var(--spacing-unit) * 1) calc(var(--spacing-unit) * 2);
-        font-size: 0.75rem;
+        font-size: 0.875rem; /* Increased from 0.75rem */
       }
 
       .file-info .meta {
-        font-size: 0.625rem;
+        font-size: 0.8125rem; /* Increased from 0.625rem */
+      }
+
+      .file-info .name {
+        font-size: 1rem; /* Increased from 0.875rem */
+      }
+
+      .files-header h4 {
+        font-size: 1rem; /* Increased from 0.875rem */
       }
 
       .file-row {
@@ -386,7 +415,37 @@
 
       .btn-upload {
         padding: calc(var(--spacing-unit) * 1) calc(var(--spacing-unit) * 3);
-        font-size: 0.75rem;
+        font-size: 0.875rem; /* Increased from 0.75rem */
+      }
+    }
+
+    @media (max-width: 360px) {
+      .uploader__drop p {
+        font-size: 0.9375rem; /* Further increase for smaller screens */
+      }
+
+      .uploader__drop .formats {
+        font-size: 0.875rem; /* Further increase */
+      }
+
+      .btn-browse {
+        font-size: 0.9375rem; /* Further increase */
+      }
+
+      .file-info .meta {
+        font-size: 0.875rem; /* Further increase */
+      }
+
+      .file-info .name {
+        font-size: 1.0625rem; /* Further increase */
+      }
+
+      .files-header h4 {
+        font-size: 1.0625rem; /* Further increase */
+      }
+
+      .btn-upload {
+        font-size: 0.9375rem; /* Further increase */
       }
     }
   </style>
@@ -545,6 +604,9 @@
                 <span class="size">${formatFileSize(file.size)}</span> • 
                 <span class="status failed">${fileExt} failed <i class="fas fa-times-circle"></i></span>
               </div>
+              <div class="progress-container">
+                <div class="progress-bar"></div>
+              </div>
             </div>
             <div class="file-actions">
               <button class="btn-action btn-delete" title="Remove file">
@@ -587,7 +649,10 @@
             <div class="meta">
               <span class="type">${fileTypeExtensions[file.type]}</span> • 
               <span class="size">${formatFileSize(file.size)}</span> • 
-              <span class="status">Ready to upload</span>
+              <span class="status">Uploading...</span>
+            </div>
+            <div class="progress-container">
+              <div class="progress-bar"></div>
             </div>
           </div>
           <div class="file-actions">
@@ -621,21 +686,31 @@
     // Simulate file upload
     function simulateUpload(row, file, fileType) {
       const status = row.querySelector('.status');
-      
+      const progressBar = row.querySelector('.progress-bar');
+      let progress = 0;
+      const totalSize = file.size;
       const isSuccess = Math.random() > 0.2; // 80% chance of success
-      const delay = Math.random() * 2000 + 1000;
       
-      setTimeout(() => {
-        if (isSuccess) {
-          status.innerHTML = `${fileType} completed <i class="fas fa-check-circle"></i>`;
-          status.classList.add('completed');
-          row.classList.add('completed');
-        } else {
-          status.innerHTML = `${fileType} failed <i class="fas fa-times-circle"></i>`;
-          status.classList.add('failed');
-          row.classList.add('failed');
+      const interval = setInterval(() => {
+        progress += Math.floor(Math.random() * 1024 * 10);
+        const percentage = Math.min((progress / totalSize) * 100, 100);
+        progressBar.style.width = `${percentage}%`;
+        
+        if (percentage >= 100) {
+          clearInterval(interval);
+          if (isSuccess) {
+            status.innerHTML = `${fileType} completed <i class="fas fa-check-circle"></i>`;
+            status.classList.add('completed');
+            row.classList.add('completed');
+            progressBar.style.background = 'var(--success)';
+          } else {
+            status.innerHTML = `${fileType} failed <i class="fas fa-times-circle"></i>`;
+            status.classList.add('failed');
+            row.classList.add('failed');
+            progressBar.style.background = 'var(--cross-color)';
+          }
         }
-      }, delay);
+      }, 200);
     }
     
     // Format file size
@@ -656,11 +731,14 @@
       }
       files.forEach(file => {
         const status = file.querySelector('.status');
+        const progressBar = file.querySelector('.progress-bar');
         const fileType = file.querySelector('.type').textContent.toLowerCase();
         if (!file.classList.contains('completed') && !file.classList.contains('failed')) {
+          progressBar.style.width = '100%';
           status.innerHTML = `${fileType} completed <i class="fas fa-check-circle"></i>`;
           status.classList.add('completed');
           file.classList.add('completed');
+          progressBar.style.background = 'var(--success)';
         }
       });
     });
