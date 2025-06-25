@@ -661,7 +661,6 @@
             files.forEach(file => {
                 const status = file.querySelector('.status');
                 const progressBar = file.querySelector('.progress-bar');
-                const fileType = file.querySelector('.type').textContent;
                 if (!file.classList.contains('completed') && !file.classList.contains('failed')) {
                     progressBar.style.width = '100%';
                     status.innerHTML = `completed <i class="fas fa-check-circle"></i>`;
@@ -674,10 +673,6 @@
         
         // Handle files
         function handleFiles(files) {
-            uploaderFiles.style.display = 'block';
-            uploadActions.style.display = 'flex';
-            uploaderContent.style.display = 'none';
-            
             const emptyState = filesList.querySelector('.empty-state');
             if (emptyState) emptyState.remove();
             
@@ -687,7 +682,6 @@
                 
                 if (!isValidType || !isValidSize) {
                     const fileExt = file.name.split('.').pop().toUpperCase();
-                    alert(`Invalid file: ${file.name}. Only PDF and Word files up to 50 MB are allowed.`);
                     
                     const row = document.createElement('div');
                     row.className = 'file-row failed';
@@ -734,60 +728,64 @@
                             uploaderContent.style.display = 'block';
                         }
                     });
-                    continue;
-                }
-                
-                const row = document.createElement('div');
-                row.className = 'file-row';
-                
-                const fileExtClass = file.type === 'application/pdf' ? 'pdf-icon' : 'word-icon';
-                const fileType = fileTypeExtensions[file.type];
-                
-                row.innerHTML = `
-                    <div class="file-icon ${fileExtClass}">
-                        <i class="${file.type === 'application/pdf' ? 'fas fa-file-pdf' : 'fas fa-file-word'}"></i>
-                    </div>
-                    <div class="file-info">
-                        <div class="name">${file.name}</div>
-                        <div class="meta">
-                            <span class="type">${fileType}</span> • 
-                            <span class="status">Uploading...</span>
+                } else {
+                    const row = document.createElement('div');
+                    row.className = 'file-row';
+                    
+                    const fileExtClass = file.type === 'application/pdf' ? 'pdf-icon' : 'word-icon';
+                    const fileType = fileTypeExtensions[file.type];
+                    
+                    row.innerHTML = `
+                        <div class="file-icon ${fileExtClass}">
+                            <i class="${file.type === 'application/pdf' ? 'fas fa-file-pdf' : 'fas fa-file-word'}"></i>
                         </div>
-                        <div class="progress-container">
-                            <div class="progress-bar"></div>
-                        </div>
-                    </div>
-                    <div class="file-actions">
-                        <button class="btn-action btn-delete" title="Remove file">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 48 48">
-                                <path fill="#f44336" d="M44,24c0,11.045-8.955,20-20,20S4,35.045,4,24S12.955,4,24,4S44,12.955,44,24z"></path>
-                                <path fill="#fff" d="M29.656,15.516l2.828,2.828l-14.14,14.14l-2.828-2.828L29.656,15.516z"></path>
-                                <path fill="#fff" d="M32.484,29.656l-2.828,2.828l-14.14-14.14l2.828-2.828L32.484,29.656z"></path>
-                            </svg>
-                        </button>
-                    </div>
-                `;
-                
-                filesList.appendChild(row);
-                
-                const deleteBtn = row.querySelector('.btn-delete');
-                deleteBtn.addEventListener('click', () => {
-                    row.remove();
-                    if (filesList.children.length === 0) {
-                        filesList.innerHTML = `
-                            <div class="empty-state">
-                                <i class="fas fa-folder-open"></i>
-                                <p>No files uploaded yet</p>
+                        <div class="file-info">
+                            <div class="name">${file.name}</div>
+                            <div class="meta">
+                                <span class="type">${fileType}</span> • 
+                                <span class="status">Uploading...</span>
                             </div>
-                        `;
-                        uploaderFiles.style.display = 'none';
-                        uploadActions.style.display = 'none';
-                        uploaderContent.style.display = 'block';
-                    }
-                });
-                
-                simulateUpload(row, file, fileType);
+                            <div class="progress-container">
+                                <div class="progress-bar"></div>
+                            </div>
+                        </div>
+                        <div class="file-actions">
+                            <button class="btn-action btn-delete" title="Remove file">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 48 48">
+                                    <path fill="#f44336" d="M44,24c0,11.045-8.955,20-20,20S4,35.045,4,24S12.955,4,24,4S44,12.955,44,24z"></path>
+                                    <path fill="#fff" d="M29.656,15.516l2.828,2.828l-14.14,14.14l-2.828-2.828L29.656,15.516z"></path>
+                                    <path fill="#fff" d="M32.484,29.656l-2.828,2.828l-14.14-14.14l2.828-2.828L32.484,29.656z"></path>
+                                </svg>
+                            </button>
+                        </div>
+                    `;
+                    
+                    filesList.appendChild(row);
+                    
+                    const deleteBtn = row.querySelector('.btn-delete');
+                    deleteBtn.addEventListener('click', () => {
+                        row.remove();
+                        if (filesList.children.length === 0) {
+                            filesList.innerHTML = `
+                                <div class="empty-state">
+                                    <i class="fas fa-folder-open"></i>
+                                    <p>No files uploaded yet</p>
+                                </div>
+                            `;
+                            uploaderFiles.style.display = 'none';
+                            uploadActions.style.display = 'none';
+                            uploaderContent.style.display = 'block';
+                        }
+                    });
+                    
+                    simulateUpload(row, file, fileType);
+                }
             }
+
+            // Ensure uploader__content is hidden after processing files
+            uploaderFiles.style.display = 'block';
+            uploadActions.style.display = 'flex';
+            uploaderContent.style.display = 'none';
         }
         
         // Simulate file upload
@@ -796,7 +794,6 @@
             const progressBar = row.querySelector('.progress-bar');
             let progress = 0;
             const totalSize = file.size;
-            const isSuccess = Math.random() > 0.2; // 80% chance of success
             
             const interval = setInterval(() => {
                 progress += Math.floor(Math.random() * 1024 * 10);
@@ -805,17 +802,10 @@
                 
                 if (percentage >= 100) {
                     clearInterval(interval);
-                    if (isSuccess) {
-                        status.innerHTML = `completed <i class="fas fa-check-circle"></i>`;
-                        status.classList.add('completed');
-                        row.classList.add('completed');
-                        progressBar.style.backgroundColor = 'oklch(60% 0.2 150)';
-                    } else {
-                        status.innerHTML = `failed <i class="fas fa-times-circle"></i>`;
-                        status.classList.add('failed');
-                        row.classList.add('failed');
-                        progressBar.style.backgroundColor = 'var(--color-red-500)';
-                    }
+                    status.innerHTML = `completed <i class="fas fa-check-circle"></i>`;
+                    status.classList.add('completed');
+                    row.classList.add('completed');
+                    progressBar.style.backgroundColor = 'oklch(60% 0.2 150)';
                 }
             }, 200);
         }
