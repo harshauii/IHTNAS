@@ -301,58 +301,48 @@
         </div>
     </div>
     
-  <script>
+<script>
     const form = document.getElementById('userForm');
     const submitButton = form.querySelector('button[type="submit"]');
     const formStatus = document.getElementById('form-status');
-
-    // PASTE YOUR GOOGLE APPS SCRIPT URL HERE
-    const scriptURL = 'https://script.google.com/macros/s/AKfycbxzxD5SENtR6BG0PWxf9oFRBqgcEEhh4Q7VXVmvusk40SE6cliBRMofFmHsEdf3rMDP/exec';
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbxzxD5SENtR6BG0PWxf9oFRBqgcEEhh4Q7VXVmvusk40SE6cliBRMofFmHsEdf3rMDP/exec'; // e.g., ...Edf3rMDP/exec
 
     form.addEventListener('submit', e => {
-        // Prevent the form from submitting the traditional way
         e.preventDefault();
 
-        // Disable the button and show a loading message
         submitButton.disabled = true;
         submitButton.textContent = 'Submitting...';
-        formStatus.textContent = ''; // Clear previous status
+        formStatus.textContent = '';
 
+        // We use FormData which is the key to this workaround
         const formData = new FormData(form);
-        const data = Object.fromEntries(formData.entries());
 
+        // This fetch request is different. We don't set Content-Type.
+        // The browser will set it automatically to multipart/form-data,
+        // which does NOT trigger a CORS preflight request.
         fetch(scriptURL, { 
-            method: 'POST',
-            // 'no-cors' mode is a common mistake. Your Apps Script is configured for CORS.
-            // But due to a redirect quirk in Apps Script, we will send it as plain text
-            // and not expect a JSON response back directly, to avoid CORS errors.
-            // The doPost function handles this. For simplicity, we can use a redirect trick.
-            // Let's use the robust JSON method instead. We need to stringify the data.
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify(data),
-            // The mode should be 'cors' which is the default, but we'll be explicit.
-            mode: 'cors'
+            method: 'POST', 
+            body: formData 
         })
-        .then(response => response.json())
-        .then(data => {
-            if (data.result === 'success') {
-                formStatus.textContent = 'Success! Your data has been submitted.';
-                formStatus.style.color = 'green';
-                form.reset(); // Clear the form fields
-            } else {
-                // This will catch errors from our Apps Script 'catch' block
-                throw new Error(data.message || 'An unknown error occurred.');
+        .then(response => {
+            if (!response.ok) {
+                // If the server responds with an error status (like 4xx or 5xx)
+                throw new Error(`Network response was not ok: ${response.statusText}`);
             }
+            return response.json(); // We still expect a JSON response
+        })
+        .then(data => {
+            console.log('Success:', data);
+            formStatus.textContent = 'Success! Your data has been submitted.';
+            formStatus.style.color = 'green';
+            form.reset();
         })
         .catch(error => {
             console.error('Error!', error.message);
-            formStatus.textContent = 'Error: Could not submit the form. Please try again.';
+            formStatus.textContent = 'Error: Could not submit. ' + error.message;
             formStatus.style.color = 'red';
         })
         .finally(() => {
-            // Re-enable the button and restore its text
             submitButton.disabled = false;
             submitButton.textContent = 'Next';
         });
