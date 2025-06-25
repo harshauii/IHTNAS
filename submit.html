@@ -264,7 +264,7 @@
             <div class="banner">
                 <img src="https://applications.growthschool.io/static/media/arrow-watermark.3b6a61eba496df5516a4fda1917be812.svg" alt="arrow-watermark" class="arrow-watermark">
                 <div class="gs-logo">
-                    <img alt="logo" src="https://d31bwppm8yl9g2.cloudfront.net/learner/website/gsmainlogo.svg">
+                    <img alt="logo" src="https://growthschool.io/static/media/gs-logo.dda9dc995a3983ca989df2e46e06e8e9.svg">
                 </div>
                 <div class="content">
                     <div>
@@ -273,37 +273,72 @@
                     </div>
                 </div>
             </div>
-            <div class="user-form-container">
-                <form class="user-form">
-                    <div class="user-input-box">
-                        <label class="user-input-label">Full Name <span>*</span></label>
-                        <input class="user-input" maxlength="50" type="text" placeholder="" value="harsha vardhan">
-                    </div>
-                    <div class="user-input-box">
-                        <label class="user-input-label">Email Address <span>*</span></label>
-                        <input class="user-input" maxlength="50" type="email" pattern=".*@.*\.[a-zA-Z]{2,}" placeholder="" value="example@gmail.com">
-                    </div>
-                    <div>
-                        <div class="user-input-label">Contact Number <span>*</span></div>
-                        <div class="iti" id="intl-phone-container">
-                            <div class="iti__flag-container">
-                                <div class="iti__selected-flag" title="India">
-                                    <div class="iti__selected-dial-code">+91</div>
-                                    <div class="iti__arrow"></div>
-                                </div>
-                            </div>
-                            <input class="phone-input" id="intl-phone" maxlength="10" type="tel" name="phone" required autocomplete="off" placeholder="1234567890">
-                        </div>
-                    </div>
-                    <button type="submit" class="next-button">Next</button>
-                    <div class="user-policy">
-                        By continuing, you agree to our 
-                        <a href="https://growthschool.io/terms-and-conditions" target="_blank" rel="noreferrer noopener">Terms of Service</a> and 
-                        <a href="https://growthschool.io/privacy-policy" target="_blank" rel="noreferrer noopener">Privacy Policy</a>
-                    </div>
-                </form>
-            </div>
+<div class="user-form-container">
+  <form class="user-form" id="userForm">
+    <div class="user-input-box">
+      <label class="user-input-label">Full Name <span>*</span></label>
+      <input class="user-input" name="name" maxlength="50" type="text" placeholder="" value="harsha vardhan">
+    </div>
+    <div class="user-input-box">
+      <label class="user-input-label">Email Address <span>*</span></label>
+      <input class="user-input" name="email" maxlength="50" type="email" pattern=".*@.*\.[a-zA-Z]{2,}" placeholder="" value="example@gmail.com">
+    </div>
+    <div>
+      <div class="user-input-label">Contact Number <span>*</span></div>
+      <div class="iti" id="intl-phone-container">
+        <div class="iti__flag-container">
+          <div class="iti__selected-flag" title="India">
+            <div class="iti__selected-dial-code">+91</div>
+            <div class="iti__arrow"></div>
+          </div>
+        </div>
+        <input class="phone-input" id="intl-phone" maxlength="10" type="tel" name="phone" required autocomplete="off" placeholder="1234567890">
+      </div>
+    </div>
+    <button type="submit" class="next-button">Next</button>
+    <div class="user-policy">
+      By continuing, you agree to our 
+      <a href="https://growthschool.io/terms-and-conditions" target="_blank" rel="noreferrer noopener">Terms of Service</a> and 
+      <a href="https://growthschool.io/privacy-policy" target="_blank" rel="noreferrer noopener">Privacy Policy</a>
+    </div>
+  </form>
+</div>
         </div>
     </div>
+    
+    <script>
+  document.getElementById("userForm").addEventListener("submit", function(e) {
+    e.preventDefault(); // Prevent the default form submission
+
+    // Gather data from form inputs
+    const formData = {
+      name: document.querySelector('input[name="name"]').value,
+      email: document.querySelector('input[name="email"]').value,
+      phone: document.querySelector('input[name="phone"]').value
+    };
+
+    // URL of the deployed Google Apps Script web app
+    const scriptURL = "YOUR_WEB_APP_URL_HERE";  // Replace with your actual URL
+
+    // Send the data using fetch
+    fetch(scriptURL, {
+      method: "POST",
+      mode: "cors", // adjust if necessary (or use "no-cors" but note the limitations)
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(formData)
+    })
+    .then(response => response.json())
+    .then(data => {
+      console.log("Success:", data);
+      // Optionally display a success message or redirect the user.
+    })
+    .catch((error) => {
+      console.error("Error:", error);
+      // Optionally display an error message.
+    });
+  });
+</script>
 </body>
 </html>
