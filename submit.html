@@ -306,54 +306,253 @@
             </div>
         </div>
     </div>
-    
-<script>
-    const form = document.getElementById('userForm');
-    const submitButton = form.querySelector('button[type="submit"]');
-    const formStatus = document.getElementById('form-status');
-    const scriptURL = 'https://script.google.com/macros/s/AKfycbxzxD5SENtR6BG0PWxf9oFRBqgcEEhh4Q7VXVmvusk40SE6cliBRMofFmHsEdf3rMDP/exec'; // e.g., ...Edf3rMDP/exec
 
-    form.addEventListener('submit', e => {
-        e.preventDefault();
+        <!-- POPUP HTML  -->
+    <div id="popup-overlay" class="popup-overlay">
+        <div id="popup-card" class="popup-card">
+            <div id="popup-icon-container" class="popup-icon-container"></div>
+            <h2 id="popup-title" class="popup-title"></h2>
+            <p id="popup-message" class="popup-message"></p>
+            <button id="popup-button" class="popup-button"></button>
+        </div>
+    </div>
+        <style>
+        /* --- STYLES FOR POPUP --- */
+        /* This CSS is added to support the popup functionality */
+        @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&display=swap');
 
-        submitButton.disabled = true;
-        submitButton.textContent = 'Submitting...';
-        formStatus.textContent = '';
+        :root {
+            --success-color: #2DCC70;
+            --fail-color: #E85B5B;
+            --bg-color: #F8F9FA;
+            --card-bg-color: #FFFFFF;
+            --title-color: #212529;
+            --text-color: #555;
+            --white-color: #FFFFFF;
+        }
 
-        // We use FormData which is the key to this workaround
-        const formData = new FormData(form);
+        .popup-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0s 0.3s;
+            z-index: 1000;
+        }
 
-        // This fetch request is different. We don't set Content-Type.
-        // The browser will set it automatically to multipart/form-data,
-        // which does NOT trigger a CORS preflight request.
-        fetch(scriptURL, { 
-            method: 'POST', 
-            body: formData 
-        })
-        .then(response => {
-            if (!response.ok) {
-                // If the server responds with an error status (like 4xx or 5xx)
-                throw new Error(`Network response was not ok: ${response.statusText}`);
+        .popup-overlay.visible {
+            opacity: 1;
+            visibility: visible;
+            transition: opacity 0.3s ease, visibility 0s 0s;
+        }
+
+        .popup-card {
+            font-family: 'IBM Plex Sans', sans-serif;
+            background: var(--card-bg-color);
+            padding: 40px;
+            border-radius: 20px;
+            width: 90%;
+            max-width: 360px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05), 0 10px 20px rgba(0, 0, 0, 0.1);
+            transform: scale(0.95) translateY(10px);
+            opacity: 0;
+            transition: transform 0.3s ease, opacity 0.3s ease;
+        }
+        
+        .popup-overlay.visible .popup-card {
+            transform: scale(1) translateY(0);
+            opacity: 1;
+        }
+
+        .popup-icon-container {
+            position: relative;
+            width: 90px;
+            height: 90px;
+            margin-bottom: 25px;
+        }
+
+        .popup-title {
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: var(--title-color);
+            margin-bottom: 12px;
+            letter-spacing: 0.5px;
+        }
+
+        .popup-message {
+            font-size: 0.95rem;
+            font-weight: 500;
+            line-height: 1.6;
+            color: var(--text-color);
+            margin-bottom: 30px;
+            max-width: 280px;
+        }
+
+        .popup-button {
+            width: 100%;
+            padding: 15px 0;
+            border: none;
+            border-radius: 100px;
+            font-family: 'IBM Plex Sans', sans-serif;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--white-color);
+            text-transform: uppercase;
+            letter-spacing: 1.2px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        
+        .popup-button:hover {
+            filter: brightness(1.05);
+            transform: translateY(-1px);
+        }
+
+        .popup-card.success .popup-title { color: var(--success-color); }
+        .popup-card.success .popup-button { background-color: var(--success-color); box-shadow: 0 4px 12px rgba(45, 204, 112, 0.25); }
+
+        .popup-card.fail .popup-title { color: var(--fail-color); }
+        .popup-card.fail .popup-button { background-color: var(--fail-color); box-shadow: 0 4px 12px rgba(232, 91, 91, 0.25); }
+
+        .success-icon .circle {
+            stroke-dasharray: 255;
+            stroke-dashoffset: 255;
+            animation: draw-circle 0.6s cubic-bezier(0.65, 0, 0.45, 1) forwards;
+        }
+        
+        .success-icon .checkmark {
+            stroke-dasharray: 48;
+            stroke-dashoffset: 48;
+            animation: draw-checkmark 0.4s cubic-bezier(0.65, 0, 0.45, 1) 0.6s forwards;
+        }
+
+        .fail-icon {
+            width: 100%;
+            height: 100%;
+            animation: shake 0.4s cubic-bezier(.36,.07,.19,.97) both;
+            transform: translate3d(0, 0, 0);
+        }
+
+        @keyframes draw-circle { to { stroke-dashoffset: 0; } }
+        @keyframes draw-checkmark { to { stroke-dashoffset: 0; } }
+        @keyframes shake {
+            10%, 90% { transform: translate3d(-1px, 0, 0); }
+            20%, 80% { transform: translate3d(2px, 0, 0); }
+            30%, 50%, 70% { transform: translate3d(-4px, 0, 0); }
+            40%, 60% { transform: translate3d(4px, 0, 0); }
+        }
+    </style>
+
+    <script>
+        // --- FORM SUBMISSION SCRIPT  ---
+
+        // 1. Elements from your original script
+        const form = document.getElementById('userForm');
+        const submitButton = form.querySelector('button[type="submit"]');
+        const formStatus = document.getElementById('form-status');
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbxzxD5SENtR6BG0PWxf9oFRBqgcEEhh4Q7VXVmvusk40SE6cliBRMofFmHsEdf3rMDP/exec';
+
+        // 2. Elements required for the popup functionality
+        const overlay = document.getElementById('popup-overlay');
+        const card = document.getElementById('popup-card');
+        const iconContainer = document.getElementById('popup-icon-container');
+        const titleEl = document.getElementById('popup-title');
+        const messageEl = document.getElementById('popup-message');
+        const buttonEl = document.getElementById('popup-button');
+
+        // 3. SVG icons and configuration for the popups
+        const successIconSVG = `
+            <svg class="success-icon" viewBox="0 0 100 100" style="width:100%; height:100%;">
+                <path class="circle" d="M50,10 a40,40 0 1,1 0,80 a40,40 0 1,1 0,-80" stroke="#2DCC70" stroke-width="5" fill="none" stroke-linecap="round"/>
+                <path class="checkmark" d="M32 51 L45 64 L70 39" stroke="#2DCC70" stroke-width="6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>`;
+        const failIconSVG = `
+            <svg class="fail-icon" viewBox="0 0 100 100">
+                <circle cx="50" cy="50" r="40" fill="#E85B5B"/>
+                <path d="M35 35 L65 65 M65 35 L35 65" stroke="#FFFFFF" stroke-width="6" stroke-linecap="round"/>
+            </svg>`;
+
+        const popupConfig = {
+            success: {
+                icon: successIconSVG,
+                title: "SUCCESS!",
+                message: "Congrats! Your data has been submitted successfully.",
+                buttonText: "DONE"
+            },
+            fail: {
+                icon: failIconSVG,
+                title: "OH NO...",
+                message: "Something went wrong, please try again.",
+                buttonText: "TRY AGAIN"
             }
-            return response.json(); // We still expect a JSON response
-        })
-        .then(data => {
-            console.log('Success:', data);
-            formStatus.textContent = 'Success! Your data has been submitted.';
-            formStatus.style.color = 'green';
-            form.reset();
-        })
-        .catch(error => {
-            console.error('Error!', error.message);
-            formStatus.textContent = 'Error: Could not submit. ' + error.message;
-            formStatus.style.color = 'red';
-        })
-        .finally(() => {
-            submitButton.disabled = false;
-            submitButton.textContent = 'Next';
-        });
-    });
-</script>
+        };
 
+        // 4. Function to show the popup
+        const showPopup = (type, onButtonClick) => {
+            const config = popupConfig[type];
+            card.className = 'popup-card'; // Reset classes
+            setTimeout(() => card.classList.add(type), 10);
+            
+            iconContainer.innerHTML = config.icon;
+            titleEl.textContent = config.title;
+            messageEl.textContent = config.message;
+            buttonEl.textContent = config.buttonText;
+            
+            // Set the button's click action to the provided function
+            buttonEl.onclick = onButtonClick;
+            
+            overlay.classList.add('visible');
+        };
+
+        // 5. Your form's event listener with integrated popup logic
+        form.addEventListener('submit', e => {
+            e.preventDefault();
+
+            submitButton.disabled = true;
+            submitButton.textContent = 'Submitting...';
+            formStatus.textContent = ''; // Clear any old status messages
+
+            const formData = new FormData(form);
+
+            fetch(scriptURL, { method: 'POST', body: formData })
+            .then(response => {
+                if (!response.ok) throw new Error(`Network response was not ok: ${response.statusText}`);
+                return response.json();
+            })
+            .then(data => {
+                console.log('Success:', data);
+                form.reset();
+                // ** MODIFICATION: Show success popup instead of text message **
+                // The button click will redirect to /index
+                showPopup('success', () => {
+                    window.location.href = '/index'; 
+                });
+            })
+            .catch(error => {
+                console.error('Error!', error.message);
+                // ** MODIFICATION: Show fail popup instead of text message **
+                // The button click will redirect to /fail
+                showPopup('fail', () => {
+                    window.location.href = '/fail';
+                });
+            })
+            .finally(() => {
+                // This will run after the popup is shown, re-enabling the form button behind it
+                submitButton.disabled = false;
+                submitButton.textContent = 'Next';
+            });
+        });
+    </script>
 </body>
 </html>
