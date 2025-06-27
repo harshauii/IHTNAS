@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>IHTNAS</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta property="og:title" content="IHTNAS – International Hub for Technology, Novelty and Applied Sciences" />
@@ -47,9 +46,6 @@
             padding-top: 72px;
         }
 
-        html, body {
-            overflow-x: hidden;
-        }
 
         /* Header styles */
         .header {
@@ -666,8 +662,8 @@
         @media (max-width: 768px) {
             .section-container {
                 width: 100%;
-                padding-left: 16px;
-                padding-right: 16px;
+                padding: 70px 16px 0px 16px;
+
             }
             .section-content {
                 padding: 24px 0;
@@ -719,7 +715,7 @@
             position: relative;
             overflow: hidden;
             border-radius: 12px;
-            background-color: #f0f0f0;
+            background-color: #fffffff;
         }
 
         .section-image img {
@@ -1342,7 +1338,7 @@
                 </button>
             </div>
             <div class="section-image">
-                <img src="https://framerusercontent.com/images/kkOygtHRHYPv76o5PniXD7eNI.png?scale-down-to=1024" 
+                <img src="/assets/paper.png" 
                      onerror="this.src='https://via.placeholder.com/560x360?text=Image+Failed+to+Load'; this.classList.add('placeholder');" 
                      alt="Syncskill Program Mockup">
             </div>
@@ -2453,6 +2449,864 @@
     }
 }
 </style>
+
+
+
+
+
+
+
+
+    <style>
+
+        /* --- Main Layout Container --- */
+        .ihtnas-publish-page-container {
+            display: flex;
+            width: 100%;
+            box-sizing: border-box;
+            padding: 0 125px;
+        }
+
+        /* --- Left Sticky Panel --- */
+        .ihtnas-publish-left-panel {
+            width: 45%;
+            height: 100vh;
+            position: sticky;
+            top: 0;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            padding-right: 48px;
+            box-sizing: border-box;
+        }
+
+        .ihtnas-publish-main-heading {
+            font-size: 2rem;
+            line-height: 1.25;
+            font-weight: 700;
+            color: #002726;
+        }
+
+        /* --- Right Scrollable Panel --- */
+        .ihtnas-publish-right-panel {
+            width: 55%;
+            padding: 48px 0;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            gap: 32px;
+        }
+
+        /* --- Process Card Styling --- */
+        .ihtnas-publish-process-card {
+            background-color: #ffffff;
+            border-radius: 16px;
+            padding: 24px;
+            box-shadow: 0 4px 16px rgba(46, 60, 90, 0.07);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+            border: 1px solid #eef2f7;
+        }
+
+        .ihtnas-publish-process-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 24px rgba(46, 60, 90, 0.1);
+        }
+
+        .ihtnas-publish-process-card::before {
+            content: attr(data-step);
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 14px;
+            font-weight: 600;
+            background-color: #e0f2f1;
+            color: #00796B;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .ihtnas-publish-card-header {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 12px;
+        }
+
+        .ihtnas-publish-card-icon {
+            width: 44px;
+            height: 44px;
+            flex-shrink: 0;
+        }
+
+        .ihtnas-publish-card-icon svg path {
+            fill: #00796B;
+        }
+        
+        .ihtnas-publish-card-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: #002726;
+            margin: 0;
+        }
+
+        .ihtnas-publish-card-description {
+            font-size: 15px;
+            line-height: 1.6;
+            margin: 0;
+            color: #4a5568;
+            padding-left: 60px; /* Aligns with title (44px icon + 16px gap) */
+        }
+        
+        /* =========================================== */
+        /* ===     STANDARD MOBILE STYLES          === */
+        /* =========================================== */
+        @media (max-width: 992px) {
+            .ihtnas-publish-page-container {
+                flex-direction: column;
+                padding: 32px 16px;
+            }
+
+            .ihtnas-publish-left-panel {
+                width: 100%;
+                height: auto;
+                position: static;
+                justify-content: center;
+                text-align: center;
+                padding: 0;
+                margin-bottom: 40px;
+            }
+            
+            .ihtnas-publish-main-heading {
+                font-size: 1.75rem;
+            }
+
+            .ihtnas-publish-right-panel {
+                width: 100%;
+                padding: 0;
+                gap: 20px;
+            }
+
+            .ihtnas-publish-process-card {
+                padding: 20px;
+            }
+
+            .ihtnas-publish-card-icon {
+                width: 40px;
+                height: 40px;
+            }
+
+            .ihtnas-publish-card-title {
+                font-size: 17px;
+            }
+
+            .ihtnas-publish-card-description {
+                font-size: 14px;
+                padding-left: 0;
+            }
+        }
+
+        /* =========================================== */
+        /* ===       SMALL MOBILE STYLES           === */
+        /* =========================================== */
+        @media (max-width: 375px) {
+             .ihtnas-publish-page-container {
+                padding: 24px 16px;
+            }
+
+            .ihtnas-publish-main-heading {
+                font-size: 1.5rem;
+            }
+
+            .ihtnas-publish-left-panel {
+                margin-bottom: 32px;
+            }
+
+            .ihtnas-publish-right-panel {
+                gap: 16px;
+            }
+
+            .ihtnas-publish-process-card {
+                padding: 16px;
+            }
+
+            .ihtnas-publish-card-header {
+                gap: 12px;
+                margin-bottom: 10px;
+            }
+
+            .ihtnas-publish-card-icon {
+                width: 36px;
+                height: 36px;
+            }
+
+            .ihtnas-publish-card-title {
+                font-size: 16px;
+            }
+        }
+
+    </style>
+
+
+    <div class="ihtnas-publish-page-container">
+        
+        <aside class="ihtnas-publish-left-panel">
+            <h1 class="ihtnas-publish-main-heading">
+                How to Publish Research<br>Paper in IHTNAS ?
+            </h1>
+        </aside>
+
+        <main class="ihtnas-publish-right-panel">
+
+            <div class="ihtnas-publish-process-card" data-step="1">
+                <div class="ihtnas-publish-card-header">
+                    <div class="ihtnas-publish-card-icon"><svg viewBox="0 0 512 386.88"><path d="M377.763 115.7c-9.42 2.733-18.532 6.86-27.591 12.155-9.256 5.41-18.373 12.031-27.649 19.629l-19.849-22.742c16.721-15.527 33.187-26.464 49.108-33.514-13.06-22.39-31.538-38.532-52.418-48.549-21.339-10.238-45.242-14.171-68.507-11.922-23.123 2.234-45.56 10.619-64.123 25.025-21.451 16.646-37.775 41.521-44.034 74.469l-1.959 10.309-10.27 1.801c-27.993 4.909-49.283 18.793-62.859 36.776-7.186 9.518-12.228 20.161-14.969 31.19-2.728 10.979-3.193 22.399-1.243 33.525 3.291 18.766 13.592 36.737 31.669 50.382 5.467 4.128 11.376 7.709 17.886 10.48 6.215 2.647 13.017 4.612 20.558 5.686h78.258v30.246h-78.827l-1.891-.178c-11.099-1.413-20.982-4.186-29.914-7.99-8.994-3.829-16.989-8.65-24.264-14.142C20.256 299.753 6.183 275.02 1.628 249.05c-2.669-15.225-2.027-30.868 1.715-45.929 3.73-15.012 10.524-29.404 20.167-42.177 16.233-21.507 40.501-38.514 71.737-46.241 9.014-35.904 28.299-63.573 53.057-82.786C171.438 13.963 199.327 3.521 228.021.748c28.551-2.76 57.975 2.11 84.339 14.758 28.095 13.479 52.661 35.696 68.986 66.815 13.827-2.201 27.042-1.521 39.42 1.5 18.862 4.603 35.493 14.611 49.212 28.159 13.36 13.193 23.994 29.797 31.216 48.001 16.814 42.377 15.209 93.978-13.361 131.996-9.299 12.37-21.252 22.45-35.572 30.468-13.811 7.735-29.884 13.593-47.949 17.787l-3.368.414h-66.346V310.4h64.727c14.501-3.496 27.297-8.212 38.168-14.299 10.794-6.045 19.62-13.396 26.238-22.2 21.842-29.066 22.745-69.34 9.463-102.815-5.698-14.359-13.999-27.371-24.363-37.605-10.007-9.882-21.906-17.126-35.154-20.36-6.654-1.625-13.721-2.248-21.145-1.705l-14.769 4.284zM205.205 265.348c-5.288 6.391-14.756 7.285-21.148 1.997-6.391-5.288-7.285-14.757-1.997-21.148l59.645-72.019c5.288-6.392 14.757-7.285 21.148-1.998a15.053 15.053 0 012.707 2.921l60.072 72.279c5.287 6.359 4.42 15.802-1.939 21.09-6.359 5.287-15.801 4.42-21.089-1.939l-34.288-41.256.202 146.628c0 8.273-6.707 14.98-14.98 14.98-8.274 0-14.981-6.707-14.981-14.98l-.202-146.582-33.15 40.027z" /></svg></div>
+                    <h2 class="ihtnas-publish-card-title">Submit Paper</h2>
+                </div>
+                <p class="ihtnas-publish-card-description">Authors submit their profile Paper/Manuscript doc/docx.</p>
+            </div>
+
+            <!-- Card 2: Review Process (Updated SVG) -->
+            <div class="ihtnas-publish-process-card" data-step="2">
+                <div class="ihtnas-publish-card-header">
+                    <div class="ihtnas-publish-card-icon"><svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 109.773 122.879"><g><path d="M82.42,73.514c5.941,0,11.33,2.418,15.232,6.305c3.903,3.904,6.306,9.277,6.306,15.234c0,4.346-1.296,8.406-3.509,11.787 l9.324,10.162l-6.432,5.877l-8.992-9.891c-3.413,2.275-7.521,3.602-11.93,3.602c-5.941,0-11.33-2.416-15.233-6.305 c-3.903-3.902-6.306-9.275-6.306-15.232c0-5.941,2.418-11.33,6.306-15.234C71.09,75.916,76.462,73.514,82.42,73.514L82.42,73.514z M28.849,79.506c-1.588,0-2.876-1.318-2.876-2.906c0-1.617,1.289-2.904,2.876-2.904h18.753c1.588,0,2.876,1.316,2.876,2.904 c0,1.619-1.288,2.906-2.876,2.906H28.849L28.849,79.506z M28.849,38.645c-1.588,0-2.876-1.288-2.876-2.876 c0-1.587,1.289-2.875,2.876-2.875h38.045c1.588,0,2.876,1.288,2.876,2.875c0,1.588-1.288,2.876-2.876,2.876H28.849L28.849,38.645z M51.455,106.588c1.588,0,2.876,1.287,2.876,2.875s-1.288,2.877-2.876,2.877H6.711c-1.857,0-3.535-0.75-4.733-1.979 C0.749,109.164,0,107.486,0,105.629V6.71c0-1.857,0.749-3.535,1.978-4.733C3.206,0.749,4.854,0,6.711,0h82.292 c1.857,0,3.535,0.749,4.733,1.978c1.228,1.228,1.977,2.875,1.977,4.733v58.372c0,1.588-1.288,2.877-2.876,2.877 c-1.587,0-2.876-1.289-2.876-2.877V6.71c0-0.27-0.119-0.479-0.27-0.659c-0.18-0.18-0.419-0.27-0.658-0.27H6.741 c-0.27,0-0.479,0.12-0.659,0.27c-0.18,0.18-0.27,0.419-0.27,0.659v98.918c0,0.27,0.12,0.479,0.27,0.658 c0.18,0.18,0.419,0.27,0.659,0.27h44.744L51.455,106.588L51.455,106.588z M28.849,59.075c-1.588,0-2.876-1.288-2.876-2.875 c0-1.588,1.289-2.876,2.876-2.876h38.045c1.588,0,2.876,1.288,2.876,2.876c0,1.587-1.288,2.875-2.876,2.875H28.849L28.849,59.075z M94.811,82.66c-3.17-3.17-7.556-5.139-12.391-5.139c-4.836,0-9.222,1.969-12.392,5.139c-3.171,3.172-5.14,7.557-5.14,12.393 c0,4.834,1.969,9.221,5.14,12.391c3.17,3.17,7.556,5.139,12.392,5.139c4.835,0,9.221-1.969,12.391-5.139 c3.171-3.17,5.14-7.557,5.14-12.391C99.95,90.217,97.981,85.832,94.811,82.66L94.811,82.66L94.811,82.66z"/></g></svg></div>
+                    <h2 class="ihtnas-publish-card-title">Review Process</h2>
+                </div>
+                <p class="ihtnas-publish-card-description">Paper review by the reviewer committee.</p>
+            </div>
+
+            <!-- Card 3: Acceptance Status (Updated SVG) -->
+            <div class="ihtnas-publish-process-card" data-step="3">
+                 <div class="ihtnas-publish-card-header">
+                    <div class="ihtnas-publish-card-icon"><svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 122.881 122.88"><g><path d="M61.44,0c16.966,0,32.326,6.877,43.445,17.995s17.996,26.479,17.996,43.444c0,16.967-6.877,32.327-17.996,43.445 S78.406,122.88,61.44,122.88c-16.966,0-32.326-6.877-43.444-17.995S0,78.406,0,61.439c0-16.965,6.877-32.326,17.996-43.444 S44.474,0,61.44,0L61.44,0z M34.556,67.179c-1.313-1.188-1.415-3.216-0.226-4.529c1.188-1.313,3.216-1.415,4.529-0.227L52.3,74.611 l31.543-33.036c1.223-1.286,3.258-1.336,4.543-0.114c1.285,1.223,1.336,3.257,0.113,4.542L54.793,81.305l-0.004-0.004 c-1.195,1.257-3.182,1.338-4.475,0.168L34.556,67.179L34.556,67.179z M100.33,22.55C90.377,12.598,76.627,6.441,61.44,6.441 c-15.188,0-28.938,6.156-38.89,16.108c-9.953,9.953-16.108,23.702-16.108,38.89c0,15.188,6.156,28.938,16.108,38.891 c9.952,9.952,23.702,16.108,38.89,16.108c15.187,0,28.937-6.156,38.89-16.108c9.953-9.953,16.107-23.702,16.107-38.891 C116.438,46.252,110.283,32.502,100.33,22.55L100.33,22.55z"/></g></svg></div>
+                    <h2 class="ihtnas-publish-card-title">Acceptance Status</h2>
+                </div>
+                <p class="ihtnas-publish-card-description">If a paper is accepted, the author will be notified via their registered email address.</p>
+            </div>
+
+            <!-- Card 4: Processing Charges (Updated SVG) -->
+            <div class="ihtnas-publish-process-card" data-step="4">
+                <div class="ihtnas-publish-card-header">
+                    <div class="ihtnas-publish-card-icon"><svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 117.34 122.88"><g><path d="M85.14,14.83L43.26,40.28h11.91l30.92-18.79l4.54-2.76l13.09,21.55h7.62c1.66,0,3.16,0.68,4.25,1.76l0,0 c1.09,1.09,1.77,2.59,1.77,4.24v70.59c0,1.65-0.68,3.15-1.76,4.23v0.01c-1.09,1.09-2.59,1.76-4.25,1.76l-105.33,0 c-1.66,0-3.16-0.67-4.25-1.76v-0.01C0.68,120.02,0,118.52,0,116.88V46.28c0-1.65,0.68-3.16,1.76-4.24 c1.09-1.09,2.59-1.76,4.25-1.76h2.5L73.53,0.77v0C74.36,0.27,75.3,0,76.27,0c0.42,0,0.84,0.05,1.25,0.15 c1.36,0.33,2.54,1.19,3.26,2.39v0l6.63,10.91L85.14,14.83L85.14,14.83L85.14,14.83z M5.89,45.62c-0.23,0.25-0.42,0.53-0.56,0.84 v8.69h106.68v-8.87c0-0.19-0.07-0.36-0.19-0.47h-0.01c-0.12-0.12-0.29-0.2-0.48-0.2H6.01C5.97,45.61,5.93,45.61,5.89,45.62 L5.89,45.62z M15.98,84.71h19.05v7.13H15.98V84.71L15.98,84.71z M15.98,101.59h53.25v6.43H15.98V101.59L15.98,101.59z M86.21,84.71 h19.05v7.13H86.21V84.71L86.21,84.71z M62.8,84.71h19.05v7.13H62.8V84.71L62.8,84.71z M39.39,84.71h19.05v7.13H39.39V84.71 L39.39,84.71z M112.01,75.14H5.33v41.73c0,0.19,0.07,0.36,0.2,0.48l0.01,0c0.13,0.13,0.3,0.2,0.47,0.2l105.33,0 c0.18,0,0.35-0.08,0.48-0.2l0,0c0.13-0.13,0.2-0.3,0.2-0.48v0V75.14L112.01,75.14z"/></g></svg></div>
+                    <h2 class="ihtnas-publish-card-title">Processing Charges</h2>
+                </div>
+                <p class="ihtnas-publish-card-description">Pay paper processing charges as per mentioned in the acceptance letter.</p>
+            </div>
+            
+            <!-- Card 5: Copyright Submission (Updated SVG) -->
+            <div class="ihtnas-publish-process-card" data-step="5">
+                <div class="ihtnas-publish-card-header">
+                    <div class="ihtnas-publish-card-icon"><?xml version="1.0" encoding="utf-8"?><svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 122.73 122.88" style="enable-background:new 0 0 122.73 122.88" xml:space="preserve"><style type="text/css">.st0{fill-rule:evenodd;clip-rule:evenodd;}</style><g><path class="st0" d="M109.5,113.68L109.5,113.68l-6.09,0c-0.4,0-0.73-0.32-0.73-0.72V69.48l0-0.1c0-0.9-0.17-1.65-0.49-2.22 c-0.06-0.11-0.14-0.22-0.2-0.31c-0.06-0.09-0.16-0.18-0.23-0.27l-0.02-0.02c-0.3-0.3-0.68-0.53-1.12-0.69l-0.25-0.07l-0.04-0.01 l-0.01,0c-0.41-0.11-0.88-0.17-1.38-0.17h-0.05l-0.08,0H36.75c-0.89,0-1.62,0.17-2.18,0.49l-0.02,0.01l-0.27,0.17l-0.04,0.04 c-0.09,0.07-0.18,0.15-0.27,0.23l-0.02,0.02l-0.01,0.01c-0.62,0.63-0.92,1.57-0.92,2.82l0,0.04l0,43.54h0 c0,0.4-0.33,0.72-0.73,0.72l-9.85,0c0,0,0,0,0,0c-0.19,0-0.38-0.08-0.51-0.21L9.87,101.41c-0.18-0.14-0.29-0.36-0.29-0.59l0-87.91 l0-0.08c0-0.83,0.15-1.52,0.44-2.07l0,0c0.05-0.11,0.11-0.2,0.17-0.29l0.02-0.03c0.07-0.11,0.19-0.18,0.25-0.29l0.01-0.02 l0.02-0.02l0,0c0.25-0.25,0.57-0.45,0.92-0.59l0.04-0.02l0.02-0.01l0.02-0.01l0.18-0.06v0l0.01-0.01c0.42-0.14,0.9-0.2,1.44-0.21 l0.09-0.01l26.21,0c0.4,0,0.73,0.32,0.73,0.72v28.75c0,0.52,0.05,1.03,0.13,1.5c0.09,0.46,0.15,0.98,0.39,1.34l0.01,0.02l0,0.01v0 c0.18,0.44,0.42,0.87,0.67,1.25c0.24,0.37,0.56,0.77,0.9,1.13l0.02,0.02l0,0.01l0.01,0c0.48,0.5,0.94,1.15,1.62,1.27l0.01,0l0.01,0 l0.01,0.01l0.32,0.17l0,0l0.4,0.18v0l0.01,0l0,0l0,0v0c0.33,0.14,0.67,0.26,1,0.34l0.01,0l0.03,0l0.01,0l0.03,0l0.26,0.05v0 c0.45,0.09,0.93,0.14,1.42,0.14l0.02,0h47.8c1.03,0,1.98-0.18,2.85-0.53l0.01-0.01c0.87-0.36,1.67-0.9,2.39-1.61l0.03-0.03 c0.36-0.36,0.69-0.75,0.96-1.16c0.26-0.38,0.58-0.76,0.66-1.22l0-0.01l0.01-0.01l0.01-0.02c0.18-0.43,0.34-0.88,0.41-1.34l0-0.03 c0.09-0.47,0.13-0.97,0.13-1.49V9.92c0-0.4,0.33-0.73,0.73-0.73h6c0.58,0,1.09,0.07,1.54,0.21c0.48,0.15,0.89,0.39,1.2,0.7 c0.68,0.67,0.88,1.67,0.9,2.59l0.01,0.09v0.05l0,0.02v97.19c0,0.56-0.07,1.07-0.21,1.51l-0.01,0.03v0l0,0.02l-0.08,0.22l0,0 l-0.02,0.06l-0.09,0.2l-0.01,0.04l-0.02,0.04l0,0l-0.03,0.06l-0.15,0.22l0,0l-0.05,0.08l-0.14,0.17l-0.06,0.07 c-0.15,0.16-0.33,0.3-0.53,0.42c-0.17,0.1-0.36,0.19-0.55,0.26l-0.06,0.02c-0.16,0.05-0.34,0.1-0.53,0.14l-0.02,0l-0.01,0l-0.02,0 l-0.09,0.01l-0.02,0l0,0l-0.02,0c-0.22,0.03-0.49,0.05-0.76,0.06H109.5L109.5,113.68z M53.93,104.43c-1.66,0-3-1.34-3-3 c0-1.66,1.34-3,3-3h31.12c1.66,0,3,1.34,3,3c0,1.66-1.34,3-3,3H53.93L53.93,104.43z M53.93,89.03c-1.66,0-3-1.34-3-3s1.34-3,3-3 h31.12c1.66,0,3,1.34,3,3s-1.34,3-3,3H53.93L53.93,89.03z M94.03,9.39l-45.32-0.2v25.86H48.7c0,0.46,0.06,0.86,0.17,1.2 c0.03,0.06,0.04,0.1,0.07,0.15c0.09,0.23,0.22,0.44,0.4,0.61l0.03,0.03v0c0.06,0.06,0.11,0.1,0.17,0.15 c0.06,0.05,0.13,0.09,0.2,0.14c0.39,0.23,0.92,0.34,1.58,0.34v0l40.1,0.25v0l0,0v0c0.91,0,1.57-0.21,1.98-0.63 c0.42-0.43,0.63-1.1,0.63-2.02h0V9.39L94.03,9.39z M41.91,73.23h53.07v0c0.35,0,0.65,0.29,0.65,0.64l0,39.17 c0,0.35-0.29,0.65-0.65,0.65H41.91v0c-0.35,0-0.65-0.29-0.65-0.64l0-39.17C41.26,73.52,41.56,73.23,41.91,73.23L41.91,73.23 L41.91,73.23z M9.68,0h104.26c4.91,0,8.79,3.86,8.79,8.79V114c0,4.95-3.9,8.88-8.79,8.88l-96.61,0l-0.24-0.25L1.05,106.6L0,105.9 V8.76C0,3.28,4.81,0,9.68,0L9.68,0L9.68,0z"/></g></svg></div>
+                    <h2 class="ihtnas-publish-card-title">Copyright Submission</h2>
+                </div>
+                <p class="ihtnas-publish-card-description">Submit the signed copyright and undertaking forms.</p>
+            </div>
+            
+            <!-- Card 6: Published (Updated SVG) -->
+            <div class="ihtnas-publish-process-card" data-step="6">
+                <div class="ihtnas-publish-card-header">
+                    <div class="ihtnas-publish-card-icon"><?xml version="1.0" encoding="utf-8"?><svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 92.35 122.88" style="enable-background:new 0 0 92.35 122.88" xml:space="preserve"><style type="text/css">.st0{fill-rule:evenodd;clip-rule:evenodd;}</style><g><path class="st0" d="M46.18,0.01c2.17-0.09,3.88,0.66,5.61,1.76c2.19,1.39,4.66,4.14,7.71,5.88c4.29,2.45,12.23-0.93,16.29,5.11 c2.37,3.52,2.48,6.28,2.66,9.01c0.19,2.94,0.71,5.65,3.72,9.63c4.99,6.6,6.03,10.99,3.46,15.56c-1.75,3.12-5.44,4.85-6.29,6.83 c-1.82,4.2,0.19,7.37-2.29,12.27c-1.73,3.4-4.39,5.64-7.94,6.78c-2.99,0.96-5.99-0.43-8.39,0.58c-4.21,1.77-7.31,5.88-10.66,6.92 c-1.29,0.4-2.58,0.6-3.87,0.59c-1.29,0.01-2.58-0.19-3.87-0.59c-3.35-1.04-6.45-5.15-10.66-6.92c-2.4-1.01-5.4,0.39-8.39-0.58 c-3.55-1.14-6.21-3.38-7.94-6.78c-2.49-4.9-0.48-8.07-2.29-12.27c-0.85-1.98-4.54-3.71-6.29-6.83C4.16,42.39,5.2,38,10.19,31.41 c3.01-3.98,3.53-6.69,3.72-9.63c0.18-2.73,0.29-5.49,2.66-9.01c4.07-6.04,12.01-2.66,16.29-5.11c3.05-1.74,5.52-4.49,7.71-5.88 C42.29,0.67,44.01-0.09,46.18,0.01L46.18,0.01z M46.18,25.97l4.46,10.9l11.75,0.87l-8.99,7.61l2.8,11.44l-10.02-6.2l-10.02,6.2 l2.8-11.44l-8.99-7.61l11.75-0.87L46.18,25.97L46.18,25.97z M88.96,113.07L77.41,111l-5.73,10.26c-4.16,5.15-6.8-3.32-7.96-6.27 L52.57,93.96c2.57-0.89,5.67-3.46,8.85-6.35c6.35,0.13,12.27-0.97,16.62-6.51l12.81,24.75l1.11,2.38 C92.84,111.32,92.38,113.36,88.96,113.07L88.96,113.07z M3.39,113.07L14.95,111l5.73,10.26c4.16,5.15,6.8-3.32,7.96-6.27 l11.15-21.03c-2.57-0.89-5.67-3.46-8.85-6.35c-6.35,0.13-12.27-0.97-16.62-6.51L1.5,105.85l-1.11,2.38 C-0.49,111.32-0.03,113.36,3.39,113.07L3.39,113.07z M46.06,16.1c13.8,0,24.99,11.19,24.99,24.99c0,13.8-11.19,24.99-24.99,24.99 c-13.8,0-24.99-11.19-24.99-24.99C21.08,27.29,32.26,16.1,46.06,16.1L46.06,16.1z"/></g></svg></div>
+                    <h2 class="ihtnas-publish-card-title">Published</h2>
+                </div>
+                <p class="ihtnas-publish-card-description">The paper will be published, and the author will be notified via their registered email address.</p>
+            </div>
+
+        </main>
+
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <style>
+ 
+ 
+ /* Desktop wrapper for centering and padding */
+.process-card-wrapper {
+    padding: 0px 125px 40px 125px ;
+
+    display: flex;
+    justify-content: center;
+}
+
+/* Prevent side padding on mobile */
+@media (max-width: 992px) {
+    .process-card-wrapper {
+        padding-left: 0;
+        padding-right: 0;
+    }
+}
+
+        /* --- Block: process-card --- */
+        .process-card {
+            display: flex;
+            align-items: flex-start;
+            background-color: #ffffff; /* Replaced var(--background-container) */
+            width: 100%;
+            border: 1px solid #eaeaea; /* Replaced var(--border-color) */
+            border-radius: 16px;
+            box-shadow: 0 8px 16px rgba(17, 17, 26, 0.05), 0 16px 32px rgba(17, 17, 26, 0.05);
+            overflow: hidden;
+            transition: all 0.3s ease-in-out;
+            justify-content: center;
+        }
+
+        /* --- Element: process-card__nav --- */
+        .process-card__nav {
+            flex: 0 0 240px;
+            position: relative;
+            padding: 40px;
+            border-right: 1px solid #eaeaea; /* Replaced var(--border-color) */
+        }
+
+        .process-card__nav-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* --- Element: process-card__step --- */
+        .process-card__step {
+            display: flex;
+            align-items: center;
+            margin-bottom: 24px;
+            cursor: pointer;
+            position: relative;
+            color: #9e9e9e; /* Replaced var(--inactive-color) */
+            font-size: 1.1rem;
+            font-weight: 400;
+            padding: 10px 15px;
+            border-radius: 8px;
+            transition: background-color 0.2s ease, color 0.2s ease;
+        }
+
+        .process-card__step:last-child {
+            margin-bottom: 0;
+        }
+
+        .process-card__step:not(.process-card__step--active):hover {
+            background-color: #f7f7f7; /* Replaced var(--hover-bg) */
+            color: #333333; /* Replaced var(--text-heading) */
+        }
+
+        .process-card__step-icon {
+            width: 28px;
+            height: 28px;
+            margin-right: 15px;
+            stroke: #9e9e9e; /* Replaced var(--inactive-color) */
+            fill: none;
+            transition: stroke 0.2s ease;
+        }
+
+        .process-card__step:not(.process-card__step--active):hover .process-card__step-icon {
+            stroke: #333333; /* Replaced var(--text-heading) */
+        }
+        
+        /* --- Modifier: process-card__step--active --- */
+        .process-card__step--active {
+            color: #002726; /* Replaced var(--text-body) */
+            font-weight: 600;
+            background-color: #e8f5e9; /* Replaced var(--active-bg-light) */
+        }
+
+        .process-card__step--active .process-card__step-icon {
+            stroke: #4CAF50; /* Replaced var(--active-color) */
+        }
+        
+        .process-card__step--active::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            right: -41px;
+            transform: translateY(-50%);
+            width: 3px;
+            height: 30px;
+            background-color: #4CAF50; /* Replaced var(--active-color) */
+            border-radius: 3px;
+            transition: all 0.3s ease-in-out;
+        }
+
+        /* --- Element: process-card__content --- */
+        .process-card__content {
+            flex: 1;
+            padding: 40px 60px 40px 80px;
+            display: flex;
+            flex-direction: row;
+            align-items: flex-start;
+        }
+
+        .process-card__figure {
+            flex-shrink: 0;
+            margin-right: 40px;
+        }
+        
+        .process-card__figure-icon {
+            width: 100px;
+            height: 100px;
+            fill: #4CAF50; /* Replaced var(--active-color) */
+        }
+
+        .process-card__details {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            text-align: left;
+        }
+
+        .process-card__title {
+            font-size: 2.2rem;
+            font-weight: 600;
+            margin: 0 0 15px 0;
+            color: #333333; /* Replaced var(--text-heading) */
+        }
+
+        .process-card__description {
+            font-size: 1rem;
+            font-weight: 400;
+            color: #002726; /* Replaced var(--text-body) */
+            line-height: 1.7;
+            margin: 0;
+        }
+        
+        .process-card__action-link {
+            display: inline-flex;
+            align-items: center;
+            background-color: #33C375; /* Replaced var(--button-bg) */
+            color: #002726; /* Replaced var(--text-body) */
+            font-family: 'Lato', sans-serif;
+            font-size: 18px;
+            font-weight: 600;
+            padding: 14px 28px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(0, 39, 38, 0.2);
+            transition: all 0.3s ease;
+            margin-top: 30px;
+            text-decoration: none;
+        }
+
+        .process-card__action-link:hover {
+            background-color: #2CAC66; /* Replaced var(--button-bg-hover) */
+            box-shadow: 0 4px 12px rgba(0, 39, 38, 0.3);
+            transform: translateY(-2px) scale(1.05);
+        }
+
+        .process-card__action-link:active {
+            transform: translateY(0) scale(0.98);
+            box-shadow: 0 2px 6px rgba(0, 39, 38, 0.2);
+        }
+
+        .process-card__action-icon {
+            margin-left: 10px;
+            transition: transform 0.3s ease;
+        }
+
+        .process-card__action-link:hover .process-card__action-icon {
+            transform: translateY(2px);
+        }
+
+        /* --- RESPONSIVE STYLES --- */
+        @media (max-width: 992px) {
+            .process-card {
+                flex-direction: column;
+                max-width: 600px;
+            }
+            .process-card__nav {
+                flex-basis: auto;
+                width: 100%;
+                border-right: none;
+                border-bottom: 1px solid #eaeaea; /* Replaced var(--border-color) */
+                padding: 20px;
+                box-sizing: border-box;
+            }
+            .process-card__nav-list {
+                flex-direction: row;
+                justify-content: space-around;
+            }
+            .process-card__step {
+                margin-bottom: 0;
+            }
+            .process-card__step--active::after {
+                top: auto;
+                bottom: -15px;
+                left: 50%;
+                right: auto;
+                transform: translateX(-50%);
+                width: 30px;
+                height: 3px;
+            }
+            .process-card__content {
+                padding: 40px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            body {
+                padding: 0;
+            }
+            .process-card {
+                border-radius: 0;
+                box-shadow: none;
+                border: none;
+                padding-top: 2rem;
+            }
+            .process-card__nav {
+                padding: 10px;
+            }
+            .process-card__step {
+                padding: 8px;
+            }
+            .process-card__step-text {
+                 font-size: 0.9rem;
+            }
+            .process-card__step-icon {
+                margin-right: 8px;
+            }
+            .process-card__content {
+                flex-direction: column;
+                align-items: center;
+                padding: 40px 20px;
+            }
+            .process-card__figure {
+                margin-right: 0;
+                margin-bottom: 30px;
+            }
+            .process-card__figure-icon {
+                width: 80px;
+                height: 80px;
+            }
+            .process-card__details {
+                align-items: center;
+                text-align: center;
+            }
+            .process-card__title {
+                font-size: 1.8rem;
+            }
+        }
+                    .process-card__action-link{
+                font-size: 14px;
+                padding: 10px 20px;
+            }
+        }
+    </style>
+<div class="process-card-wrapper">
+    <div class="process-card">
+        <nav class="process-card__nav">
+            <ul class="process-card__nav-list">
+                <li class="process-card__step">
+                    <svg class="process-card__step-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M7 13L10 16L17 9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                        <circle cx="12" cy="12" r="10" stroke-width="2"></circle>
+                    </svg>
+                    <span class="process-card__step-text">Write.</span>
+                </li>
+                <li class="process-card__step process-card__step--active">
+                    <svg class="process-card__step-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M7 13L10 16L17 9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                        <circle cx="12" cy="12" r="10" stroke-width="2"></circle>
+                    </svg>
+                    <span class="process-card__step-text">Submit.</span>
+                </li>
+                <li class="process-card__step">
+                    <svg class="process-card__step-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M7 13L10 16L17 9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                        <circle cx="12" cy="12" r="10" stroke-width="2"></circle>
+                    </svg>
+                    <span class="process-card__step-text">Inspire.</span>
+                </li>
+            </ul>
+        </nav>
+        <main class="process-card__content">
+            <div class="process-card__figure">
+                <svg class="process-card__figure-icon" xmlns="http://www.w3.org/2000/svg" shape-rendering="geometricPrecision" text-rendering="geometricPrecision" image-rendering="optimizeQuality" fill-rule="evenodd" clip-rule="evenodd" viewBox="0 0 512 364.92"><path fill-rule="nonzero" d="M359.34 124.66c-13.56 6.7-25.71 15.36-37.41 24.9l-20.13-23.03c14.81-13.74 32.08-24.49 50.64-32.39-37.56-66.54-128.4-83.94-188.3-37.42-21.75 16.84-38.26 42.04-44.61 75.42l-2 10.43-10.4 1.84c-10.19 1.78-19.29 4.24-27.27 7.36-49.8 19.27-63.78 74.7-33.31 116.79 13.04 17.91 29.66 36.17 51.47 39.21h30.49c-.21 3-.32 6.02-.32 9.07 0 7.34.62 14.53 1.82 21.53H97.53l-1.92-.17c-30.53-3.88-55.62-26.61-73.75-51.72C-20.41 228.28.4 149.83 68.93 123.25c7.15-2.79 14.8-5.12 22.86-6.99 9.15-36.34 28.65-64.32 53.72-83.74C222.7-27.29 338.58-1.8 382.79 86.08c6.65-1.05 13.31-1.58 19.92-1.5 98.9.73 138.01 127.2 86.69 195.33-20.57 27.29-52.12 50.51-84.61 58.05l-3.41.41h-19.81a128.362 128.362 0 0 0 1.5-30.6h16.61c24.15-5.81 49.91-25.68 65.23-46.16 36.46-48.56 10.58-146.05-62.41-146.51-14.26-.12-29.11 3.33-43.16 9.56zM234.73 364.92h42.56c9.95 0 18.11-8.16 18.11-18.11v-58.64h31.04c6.54-.28 11.18-2.44 13.87-6.52 7.27-10.91-2.66-21.68-9.55-29.27-19.55-21.46-53.22-53.23-62.87-64.59-7.32-8.08-17.72-8.08-25.04 0-9.97 11.64-44.84 45.77-63.43 66.64-6.45 7.27-14.42 17.17-7.72 27.22 2.76 4.08 7.35 6.24 13.89 6.52h31.04v58.64c0 9.84 8.15 18.11 18.1 18.11z"/></svg>
+            </div>
+            <div class="process-card__details">
+                <h1 class="process-card__title">Submit Paper</h1>
+                <p class="process-card__description">Submit your manuscript to be published in the IHTNAS journal. This opportunity will help you share your research with a broader audience and advance your academic career</p>
+                <a href="/submit" class="process-card__action-link">
+                    Submit Paper
+                    <svg class="process-card__action-icon" xmlns="http://www.w3.org/2000/svg" width="10" height="13" viewBox="0 0 12 13" fill="none">
+                        <path d="M1 7.11108L6 12L11 7.11108" stroke="#012726" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                        <path d="M1 1L6 5.88889L11 1" stroke="#012726" stroke-opacity="0.5" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                    </svg>
+                </a>
+            </div>
+        </main>
+    </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<style>
+    .faqMainWrapperUnique {
+      margin: 0 auto;
+      max-width: 1100px;
+      padding: 0 16px;
+ 
+    }
+    .faqWrapperUnique {
+      width: 100%;
+    }
+    .faqContainerUnique {
+      margin-bottom: 15px;
+      border: 1px solid rgba(0, 39, 38, 0.2);
+      border-radius: 16px;
+      overflow: hidden;
+      transition: all 0.4s ease-in-out;
+    }
+    .faqQuestionUnique {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 24px;
+      background-color: transparent;
+      border: none;
+      text-align: left;
+      font-size: 16px;
+      cursor: pointer;
+      outline: none;
+      transition: background-color 0.4s ease-in-out;
+      font-family: 'IBM Plex Sans', sans-serif;
+      font-weight: 500;
+    }
+    .faqQuestionUnique h3 {
+      color: #002726;
+      font-size: 16px;
+      margin: 0;
+    }
+    .faqQuestionUnique:hover {
+      background-color: #f0f0f0;
+    }
+    .faqSvgArrowUnique {
+      width: 24px;
+      height: 24px;
+      transition: transform 0.4s ease-in-out;
+      flex-shrink: 0;
+      margin-left: 8px;
+    }
+    .faqQuestionUnique.active .faqSvgArrowUnique {
+      transform: rotate(180deg);
+    }
+    .faqAnswerUnique {
+      display: none;
+      padding: 15px 24px 24px;
+      background-color: #ffffff;
+      color: #4a6f68;
+      font-size: 14px;
+      font-family: 'IBM Plex Sans', sans-serif;
+      transition: max-height 0.4s ease-in-out, padding 0.4s ease-in-out;
+      max-height: 0;
+      overflow: hidden;
+    }
+    .faqAnswerUnique.active {
+      display: block;
+      max-height: 200px;
+      padding: 15px 24px 24px;
+    }
+    .headingTitleUnique {
+      color: #002726;
+      font-size: 24px;
+      font-weight: 500;
+      margin-bottom: 24px;
+    }
+    @media (min-width: 768px) {
+      .headingTitleUnique {
+        font-size: 32px;
+      }
+    }
+    @media (max-width: 767px) {
+      .faqWrapperMobileUnique {
+        width: 100%;
+      }
+      .faqContainerMobileUnique {
+        margin-bottom: 15px;
+        border: 1px solid rgba(0, 39, 38, 0.2);
+        border-radius: 16px;
+        overflow: hidden;
+        transition: all 0.4s ease-in-out;
+      }
+      .faqQuestionMobileUnique {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 16px;
+        background-color: transparent;
+        border: none;
+        text-align: left;
+        font-size: 14px;
+        cursor: pointer;
+        outline: none;
+        transition: background-color 0.4s ease-in-out;
+        font-family: 'IBM Plex Sans', sans-serif;
+        font-weight: 500;
+      }
+      .faqQuestionMobileUnique h3 {
+        color: #002726;
+        font-size: 14px;
+        margin: 0;
+      }
+      .faqQuestionMobileUnique:hover {
+        background-color: #f0f0f0;
+      }
+      .faqSvgArrowMobileUnique {
+        width: 20px;
+        height: 20px;
+        transition: transform 0.4s ease-in-out;
+        flex-shrink: 0;
+        margin-left: 8px;
+      }
+      .faqQuestionMobileUnique.active .faqSvgArrowMobileUnique {
+        transform: rotate(180deg);
+      }
+      .faqAnswerMobileUnique {
+        display: none;
+        padding: 12px 16px 16px;
+        background-color: #ffffff;
+        color: #4a6f68;
+        font-size: 12px;
+        font-family: 'IBM Plex Sans', sans-serif;
+        transition: max-height 0.4s ease-in-out, padding 0.4s ease-in-out;
+        max-height: 0;
+        overflow: hidden;
+      }
+      .faqAnswerMobileUnique.active {
+        display: block;
+        max-height: 180px;
+        padding: 12px 16px 16px;
+      }
+      .headingTitleMobileUnique {
+        color: #002726;
+        font-size: 20px;
+        font-weight: 500;
+        margin-bottom: 20px;
+      }
+    }
+  </style>
+  <div class="faqMainWrapperUnique">
+    <div class="faqWrapperUnique">
+      <h2 class="headingTitleUnique">Frequently Asked Questions</h2>
+      <div class="faqContainerUnique">
+        <button class="faqQuestionUnique">
+          <div><h3 class="questionTextUnique">How long does the review process take?</h3></div>
+          <svg class="faqSvgArrowUnique" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M6 9L12 15L18 9" stroke="#002726" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+          </svg>
+        </button>
+        <div class="faqAnswerUnique">
+          <span class="answerTextUnique">The review process typically takes between 4 to 8 weeks, depending on reviewer availability and the complexity of the manuscript. Authors will be notified via email once a decision has been made.</span>
+        </div>
+      </div>
+      <div class="faqContainerUnique">
+        <button class="faqQuestionUnique">
+          <div><h3 class="questionTextUnique">How do I submit a manuscript?</h3></div>
+          <svg class="faqSvgArrowUnique" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M6 9L12 15L18 9" stroke="#002726" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+          </svg>
+        </button>
+        <div class="faqAnswerUnique">
+          <span class="answerTextUnique">Manuscripts must be submitted through our online submission system. Visit the journal's official website and click on the “Submit Manuscript” button to begin the process. Ensure you follow the Author Guidelines for formatting and required documents.</span>
+        </div>
+      </div>
+      <div class="faqContainerUnique">
+        <button class="faqQuestionUnique">
+          <div><h3 class="questionTextUnique">Who can submit a paper?</h3></div>
+          <svg class="faqSvgArrowUnique" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M6 9L12 15L18 9" stroke="#002726" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+          </svg>
+        </button>
+        <div class="faqAnswerUnique">
+          <span class="answerTextUnique">Submissions are welcome from researchers, academics, and professionals in the relevant field. Both individual authors and co-authored works are accepted. Students may submit if their work is supervised or endorsed by a faculty member.</span>
+        </div>
+      </div>
+      <div class="faqContainerUnique">
+        <button class="faqQuestionUnique">
+          <div><h3 class="questionTextUnique">Is there any publication fee?</h3></div>
+          <svg class="faqSvgArrowUnique" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M6 9L12 15L18 9" stroke="#002726" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+          </svg>
+        </button>
+        <div class="faqAnswerUnique">
+          <span class="answerTextUnique">Yes. An Article Processing Charge (APC) may apply after the manuscript is accepted. The fee details can be found in the “Publication Fees” section of the website. Waivers may be available for authors from low-income countries.</span>
+        </div>
+      </div>
+      <div class="faqContainerUnique">
+        <button class="faqQuestionUnique">
+          <div><h3 class="questionTextUnique">What are the journal's main focus areas?</h3></div>
+          <svg class="faqSvgArrowUnique" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M6 9L12 15L18 9" stroke="#002726" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+          </svg>
+        </button>
+        <div class="faqAnswerUnique">
+          <span class="answerTextUnique">The journal focuses on publishing high-quality research in the areas of [insert specific disciplines, e.g., environmental science, artificial intelligence, public health, etc.]. Interdisciplinary studies and innovative approaches within these domains are highly encouraged. Please review the Aims and Scope section for a detailed overview.</span>
+        </div>
+      </div>
+ 
+    </div>
+  </div>
+
+  <script>
+    document.querySelectorAll('.faqQuestionUnique').forEach(button => {
+      button.addEventListener('click', () => {
+        const answer = button.nextElementSibling;
+        const isActive = answer.classList.contains('active');
+        // Close all other answers and remove active state from other questions
+        document.querySelectorAll('.faqAnswerUnique').forEach(a => a.classList.remove('active'));
+        document.querySelectorAll('.faqQuestionUnique').forEach(b => b.classList.remove('active'));
+        // Open the clicked answer if it was closed
+        if (!isActive) {
+          answer.classList.add('active');
+          button.classList.add('active');
+        }
+      });
+    });
+  </script>
+
+
 
 
 
