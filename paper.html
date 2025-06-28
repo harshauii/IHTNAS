@@ -1456,7 +1456,6 @@
     @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&display=swap');
     
     /* --- Base and Wrapper --- */
-    /* RENAMED: Top-level block for the entire component */
     .article-view {
         padding: 60px 125px;
         font-family: 'IBM Plex Sans', sans-serif;
@@ -1498,7 +1497,6 @@
         width: 100%;
     }
 
-
     /* --- Block: article-card --- */
     .article-card {
         display: flex;
@@ -1516,7 +1514,6 @@
         box-shadow: 0 20px 25px -5px rgba(0,0,0,.08),0 8px 10px -6px rgba(0,0,0,.08);
     }
 
-    /* --- Element: article-card__content --- */
     .article-card__content {
         flex: 1;
         padding: 50px 70px;
@@ -1531,24 +1528,20 @@
         text-align: left;
     }
     
-    /* --- Meta Information --- */
     .paper-meta {
         margin-bottom: 30px;
         font-size: 1.05rem;
         color: #718096;
         line-height: 1.8;
     }
-    /* ADDED: Class for each meta paragraph */
     .paper-meta__item {
         margin: 6px 0;
     }
-    /* ADDED: Class for the label (bold text) */
     .paper-meta__label {
         font-weight: 600;
         color: #4a5568;
     }
     
-    /* --- Keywords Section --- */
     .keywords-container {
         display: flex;
         flex-wrap: wrap;
@@ -1556,14 +1549,12 @@
         gap: 10px;
         margin-bottom: 35px;
     }
-    /* ADDED: Class for the "Keywords:" label */
     .keywords-container__label {
         font-weight: 600;
         color: #4a5568;
         font-size: 1rem;
         margin-right: 5px;
     }
-
     .keyword-tile {
         display: inline-block;
         background-color: #edf2f7;
@@ -1575,7 +1566,6 @@
         white-space: nowrap;
         transition: all 0.2s ease-out;
     }
-    
     .keyword-tile:hover {
         transform: translateY(-2px);
         background-color: #e2e8f0;
@@ -1583,7 +1573,6 @@
         cursor: pointer;
     }
 
-    /* --- Abstract and Text --- */
     .article-card__subheading {
         font-size: 1.4rem;
         font-weight: 600;
@@ -1602,7 +1591,6 @@
         margin: 0;
     }
     
-    /* --- Reusable Button Styles --- */
     .btn {
         display: inline-flex;
         align-items: center;
@@ -1616,28 +1604,23 @@
         text-decoration: none;
         transition: all 0.25s ease-out;
     }
-
     .btn--primary {
         background-color: #33C375;
         color: #002726;
         box-shadow: 0 4px 14px 0 rgba(51, 195, 117, 0.25);
     }
-    
     .btn--primary:hover {
         background-color: #2CAC66;
         box-shadow: 0 6px 20px rgba(44, 172, 102, 0.3);
         transform: translateY(-3px) scale(1.03);
     }
-
     .btn__icon {
         margin-left: 10px;
         transition: transform 0.25s ease-out;
     }
-
     .btn:hover .btn__icon {
         transform: translateY(2px);
     }
-
     .article-card__action-link {
         margin-top: 40px;
     }
@@ -1652,14 +1635,12 @@
         padding: 50px 70px; 
         box-sizing: border-box;
     }
-    
     .citation-card__title {
         font-size: 1.6rem;
         font-weight: 600;
         color: #2d3748;
         margin: 0 0 25px 0;
     }
-    
     .citation-card__content {
         border-left: 3px solid #33C375;
         padding-left: 25px;
@@ -1667,7 +1648,6 @@
         flex-direction: column;
         gap: 10px;
     }
-
     .citation-card__meta-list {
         display: flex;
         flex-wrap: wrap;
@@ -1675,12 +1655,6 @@
         font-size: 1.1rem;
         color: #718096;
     }
-
-    /* ADDED: Class for each meta span */
-    .citation-card__meta-item {
-        /* No specific styles needed, inherits from parent */
-    }
-
     .citation-card__article-title {
         font-size: 1.7rem;
         font-weight: 600;
@@ -1689,7 +1663,6 @@
         line-height: 1.5;
         margin: 0;
     }
-    
     .citation-card__link-wrapper {
         font-size: 1.1rem;
         color: #4a5568;
@@ -1699,11 +1672,7 @@
         flex-wrap: wrap;
         margin: 0;
     }
-    
-    .citation-card__link-icon {
-        flex-shrink: 0; /* Prevents icon from shrinking */
-    }
-
+    .citation-card__link-icon { flex-shrink: 0; }
     .citation-card__link {
         color: #2CAC66;
         text-decoration: none;
@@ -1724,40 +1693,34 @@
         text-align: center;
         box-shadow: 0 4px 6px -1px rgba(0,0,0,.05),0 2px 4px -2px rgba(0,0,0,.05);
     }
-    
     .sidebar-card__header {
         display: flex;
         align-items: center;
         justify-content: center;
         gap: 12px;
     }
-
     .sidebar-card__logo-image {
         height: 46px;
         width: 46px;
         object-fit: cover;
         border-radius: 6px;
     }
-    
     .sidebar-card__logo-text {
         font-size: 1.8rem;
         font-weight: 700;
         color: #2d3748;
         letter-spacing: 1.5px;
     }
-
     .sidebar-card__text {
         font-size: 0.95rem;
         color: #4a5568;
         line-height: 1.6;
         margin: 0;
     }
-
     .sidebar-card__action-button {
         width: 100%;
         box-sizing: border-box;
     }
-
 
     /* --- RESPONSIVE STYLES --- */
     @media (max-width: 1200px) {
@@ -1769,25 +1732,100 @@
         .article-view__layout { flex-direction: column; gap: 40px; }
         .article-view__main-content, .article-view__sidebar { flex-basis: 100%; width: 100%; }
         .article-view__sidebar { position: static; }
+        .article-view__main-content { gap: 40px; }
     }
 
+    /* --- Standard Mobile Adjustments (up to 576px) --- */
     @media (max-width: 576px) {
         .article-view { padding: 0; }
-        .article-card, .citation-card, .sidebar-card { border-radius: 0; box-shadow: none; border: none; border-top: 1px solid #e9ecef; }
-        .article-view__main-heading { padding: 20px 20px 0 20px; }
-        .article-view__layout { gap: 0; }
+        .article-card, .citation-card, .sidebar-card { 
+            border-radius: 0; 
+            box-shadow: none; 
+            border: none; 
+            border-top: 1px solid #e9ecef; 
+        }
+        .article-card:hover, .citation-card:hover {
+             transform: none;
+             box-shadow: none;
+        }
+
+        .article-view__main-content { gap: 0; }
+
+        .article-view__main-heading { 
+            padding: 30px 20px 0 20px; 
+            font-size: 1.8rem;
+            line-height: 1.4;
+        }
+
+        .article-card__content, .citation-card {
+            padding: 30px 20px;
+        }
+
+        .paper-meta {
+            font-size: 0.9rem;
+            line-height: 1.7;
+            margin-bottom: 25px;
+        }
+        
+        .keywords-container {
+            justify-content: flex-start; /* Better for scannability than center */
+            margin-bottom: 30px;
+        }
+
+        .article-card__subheading {
+            font-size: 1.3rem;
+            text-align: left; /* Ensure left alignment */
+        }
+        .article-card__description {
+            font-size: 1rem;
+            line-height: 1.8;
+        }
+        
+        .citation-card__title {
+            font-size: 1.4rem;
+            text-align: left;
+        }
+        .citation-card__article-title {
+            font-size: 1.2rem;
+        }
+        .citation-card__meta-list, .citation-card__link-wrapper {
+            font-size: 0.9rem;
+        }
+        .citation-card__content {
+             padding-left: 15px;
+             text-align: left;
+        }
+
+        /* Sidebar card on mobile */
+        .sidebar-card { padding: 30px 20px; }
+        .sidebar-card__logo-image { height: 40px; width: 40px; }
+        .sidebar-card__logo-text { font-size: 1.5rem; }
+        .sidebar-card__text { font-size: 0.9rem; }
+    }
+
+    /* --- Small Mobile Adjustments (up to 420px) --- */
+    @media (max-width: 420px) {
+        .article-view__main-heading {
+            padding: 25px 15px 0 15px;
+            font-size: 1.6rem;
+        }
+
+        .article-card__content, .citation-card, .sidebar-card {
+            padding: 25px 15px;
+        }
+
+        .paper-meta { font-size: 0.85rem; }
+        .keyword-tile { padding: 6px 12px; font-size: 0.8rem; }
+        .article-card__description { font-size: 0.95rem; }
+        .btn { padding: 12px 24px; font-size: 0.95rem; }
     }
 </style>
 
-<!-- RENAMED: Main wrapper -->
+<!-- The HTML remains unchanged, as all adjustments are handled by the CSS media queries. -->
 <div class="article-view">
-    <!-- RENAMED: Layout container -->
     <div class="article-view__layout">
-
-        <!-- RENAMED: Left column -->
         <div class="article-view__main-content">
             <h1 class="article-view__main-heading">A study on Karnataka Unification movement: A historical study</h1>
-
             <div class="article-card">
                 <main class="article-card__content">
                     <div class="article-card__details">
@@ -1796,7 +1834,6 @@
                             <p class="paper-meta__item"><strong class="paper-meta__label">Unique Paper ID:</strong> 167649</p>
                             <p class="paper-meta__item"><strong class="paper-meta__label">Volume:</strong> 1 | <strong class="paper-meta__label">Issue:</strong> 1 | <strong class="paper-meta__label">PageNo:</strong> 200-203</p>
                         </div>
-
                         <div class="keywords-container">
                             <strong class="keywords-container__label">Keywords:</strong>
                             <span class="keyword-tile">Administration</span>
@@ -1806,7 +1843,6 @@
                             <span class="keyword-tile">Mile stones</span>
                             <span class="keyword-tile">Unification</span>
                         </div>
-
                         <h2 class="article-card__subheading">Abstract</h2>
                         <p class="article-card__description">
                             Historically, there was no such thing as Karnataka state. In the beginning of 20th century, unifying all Kannada speaking areas into one was still a dream. Except for Mysore, most of Kannada areas were under the administration of non-Kannadigas, where Kannada language and culture were facing an extinction. This had historical causes. After the fall of Vijayanagara empire, Kannada was the official language only in Keladi and Mysore. After Keladi kingdom was annexed into Mysore in 1763 A.D., Mysore became the sole representative of Kannada. Even in Mysore Samsathana, Kannada was elbowed by other languages, especially by Marathi. Infact the prominence of Marathi was so high, that, there used to be ‘Double Daftar’ by which official papers were kept in two languages, namely, Kannada and Marathi. Though it was abolished by the English Commissioner, Mark Cubbon. With the ascendancy of the English in Mysore, Marathi gave way to English. Even though, Mysore’s administration was handed over to the Wodeyar ruler in 1881, Kannada did not get its rightful place, due to the predominance of the outsiders, particularly from administrators of Madras Province origin. Yet, Kannada managed to survive with the help of the life-support System in Mysore, which remained the core Kannada state. But the condition of Kannada in the remaining vast Kannada speaking areas was pitiable.
@@ -1821,7 +1857,6 @@
                     </div>
                 </main>
             </div>
-
             <div class="citation-card">
                  <h2 class="citation-card__title">Cite This Article</h2>
                  <div class="citation-card__content">
@@ -1842,19 +1877,15 @@
                 </div>
             </div>
         </div>
-
-        <!-- RENAMED: Right column/sidebar -->
         <div class="article-view__sidebar">
             <div class="sidebar-card">
                 <div class="sidebar-card__header">
                     <img class="sidebar-card__logo-image" src="https://via.placeholder.com/46x46/2d3748/ffffff?text=L" alt="IHTNAS Logo">
                     <div class="sidebar-card__logo-text">IHTNAS</div>
                 </div>
-
                 <p class="sidebar-card__text">
                     Get updates and new research from this journal delivered to your inbox.
                 </p>
-
                 <a href="#" class="btn btn--primary sidebar-card__action-button">
                     Submit
                     <svg class="btn__icon" xmlns="http://www.w3.org/2000/svg" width="10" height="13" viewBox="0 0 12 13" fill="none" aria-hidden="true">
@@ -1864,7 +1895,6 @@
                 </a>
             </div>
         </div>
-        
     </div>
 </div>
 
