@@ -1457,7 +1457,7 @@
     
     /* --- Base and Wrapper --- */
     .article-view {
-        padding: 60px 125px;
+        padding: 60px 150px;
         font-family: 'IBM Plex Sans', sans-serif;
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
@@ -1730,12 +1730,17 @@
     @media (max-width: 992px) {
         .article-view { padding: 20px; }
         .article-view__layout { flex-direction: column; gap: 40px; }
-        .article-view__main-content, .article-view__sidebar { flex-basis: 100%; width: 100%; }
-        .article-view__sidebar { position: static; }
+        .article-view__main-content { 
+            flex-basis: 100%; 
+            width: 100%; 
+        }
+        /* UPDATED: Hide sidebar on tablet and mobile */
+        .article-view__sidebar { 
+            display: none;
+        }
         .article-view__main-content { gap: 40px; }
     }
 
-    /* --- Standard Mobile Adjustments (up to 576px) --- */
     @media (max-width: 576px) {
         .article-view { padding: 0; }
         .article-card, .citation-card, .sidebar-card { 
@@ -1752,7 +1757,8 @@
         .article-view__main-content { gap: 0; }
 
         .article-view__main-heading { 
-            padding: 30px 20px 0 20px; 
+            /* UPDATED: Set top padding to 20px */
+            padding: 20px 20px 0 20px; 
             font-size: 1.8rem;
             line-height: 1.4;
         }
@@ -1768,13 +1774,13 @@
         }
         
         .keywords-container {
-            justify-content: flex-start; /* Better for scannability than center */
+            justify-content: flex-start;
             margin-bottom: 30px;
         }
 
         .article-card__subheading {
             font-size: 1.3rem;
-            text-align: left; /* Ensure left alignment */
+            text-align: left;
         }
         .article-card__description {
             font-size: 1rem;
@@ -1795,22 +1801,15 @@
              padding-left: 15px;
              text-align: left;
         }
-
-        /* Sidebar card on mobile */
-        .sidebar-card { padding: 30px 20px; }
-        .sidebar-card__logo-image { height: 40px; width: 40px; }
-        .sidebar-card__logo-text { font-size: 1.5rem; }
-        .sidebar-card__text { font-size: 0.9rem; }
     }
 
-    /* --- Small Mobile Adjustments (up to 420px) --- */
     @media (max-width: 420px) {
         .article-view__main-heading {
-            padding: 25px 15px 0 15px;
+            padding: 20px 15px 0 15px; /* Adjust side padding as well */
             font-size: 1.6rem;
         }
 
-        .article-card__content, .citation-card, .sidebar-card {
+        .article-card__content, .citation-card {
             padding: 25px 15px;
         }
 
@@ -1821,7 +1820,6 @@
     }
 </style>
 
-<!-- The HTML remains unchanged, as all adjustments are handled by the CSS media queries. -->
 <div class="article-view">
     <div class="article-view__layout">
         <div class="article-view__main-content">
@@ -1897,7 +1895,6 @@
         </div>
     </div>
 </div>
-
 
 
 
